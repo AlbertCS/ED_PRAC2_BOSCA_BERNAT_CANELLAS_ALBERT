@@ -1,4 +1,4 @@
-package Dades;
+package Dades.Base;
 
 public class Assignatura implements Comparable<Assignatura>{
 	private Integer codiAssig;
@@ -74,5 +74,19 @@ public class Assignatura implements Comparable<Assignatura>{
 		else if (this.quad<assig.quad) return -1;
 		else if (this.quad>assig.quad) return 1;
 		else return (this.nomAssig.compareTo(assig.nomAssig)); 
+	}
+	
+	public boolean equals(Assignatura assig) {
+		if((this.codiAssig==assig.getCodiAssig())&&(this.nomAssig==assig.getNomAssig())&&(this.credits==assig.getCredits())&&(this.quad==assig.getQuad())) 
+			return true;
+		else return false;
+	}
+	
+	public void clone(Assignatura assig) {
+		this.codiAssig=assig.getCodiAssig();
+		this.nomAssig=assig.getNomAssig();
+		this.credits=assig.getCredits();
+		this.curs=assig.getCurs();
+		this.quad=assig.getQuad();
 	}
 }
