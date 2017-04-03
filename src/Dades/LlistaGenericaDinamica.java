@@ -15,7 +15,7 @@ public class LlistaGenericaDinamica<T extends Comparable<T>> implements Iterable
 	}
 
 	@SuppressWarnings("unchecked")
-	public void afegirElement(T p) {
+	public void afegirElement(T p) throws LlistaPlena {
 		if (num>=llista.length) {
 			// amplio
 			T[] nova=(T[]) new Comparable[llista.length*2];
@@ -43,7 +43,7 @@ public class LlistaGenericaDinamica<T extends Comparable<T>> implements Iterable
 
 	@Override
 	public Iterator<T> iterator() {
-		return new MeuIterator<T>(this);
+		return new MeuIterator<T>(this, 2);
 	}
 
 	@Override
