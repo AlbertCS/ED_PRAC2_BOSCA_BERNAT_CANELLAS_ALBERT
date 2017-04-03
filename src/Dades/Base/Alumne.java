@@ -1,4 +1,4 @@
-package Dades;
+package Dades.Base;
 
 public class Alumne implements Comparable<Alumne>{
 	private String codiAlum;
