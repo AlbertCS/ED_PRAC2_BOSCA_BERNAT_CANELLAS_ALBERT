@@ -1,54 +1,78 @@
 package Dades;
 
-import java.util.Arrays;
-import java.util.Iterator;
+import java.util.*;
 import Exceptions.*;
 
 public class LlistaDinamica<T extends Comparable<T>> implements Iterable<T>, TADLlistaGenerica<T> {
-	private T[] llista;
-	private int num;
+	
+	private Node<T> primer;
+	private static int numElem=0;
+	
 	
 	public LlistaDinamica() {
-		llista=null;
-		num=0;
+		primer=null;
 	}
 
-	@SuppressWarnings("unchecked")
 	public void afegirElement(T p) throws LlistaPlena {
-		if (num>=llista.length) {
-			// amplio
-			T[] nova=(T[]) new Comparable[llista.length*2];
-			for (int i=0; i<llista.length; i++) nova[i]=llista[i];
-			llista=nova;
+		Node<T> nou=new Node<T>(p, null, null);
+		if(numElem==0) {
+			primer=nou;
 		}
-		// segur que tinc espai
-		int pos=num-1;
-		while ((pos>=0) && (p.compareTo(llista[pos])<0)) {
-			llista[pos+1]=llista[pos];
-			pos--;
+		else {
+			nou.setSeguent(primer);
+			primer.setAnterior(nou);
+			primer=nou;
 		}
-		llista[pos+1]=p;
-		num++;
-	}
-	
-	public int getNum() {
-		return num;
+		numElem++;
 	}
 
+	/**
+	 * @return the primer
+	 */
+	public Node<T> getPrimer() {
+		return primer;
+	}
+
+	/**
+	 * @param primer the primer to set
+	 */
+	public void setPrimer(Node<T> primer) {
+		this.primer = primer;
+	}
+
+	/**
+	 * @return the numElem
+	 */
+	public static int getNumElem() {
+		return numElem;
+	}
+
+	/**
+	 * @param numElem the numElem to set
+	 */
+	public static void setNumElem(int numElem) {
+		LlistaDinamica.numElem = numElem;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
-		return "LlistaPunts [llista=" + Arrays.toString(llista) + ", num=" + num + "]";
+		return "LlistaDinamica [primer=" + primer + "]";
 	}
 
 	@Override
-	public Iterator<T> iterator() {
-		return new MeuIterator<T>(this, 2);
-	}
-
-	@Override
-	public T consultarPosicio(int i) throws LlistaBuida {
-		// TODO Auto-generated method stub
-		return null;
+	public T consultarPosicio(int num) throws LlistaBuida {
+		Node<T> aux;
+		aux=primer;
+		if(num==0) return aux.getX();
+		else {
+			for(int i=0; i<num; i++){
+			aux=aux.getSeguent();
+			}
+		return aux.getX();	
+		}
 	}
 
 	@Override
@@ -56,5 +80,17 @@ public class LlistaDinamica<T extends Comparable<T>> implements Iterable<T>, TAD
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	@Override
+	public int getNum() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Iterator<T> iterator() {
+		return new MeuIterator<T>(this, 1);
+	}
+	
 	
 }
