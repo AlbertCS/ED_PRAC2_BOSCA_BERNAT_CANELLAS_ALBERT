@@ -31,9 +31,10 @@ public class MeuIterator<T extends Comparable<T>> implements Iterator<T> {
 
 	@Override
 	public T next() {
-		posicioIterator++;
 		try {
-			return llista.consultarPosicio(posicioIterator);
+			T aux=llista.consultarPosicio(posicioIterator);
+			posicioIterator++;
+			return aux;
 		} catch (LlistaBuida e) {
 			e.printStackTrace();
 			return null;
