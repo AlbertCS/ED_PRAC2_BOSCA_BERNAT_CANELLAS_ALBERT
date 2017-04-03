@@ -35,4 +35,14 @@ public class Alumne implements Comparable<Alumne>{
 	public int compareTo(Alumne alum) { 
 		return (this.nomAlum.compareTo(alum.nomAlum));
 	}
+
+	public boolean equals(Alumne alum) {
+		if((this.codiAlum==alum.getCodiAlum())&&(this.nomAlum==alum.getNomAlum())) return true;
+		else return false;
+	}
+	
+	public void clone(Alumne alum) {
+		this.codiAlum=alum.getCodiAlum();
+		this.nomAlum=alum.getNomAlum();
+	}
 }

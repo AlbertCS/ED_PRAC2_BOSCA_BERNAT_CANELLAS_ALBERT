@@ -2,105 +2,89 @@ package Dades;
 //Class Node
 public class Matricula {
 
-	private int assig;
-	private int alum;
-	Matricula ante_hor, next_hor, ante_ver, next_ver;
+	private Integer assig;
+	private String alum;
+	Matricula seguentAssig, seguentAlumne;
 	
-	public Matricula(int dim) {
-		this.assig=assig;			//llista horitzontal
-		this.alum=alum;				//llista vertical
-		ante_hor=null;
-		next_hor=null;
-		ante_ver=null;
-		next_ver=null;
+	public Matricula(Integer assig, String alum) {
+		this.assig=assig;
+		this.alum=alum;
+		seguentAssig=null;
+		seguentAlumne=null;
 	}
 
 	/**
 	 * @return the assig
 	 */
-	public int getAssig() {
+	public Integer getAssig() {
 		return assig;
 	}
 
 	/**
 	 * @param assig the assig to set
 	 */
-	public void setAssig(int assig) {
+	public void setAssig(Integer assig) {
 		this.assig = assig;
 	}
 
 	/**
 	 * @return the alum
 	 */
-	public int getAlum() {
+	public String getAlum() {
 		return alum;
 	}
 
 	/**
 	 * @param alum the alum to set
 	 */
-	public void setAlum(int alum) {
+	public void setAlum(String alum) {
 		this.alum = alum;
 	}
 
-	/**
-	 * @return the ante_hor
-	 */
-	public Matricula getAnte_hor() {
-		return ante_hor;
+	public Matricula getSeguentAssig() {
+		return seguentAssig;
 	}
 
-	/**
-	 * @param ante_hor the ante_hor to set
-	 */
-	public void setAnte_hor(Matricula ante_hor) {
-		this.ante_hor = ante_hor;
+	public void setSeguentAssig(Matricula seguentAssig) {
+		this.seguentAssig = seguentAssig;
 	}
 
-	/**
-	 * @return the next_hor
-	 */
-	public Matricula getNext_hor() {
-		return next_hor;
+	public Matricula getSeguentAlumne() {
+		return seguentAlumne;
 	}
 
-	/**
-	 * @param next_hor the next_hor to set
-	 */
-	public void setNext_hor(Matricula next_hor) {
-		this.next_hor = next_hor;
+	public void setSeguentAlumne(Matricula seguentAlumne) {
+		this.seguentAlumne = seguentAlumne;
 	}
 
-	/**
-	 * @return the ante_ver
-	 */
-	public Matricula getAnte_ver() {
-		return ante_ver;
+	@Override
+	public String toString() {
+		return "Matricula [assig=" + assig + ", alum=" + alum + "]";
 	}
-
-	/**
-	 * @param ante_ver the ante_ver to set
-	 */
-	public void setAnte_ver(Matricula ante_ver) {
-		this.ante_ver = ante_ver;
-	}
-
-	/**
-	 * @return the next_ver
-	 */
-	public Matricula getNext_ver() {
-		return next_ver;
-	}
-
-	/**
-	 * @param next_ver the next_ver to set
-	 */
-	public void setNext_ver(Matricula next_ver) {
-		this.next_ver = next_ver;
-	}
-
 	
+	public int compareTo(Assignatura assig) {
+		return (this.assig.compareTo(assig.getCodiAssig()));
+	}
 	
+	public int compareTo(Alumne alum) { 
+		return (this.alum.compareTo(alum.getCodiAlum()));
+	}
 	
+	public boolean equals(Assignatura assig) {
+		if(this.compareTo(assig)==0) return true;
+		else return false;
+	}
 	
+	public boolean equals(Matricula mat) {
+		if((this.assig==mat.getAssig())&&(this.alum==mat.getAlum())&&(this.seguentAssig==mat.getSeguentAssig())&&(this.seguentAlumne==mat.getSeguentAlumne())) 
+			return true;
+		else return false;
+	}
+	
+	public void clone(Matricula mat) {
+		this.assig=mat.getAssig();
+		this.alum=mat.getAlum();
+		this.seguentAssig=mat.getSeguentAssig();
+		this.seguentAlumne=mat.getSeguentAlumne();
+	}
 }

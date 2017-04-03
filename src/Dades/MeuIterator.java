@@ -1,15 +1,25 @@
 package Dades;
 
 import java.util.Iterator;
+import Exceptions.*;
 
 public class MeuIterator<T extends Comparable<T>> implements Iterator<T> {
-	private LlistaGenerica<T> llista;	//nou atribut que ens guardarà una copia de la llista actual de punts
+	private TADLlistaGenerica<T> llista;	//nou atribut que ens guardarà una copia de la llista actual de elements
 	private int posicioIterator;
 	
-	public MeuIterator(LlistaGenerica<T> ll) {
-		llista=new LlistaGenerica<T>(ll.getNum());
-		for (int i=0; i<ll.getNum(); i++) {
-			llista.afegirElement(ll.consultarIessim(i));
+	public MeuIterator(TADLlistaGenerica<T> ll, int tipus) {
+		switch(tipus){
+			case 1:
+				llista=new LlistaEstatica<T>(ll.getNum()); break;
+			case 2:
+				llista=new LlistaDinamica<T>(); break;
+			case 3: break;
+			default: break;
+		}
+		try{
+			for (int i=0; i<ll.getNum(); i++) llista.afegirElement(ll.consultarPosicio(i));
+		} catch (LlistaPlena|LlistaBuida e){
+			System.out.println("Aquesta circunstancia no deuria de passar mai.");
 		}
 		posicioIterator=0; 	// ens preparem per a retornar els elements a partir de la posicio 0
 	}
@@ -21,11 +31,14 @@ public class MeuIterator<T extends Comparable<T>> implements Iterator<T> {
 
 	@Override
 	public T next() {
-		T aux=llista.consultarIessim(posicioIterator);
-		posicioIterator++;
-		return aux;
+		try {
+			T aux=llista.consultarPosicio(posicioIterator);
+			posicioIterator++;
+			return aux;
+		} catch (LlistaBuida e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
-
-	
 
 }
