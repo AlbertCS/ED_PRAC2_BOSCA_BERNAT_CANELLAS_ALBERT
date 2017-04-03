@@ -4,15 +4,13 @@ public class Matricula {
 
 	private Integer assig;
 	private String alum;
-	Matricula ante_hor, next_hor, ante_ver, next_ver;
+	Matricula seguentAssig, seguentAlumne;
 	
 	public Matricula(Integer assig, String alum) {
 		this.assig=assig;
 		this.alum=alum;
-		ante_hor=null;
-		next_hor=null;
-		ante_ver=null;
-		next_ver=null;
+		seguentAssig=null;
+		seguentAlumne=null;
 	}
 
 	/**
@@ -43,64 +41,20 @@ public class Matricula {
 		this.alum = alum;
 	}
 
-	/**
-	 * @return the ante_hor
-	 */
-	public Matricula getAnte_hor() {
-		return ante_hor;
+	public Matricula getSeguentAssig() {
+		return seguentAssig;
 	}
 
-	/**
-	 * @param ante_hor the ante_hor to set
-	 */
-	public void setAnte_hor(Matricula ante_hor) {
-		this.ante_hor = ante_hor;
+	public void setSeguentAssig(Matricula seguentAssig) {
+		this.seguentAssig = seguentAssig;
 	}
 
-	/**
-	 * @return the next_hor
-	 */
-	public Matricula getNext_hor() {
-		return next_hor;
+	public Matricula getSeguentAlumne() {
+		return seguentAlumne;
 	}
 
-	/**
-	 * @param next_hor the next_hor to set
-	 */
-	public void setNext_hor(Matricula next_hor) {
-		this.next_hor = next_hor;
+	public void setSeguentAlumne(Matricula seguentAlumne) {
+		this.seguentAlumne = seguentAlumne;
 	}
-
-	/**
-	 * @return the ante_ver
-	 */
-	public Matricula getAnte_ver() {
-		return ante_ver;
-	}
-
-	/**
-	 * @param ante_ver the ante_ver to set
-	 */
-	public void setAnte_ver(Matricula ante_ver) {
-		this.ante_ver = ante_ver;
-	}
-
-	/**
-	 * @return the next_ver
-	 */
-	public Matricula getNext_ver() {
-		return next_ver;
-	}
-
-	/**
-	 * @param next_ver the next_ver to set
-	 */
-	public void setNext_ver(Matricula next_ver) {
-		this.next_ver = next_ver;
-	}
-
-	
-	
-	
 	
 }
