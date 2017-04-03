@@ -77,7 +77,8 @@ public class Assignatura implements Comparable<Assignatura>{
 	}
 	
 	public boolean equals(Assignatura assig) {
-		if(this.compareTo(assig)==0) return true;
+		if((this.codiAssig==assig.getCodiAssig())&&(this.nomAssig==assig.getNomAssig())&&(this.credits==assig.getCredits())&&(this.quad==assig.getQuad())) 
+			return true;
 		else return false;
 	}
 	

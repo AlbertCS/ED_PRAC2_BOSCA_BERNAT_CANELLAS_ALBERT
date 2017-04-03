@@ -63,11 +63,11 @@ public class Matricula {
 	}
 	
 	public int compareTo(Assignatura assig) {
-		return 0;
+		return (this.assig.compareTo(assig.getCodiAssig()));
 	}
 	
 	public int compareTo(Alumne alum) { 
-		return 0;
+		return (this.alum.compareTo(alum.getCodiAlum()));
 	}
 	
 	public boolean equals(Assignatura assig) {
@@ -75,8 +75,9 @@ public class Matricula {
 		else return false;
 	}
 	
-	public boolean equals(Alumne alum) {
-		if(this.compareTo(alum)==0) return true;
+	public boolean equals(Matricula mat) {
+		if((this.assig==mat.getAssig())&&(this.alum==mat.getAlum())&&(this.seguentAssig==mat.getSeguentAssig())&&(this.seguentAlumne==mat.getSeguentAlumne())) 
+			return true;
 		else return false;
 	}
 	

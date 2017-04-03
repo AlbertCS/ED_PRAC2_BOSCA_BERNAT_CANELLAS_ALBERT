@@ -37,7 +37,7 @@ public class Alumne implements Comparable<Alumne>{
 	}
 
 	public boolean equals(Alumne alum) {
-		if(this.compareTo(alum)==0) return true;
+		if((this.codiAlum==alum.getCodiAlum())&&(this.nomAlum==alum.getNomAlum())) return true;
 		else return false;
 	}
 	
