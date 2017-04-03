@@ -1,5 +1,6 @@
 package Dades;
 import java.util.*;
+import Exceptions.*;
 
 public interface TADLlistaGenerica<E, T extends Comparable<T>>{
 
