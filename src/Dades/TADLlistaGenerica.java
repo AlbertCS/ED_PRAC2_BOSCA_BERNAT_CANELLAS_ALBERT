@@ -1,21 +1,22 @@
 package Dades;
 import java.util.*;
+import Exceptions.*;
 
-public interface TADLlistaGenerica<E, T extends Comparable<T>>{
+public interface TADLlistaGenerica<T extends Comparable<T>>{
 
 		/**
 		 * 
 		 * @param elem
 		 * @throws LlistaPlena
 		 */
-		void afegirElement(E elem) throws LlistaPlena;
+		void afegirElement(T elem)  throws LlistaPlena;
 		
 		/**
 		 * 
 		 * @return
 		 * @throws LlistaBuida
 		 */
-		E consultarIessim() throws LlistaBuida;
+		T consultarPosicio(int i) throws LlistaBuida;
 		
 		/**
 		 * Metode que retorna el numero d'elements
@@ -26,6 +27,7 @@ public interface TADLlistaGenerica<E, T extends Comparable<T>>{
 		public String toString();
 		
 		public Iterator<T> iterator();
-	
+		
+		public int getNum();	
 
 }

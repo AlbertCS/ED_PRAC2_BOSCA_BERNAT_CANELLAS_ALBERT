@@ -1,15 +1,16 @@
 package Dades;
 
 import java.util.Iterator;
+import Exceptions.*;
 
 public class MeuIterator<T extends Comparable<T>> implements Iterator<T> {
-	private LlistaGenerica<T> llista;	//nou atribut que ens guardarà una copia de la llista actual de punts
+	private TADLlistaGenerica<T> llista;	//nou atribut que ens guardarà una copia de la llista actual de elements
 	private int posicioIterator;
 	
-	public MeuIterator(LlistaGenerica<T> ll) {
-		llista=new LlistaGenerica<T>(ll.getNum());
+	public MeuIterator(TADLlistaGenerica<T> ll) {
+		llista=new TADLlistaGenerica<T>(ll.getNum());
 		for (int i=0; i<ll.getNum(); i++) {
-			llista.afegirElement(ll.consultarIessim(i));
+			llista.afegirElement(ll.consultarPosicio(i));
 		}
 		posicioIterator=0; 	// ens preparem per a retornar els elements a partir de la posicio 0
 	}
@@ -20,8 +21,9 @@ public class MeuIterator<T extends Comparable<T>> implements Iterator<T> {
 	}
 
 	@Override
-	public T next() {
-		T aux=llista.consultarIessim(posicioIterator);
+	public TADLlistaGenerica next() {
+		TADLlistaGenerica<T> aux=null;
+		aux=llista.consultarPosicio(posicioIterator);
 		posicioIterator++;
 		return aux;
 	}

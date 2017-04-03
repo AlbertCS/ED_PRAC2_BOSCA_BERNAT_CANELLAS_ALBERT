@@ -2,22 +2,24 @@ package Dades;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import Exceptions.*;
 
-public class LlistaGenerica<T extends Comparable<T>> implements Iterable<T> {
+public class LlistaGenericaEstatica<T extends Comparable<T>> implements Iterable<T>, TADLlistaGenerica<T> {
 	private T[] llista;
 	private int num;
 	
-	public LlistaGenerica(int dim) {
+	@SuppressWarnings("unchecked")
+	public LlistaGenericaEstatica(int dim) {
 		llista=(T[])new Comparable[dim];
 		num=0;
 	}
 
+	@SuppressWarnings("unchecked")
 	public void afegirElement(T p) {
 		if (num>=llista.length) {
 			// amplio
 			T[] nova=(T[]) new Comparable[llista.length*2];
-			for (int i=0; i<llista.length; i++)
-				nova[i]=llista[i];
+			for (int i=0; i<llista.length; i++) nova[i]=llista[i];
 			llista=nova;
 		}
 		// segur que tinc espai
@@ -28,11 +30,6 @@ public class LlistaGenerica<T extends Comparable<T>> implements Iterable<T> {
 		}
 		llista[pos+1]=p;
 		num++;
-	}
-	
-	public T consultarIessim(int i) {
-		if (i<num) return(llista[i]);
-		else return(null);
 	}
 	
 	public int getNum() {
@@ -46,8 +43,19 @@ public class LlistaGenerica<T extends Comparable<T>> implements Iterable<T> {
 
 	@Override
 	public Iterator<T> iterator() {
-		MeuIterator<T> pI=new MeuIterator<T>(this);
-		return pI;
+		return new MeuIterator<T>(this);
+	}
+
+	@Override
+	public T consultarPosicio(int i) throws LlistaBuida {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int numElems() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 }

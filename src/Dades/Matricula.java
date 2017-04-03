@@ -2,13 +2,13 @@ package Dades;
 //Class Node
 public class Matricula {
 
-	private int assig;
-	private int alum;
+	private Integer assig;
+	private String alum;
 	Matricula ante_hor, next_hor, ante_ver, next_ver;
 	
-	public Matricula(int dim) {
-		this.assig=assig;			//llista horitzontal
-		this.alum=alum;				//llista vertical
+	public Matricula(Integer assig, String alum) {
+		this.assig=assig;
+		this.alum=alum;
 		ante_hor=null;
 		next_hor=null;
 		ante_ver=null;
@@ -18,28 +18,28 @@ public class Matricula {
 	/**
 	 * @return the assig
 	 */
-	public int getAssig() {
+	public Integer getAssig() {
 		return assig;
 	}
 
 	/**
 	 * @param assig the assig to set
 	 */
-	public void setAssig(int assig) {
+	public void setAssig(Integer assig) {
 		this.assig = assig;
 	}
 
 	/**
 	 * @return the alum
 	 */
-	public int getAlum() {
+	public String getAlum() {
 		return alum;
 	}
 
 	/**
 	 * @param alum the alum to set
 	 */
-	public void setAlum(int alum) {
+	public void setAlum(String alum) {
 		this.alum = alum;
 	}
 
