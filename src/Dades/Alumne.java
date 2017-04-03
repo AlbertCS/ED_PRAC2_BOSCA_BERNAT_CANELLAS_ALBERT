@@ -21,6 +21,7 @@ public class Alumne implements Comparable<Alumne>{
 		return nomAlum;
 	}
 
+
 	public void setNomAlum(String nomAlum) {
 		this.nomAlum = nomAlum;
 	}
