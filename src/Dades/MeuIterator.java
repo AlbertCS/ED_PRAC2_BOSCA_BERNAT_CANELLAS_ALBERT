@@ -9,12 +9,12 @@ public class MeuIterator<T extends Comparable<T>> implements Iterator<T> {
 	
 	public MeuIterator(TADLlistaGenerica<T> ll, int tipus) {
 		switch(tipus){
-		case 1:
-			llista=new LlistaGenericaEstatica<T>(ll.getNum()); break;
-		case 2:
-			llista=new LlistaGenericaDinamica<T>(ll.getNum()); break;
-		case 3: break;
-		default: break;
+			case 1:
+				llista=new LlistaEstatica<T>(ll.getNum()); break;
+			case 2:
+				llista=new LlistaDinamica<T>(); break;
+			case 3: break;
+			default: break;
 		}
 		try{
 			for (int i=0; i<ll.getNum(); i++) llista.afegirElement(ll.consultarPosicio(i));
@@ -40,7 +40,5 @@ public class MeuIterator<T extends Comparable<T>> implements Iterator<T> {
 			return null;
 		}
 	}
-
-	
 
 }

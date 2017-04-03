@@ -4,12 +4,12 @@ import java.util.Arrays;
 import java.util.Iterator;
 import Exceptions.*;
 
-public class LlistaGenericaEstatica<T extends Comparable<T>> implements Iterable<T>, TADLlistaGenerica<T> {
+public class LlistaEstatica<T extends Comparable<T>> implements Iterable<T>, TADLlistaGenerica<T> {
 	private T[] llista;
 	private int num;
 	
 	@SuppressWarnings("unchecked")
-	public LlistaGenericaEstatica(int dim) {
+	public LlistaEstatica(int dim) {
 		llista=(T[])new Comparable[dim];
 		num=0;
 	}

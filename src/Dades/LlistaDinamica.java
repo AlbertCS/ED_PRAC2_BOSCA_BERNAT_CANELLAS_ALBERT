@@ -4,13 +4,12 @@ import java.util.Arrays;
 import java.util.Iterator;
 import Exceptions.*;
 
-public class LlistaGenericaDinamica<T extends Comparable<T>> implements Iterable<T>, TADLlistaGenerica<T> {
+public class LlistaDinamica<T extends Comparable<T>> implements Iterable<T>, TADLlistaGenerica<T> {
 	private T[] llista;
 	private int num;
 	
-	@SuppressWarnings("unchecked")
-	public LlistaGenericaDinamica(int dim) {
-		llista=(T[])new Comparable[dim];
+	public LlistaDinamica() {
+		llista=null;
 		num=0;
 	}
 
