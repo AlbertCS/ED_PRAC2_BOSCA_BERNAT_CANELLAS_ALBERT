@@ -1,4 +1,5 @@
-package Dades;
+package Dades.Base;
+
 //Class Node
 public class Matricula {
 

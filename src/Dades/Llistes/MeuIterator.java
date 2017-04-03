@@ -1,6 +1,7 @@
-package Dades;
+package Dades.Llistes;
 
 import java.util.Iterator;
+
 import Exceptions.*;
 
 public class MeuIterator<T extends Comparable<T>> implements Iterator<T> {
@@ -10,14 +11,14 @@ public class MeuIterator<T extends Comparable<T>> implements Iterator<T> {
 	public MeuIterator(TADLlistaGenerica<T> ll, int tipus) {
 		switch(tipus){
 			case 1:
-				llista=new LlistaEstatica<T>(ll.getNum()); break;
+				llista=new LlistaEstatica<T>(ll.numElems()); break;
 			case 2:
 				llista=new LlistaDinamica<T>(); break;
 			case 3: break;
 			default: break;
 		}
 		try{
-			for (int i=0; i<ll.getNum(); i++) llista.afegirElement(ll.consultarPosicio(i));
+			for (int i=0; i<ll.numElems(); i++) llista.afegirElement(ll.consultarPosicio(i));
 		} catch (LlistaPlena|LlistaBuida e){
 			System.out.println("Aquesta circunstancia no deuria de passar mai.");
 		}
@@ -26,7 +27,7 @@ public class MeuIterator<T extends Comparable<T>> implements Iterator<T> {
 	
 	@Override
 	public boolean hasNext() {
-		return ((posicioIterator<llista.getNum()));
+		return ((posicioIterator<llista.numElems()));
 	}
 
 	@Override

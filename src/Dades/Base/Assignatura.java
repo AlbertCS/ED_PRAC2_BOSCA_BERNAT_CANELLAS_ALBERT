@@ -1,4 +1,4 @@
-package Dades;
+package Dades.Base;
 
 public class Assignatura implements Comparable<Assignatura>{
 	private Integer codiAssig;

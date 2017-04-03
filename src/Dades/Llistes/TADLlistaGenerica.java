@@ -1,4 +1,4 @@
-package Dades;
+package Dades.Llistes;
 import java.util.*;
 import Exceptions.*;
 
@@ -24,10 +24,8 @@ public interface TADLlistaGenerica<T extends Comparable<T>>{
 		 */
 		int numElems();
 		
-		public String toString();
+		String toString();
 		
-		public Iterator<T> iterator();
-		
-		public int getNum();	
+		Iterator<T> iterator();
 
 }
