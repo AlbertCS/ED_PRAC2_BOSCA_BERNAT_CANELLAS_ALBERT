@@ -56,5 +56,34 @@ public class Matricula {
 	public void setSeguentAlumne(Matricula seguentAlumne) {
 		this.seguentAlumne = seguentAlumne;
 	}
+
+	@Override
+	public String toString() {
+		return "Matricula [assig=" + assig + ", alum=" + alum + "]";
+	}
 	
+	public int compareTo(Assignatura assig) {
+		return 0;
+	}
+	
+	public int compareTo(Alumne alum) { 
+		return 0;
+	}
+	
+	public boolean equals(Assignatura assig) {
+		if(this.compareTo(assig)==0) return true;
+		else return false;
+	}
+	
+	public boolean equals(Alumne alum) {
+		if(this.compareTo(alum)==0) return true;
+		else return false;
+	}
+	
+	public void clone(Matricula mat) {
+		this.assig=mat.getAssig();
+		this.alum=mat.getAlum();
+		this.seguentAssig=mat.getSeguentAssig();
+		this.seguentAlumne=mat.getSeguentAlumne();
+	}
 }
