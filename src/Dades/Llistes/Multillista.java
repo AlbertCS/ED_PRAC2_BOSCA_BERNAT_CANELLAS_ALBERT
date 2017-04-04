@@ -27,6 +27,28 @@ public class Multillista<T extends Comparable<T>> {
 		}
 	}
 	
+	public Matricula consultarMatricula (Integer assig, String alum) {
+		int i=0;
+		Assignatura assigAux=null;
+		Matricula matAux=null;
+		try {
+			//Busquem la assignatura a la llista
+			assigAux=(Assignatura) llistaAssig.consultarPosicio(i);
+			while(assig!=assigAux.getCodiAssig()) {
+				i++;
+				assigAux=(Assignatura) llistaAssig.consultarPosicio(i);
+			}
+			//Una vegada ja l'hem trobat
+			matAux=assigAux.getMatric();
+			//Busquem la relacio entre aquesta asignatura i el alumne
+			while((matAux.getSeguentAssig()!=null)&&(matAux.getAlum()!=alum)) matAux=matAux.getSeguentAssig();
+		} catch (LlistaBuida e) {
+			e.printStackTrace();
+		}
+		//Ojo que si no existeix la relació entre assignatura i alumne retornara null
+		return matAux;
+	}
+	
 	public void afegirMatricula (Integer assig, String alum) {
 		int i=0;
 		Matricula newMat=new Matricula(assig, alum);
@@ -34,23 +56,41 @@ public class Multillista<T extends Comparable<T>> {
 		Alumne aluAux=null;
 		Matricula matAux=null;
 		try {
+			//Busquem la assignatura a la llista
 			assigAux=(Assignatura) llistaAssig.consultarPosicio(i);
 			while(assig!=assigAux.getCodiAssig()) {
 				i++;
 				assigAux=(Assignatura) llistaAssig.consultarPosicio(i);
 			}
+			//Una vegada ja l'hem trobat
 			matAux=assigAux.getMatric();
+			//Mirem si es la primera relació que hauria de fer o deuria ser referenciada
 			if(matAux==null) assigAux.setMatric(newMat);
+			//Si ja tenim la primera relació
 			else {
-				while(matAux.getSeguentAssig()!=null) matAux=matAux.getSeguentAssig();
-				matAux.setSeguentAssig(newMat);
+				//Busquem que no existisca previament una relacio amb aquesta asignatura i el mateix alumne
+				while((matAux.getSeguentAssig()!=null)&&(matAux.getAlum()!=alum)) matAux=matAux.getSeguentAssig();
+				//Sino existeix cap relacio amb aquesta asignatura i aquest alumne
+				if((matAux.getSeguentAssig()==null)&&(matAux.getAlum()!=alum)) {
+					matAux.setSeguentAssig(newMat);
+					newMat.setAnteriorAssig(matAux);
+				}
 			}
+			i=0;
 			aluAux=(Alumne) llistaAssig.consultarPosicio(i);
 			while(alum!=aluAux.getCodiAlum()) {
 				i++;
 				aluAux=(Alumne) llistaAssig.consultarPosicio(i);
 			}
-			aluAux.setMatric(newMat);
+			matAux=aluAux.getMatric();
+			if(matAux==null) aluAux.setMatric(newMat);
+			else {
+				while((matAux.getSeguentAlumne()!=null)&&(matAux.getAssig()!=assig)) matAux=matAux.getSeguentAlumne();
+				if((matAux.getSeguentAlumne()==null)&&(matAux.getAssig()!=assig)) {
+					matAux.setSeguentAlumne(newMat);
+					newMat.setAnteriorAlumne(matAux);
+				}
+			}
 		} catch (LlistaBuida e) {
 			e.printStackTrace();
 		}
