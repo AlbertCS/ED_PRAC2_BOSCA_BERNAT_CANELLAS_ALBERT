@@ -4,6 +4,7 @@ public class Assignatura implements Comparable<Assignatura>{
 	private Integer codiAssig;
 	private String nomAssig;
 	private Integer credits, curs,  quad;
+	private Matricula matric;
 	
 	public Assignatura(Integer codiAssig, String nomAssig, Integer credits, Integer curs, Integer quad){
 		this.codiAssig=codiAssig;
@@ -13,6 +14,14 @@ public class Assignatura implements Comparable<Assignatura>{
 		this.quad=quad;
 	}
 
+	public Matricula getMatric() {
+		return matric;
+	}
+
+	public void setMatric(Matricula matric) {
+		this.matric = matric;
+	}
+	
 	public Integer getCodiAssig() {
 		return codiAssig;
 	}
@@ -77,7 +86,7 @@ public class Assignatura implements Comparable<Assignatura>{
 	}
 	
 	public boolean equals(Assignatura assig) {
-		if((this.codiAssig==assig.getCodiAssig())&&(this.nomAssig==assig.getNomAssig())&&(this.credits==assig.getCredits())&&(this.quad==assig.getQuad())) 
+		if((this.codiAssig==assig.getCodiAssig())&&(this.nomAssig==assig.getNomAssig())&&(this.credits==assig.getCredits())&&(this.quad==assig.getQuad())&&(this.matric==assig.getMatric())) 
 			return true;
 		else return false;
 	}
@@ -88,5 +97,6 @@ public class Assignatura implements Comparable<Assignatura>{
 		this.credits=assig.getCredits();
 		this.curs=assig.getCurs();
 		this.quad=assig.getQuad();
+		this.matric=assig.getMatric();
 	}
 }

@@ -5,13 +5,31 @@ public class Matricula {
 
 	private Integer assig;
 	private String alum;
-	Matricula seguentAssig, seguentAlumne;
+	Matricula seguentAssig, seguentAlumne, anteriorAssig, anteriorAlumne;
 	
 	public Matricula(Integer assig, String alum) {
 		this.assig=assig;
 		this.alum=alum;
 		seguentAssig=null;
 		seguentAlumne=null;
+		anteriorAssig=null;
+		anteriorAlumne=null;
+	}
+
+	public Matricula getAnteriorAssig() {
+		return anteriorAssig;
+	}
+
+	public void setAnteriorAssig(Matricula anteriorAssig) {
+		this.anteriorAssig = anteriorAssig;
+	}
+
+	public Matricula getAnteriorAlumne() {
+		return anteriorAlumne;
+	}
+
+	public void setAnteriorAlumne(Matricula anteriorAlumne) {
+		this.anteriorAlumne = anteriorAlumne;
 	}
 
 	/**

@@ -3,10 +3,20 @@ package Dades.Base;
 public class Alumne implements Comparable<Alumne>{
 	private String codiAlum;
 	private String nomAlum;
+	private Matricula matric;
 	
 	public Alumne(String codiAlum, String nomAlum) {
 		this.codiAlum=codiAlum;
 		this.nomAlum=nomAlum;
+		matric=null;
+	}
+
+	public Matricula getMatric() {
+		return matric;
+	}
+
+	public void setMatric(Matricula matric) {
+		this.matric = matric;
 	}
 
 	public String getCodiAlum() {
@@ -37,12 +47,13 @@ public class Alumne implements Comparable<Alumne>{
 	}
 
 	public boolean equals(Alumne alum) {
-		if((this.codiAlum==alum.getCodiAlum())&&(this.nomAlum==alum.getNomAlum())) return true;
+		if((this.codiAlum==alum.getCodiAlum())&&(this.nomAlum==alum.getNomAlum())&&(this.matric==alum.getMatric())) return true;
 		else return false;
 	}
 	
 	public void clone(Alumne alum) {
 		this.codiAlum=alum.getCodiAlum();
 		this.nomAlum=alum.getNomAlum();
+		this.matric=alum.getMatric();
 	}
 }
