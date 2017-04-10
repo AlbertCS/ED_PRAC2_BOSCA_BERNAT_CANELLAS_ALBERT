@@ -24,13 +24,19 @@ public class LlistaEstatica<T extends Comparable<T>> implements Iterable<T>, TAD
 			llista=nova;
 		}
 		// segur que tinc espai
-		int pos=numElems-1;
-		while ((pos>=0) && (p.compareTo(llista[pos])<0)) {
-			llista[pos+1]=llista[pos];
-			pos--;
+		int pos=0;
+		while ((!p.equals(llista[pos])) && (pos!=numElems)){
+			pos++;
 		}
-		llista[pos+1]=p;
-		numElems++;
+		if(pos==numElems) {
+			pos=numElems-1;
+			while ((pos>=0) && (p.compareTo(llista[pos])<0)) {
+				llista[pos+1]=llista[pos];
+				pos--;
+			}
+			llista[pos+1]=p;
+			numElems++;
+		}
 	}
 	
 	@Override

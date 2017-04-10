@@ -19,13 +19,20 @@ public class LlistaJava<T extends Comparable<T>> implements Iterable<T>, TADLlis
 		
 	@Override
 	public void afegirElement(T elem) throws LlistaPlena {
-		int pos=numElems-1;
-		while ((pos>=0) && (elem.compareTo(llista.get(pos))<0)) {
-			llista.add(pos+1, llista.get(pos));
-			pos--;
+		int pos=0;
+		while (!elem.equals(llista.get(pos))&& (pos!=numElems)){
+			pos++;
 		}
-		llista.add(pos+1, elem);
-		numElems++;
+		if(pos==numElems) {
+			pos=numElems-1;
+			while ((pos>=0) && (elem.compareTo(llista.get(pos))<0)) {
+				llista.add(pos+1, llista.get(pos));
+				pos--;
+			}
+			llista.add(pos+1, elem);
+			numElems++;
+		}
+		
 	}
 
 	@Override
