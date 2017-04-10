@@ -6,7 +6,7 @@ package Dades.Llistes;
  * @param <E> Tipus Element
  *
  */
-public class Node<T> {
+public class Node<T extends Comparable<T>> {
 	
 	private T x;
 	private Node<T> seguent;

@@ -1,15 +1,17 @@
 package Aplicacio;
+import Dades.Base.*;
+
 
 import java.io.*;
 import java.util.*;
 
 import Exceptions.*;
 import Dades.*;
-
+import Dades.Llistes.*;
 /**
  * Class per testejar el programa
  * 	 
- * @author Albert Cañellas Sole
+ * @author Albert Cañellas Solé
  * @author Bernat Bosca Candel
  *
  */
@@ -26,7 +28,7 @@ public class Aplicacio {
 		String op;
 		int opcio=0;
 			
-		System.out.println("Indica tipus de cua a utilitzar:\n\t1. Vector\n\t2. Circular\n\t3. Dinàmica\n\t4. JavaCollection");
+		System.out.println("Indica tipus de llista a utilitzar:\n\t1. Estàtica\n\t2. Dinàmica\n\t3. JavaCollection");
 		op=teclat.nextLine();
 		if(Character.isDigit(op.charAt(0))) opcio=Integer.parseInt(op);
 		
@@ -38,10 +40,8 @@ public class Aplicacio {
 					opcioOk=false; break;
 				case 3: 
 					opcioOk=false; break;
-				case 4: 
-					opcioOk=false; break;
 				default:
-					System.out.println("Valor incorrecte. Indica tipus de cua a utilitzar:\n\t1. Vector\n\t2. Circular\n\t3. Dinàmica\n\t4. JavaCollection");
+					System.out.println("Valor incorrecte. Indica tipus de cua a utilitzar:\n\t1. Estàtica\n\t2. Dinàmica\n\t3. JavaCollection");
 					op=teclat.nextLine();
 					if(Character.isDigit(op.charAt(0))) opcio=Integer.parseInt(op); break;
 			}
@@ -50,73 +50,27 @@ public class Aplicacio {
 	}
 		
 	/**
-	 * Metode que crea el tipus de cua corresponent
+	 * Metode que crea el tipus de llista corresponent
 	 * @param opcio implementacio escollida
-	 * @param mida dimensio de la cua
-	 * @param cua	la cua implementada
-	 * @param clau	la clau amb la que tractar el missatge
-	 * @return retorna la cua corresponent
+	 * @param mida dimensio de la llista
+	 * @param cua	la llista implementada
 	 */
-	public static TADDades<Integer> implementacio(int opcio, int mida, TADDades<Integer> cua, String clau) {
+	public static void implementacio(int opcio, int mida, TADLlistaGenerica<Alumne> llistaAlumne, TADLlistaGenerica<Assignatura> llistaAssignatura) {
 		switch(opcio){
 			case 1:
-				cua=new CuaVector<Integer>(mida); break;
+				llistaAlumne=new LlistaEstatica<Alumne>(mida); 
+				llistaAssignatura=new LlistaEstatica<Assignatura>(mida); break;
 			case 2:
-				cua=new CuaCircular<Integer>(mida); break;
+				llistaAlumne=new LlistaDinamica<Alumne>(); 
+				llistaAssignatura=new LlistaDinamica<Assignatura>(); break;
 			case 3:
-				cua=new CuaDinamic<Integer>(); break;
-			case 4:
-				cua=new CuaJava<Integer>(); break;
+				llistaAlumne=new LlistaJava<Alumne>(); 
+				llistaAssignatura=new LlistaJava<Assignatura>(); break;
 			default: break;
 		}
-		try{
-			for(int i=0;i<mida;i++)	cua.encuar(new Integer (clau.charAt(i)-48));
-		} catch (CuaPlena e){
-			System.out.println("Aquesta circunstancia no deuria de passar mai.");
-		}
-		return cua;
 	}
 	
-	/**
-	 * Metode que tracta la lletra, sumant o restant el valor de la clau corresponent
-	 * @param a lletra a tractar
-	 * @param num valor de la clau a aplicar
-	 * @param signe indica si s'ha de sumar(xifrar) o restar(desxifrar)
-	 * @return la lletra tractada
-	 */
-	public static char tractarLletra(char a, int num, char signe) {
-		char mayus[]={'R','S','T','U','V','W','X','Y','Z','A','B','C','D','E','F','G','H','I'};
-		char minus[]={'r','s','t','u','v','w','x','y','z','a','b','c','d','e','f','g','h','i'};
-		int i=0;
-		
-		if(signe=='+') {
-			if((int)(a)<82) a=(char) ((int)(a)+num);	//Lletra mayus sense problemes
-			else if((int)(a)<91) {	//Lletra mayus amb problemes
-				while(a!=mayus[i]) i++;
-				a= mayus[i+num];
-			} 
-			else if (((int)(a)>96)&((int)(a)<114)) a=(char) ((int)(a)+num);	//Lletra minus sense problemes
-			else if((int)(a)<123) {	//Lletra minus amb problemes
-				while(a!=minus[i]) i++;
-				a=minus[i+num];
-			}
-		}
-		else {
-			i=9;
-			if(((int)(a)>64)&((int)(a)<74)) {	//Lletra mayus amb problemes
-				while(a!=mayus[i]) i++;
-				a= mayus[i-num];	
-			}
-			else if((int)(a)<91) a=(char) ((int)(a)-num);	//Lletra mayus sense problemes
-			else if (((int)(a)>96)&((int)(a)<106)) {	//Lletra minus amb problemes
-				while(a!=minus[i]) i++;
-				a=minus[i-num];
-			}
-			else if((int)(a)<123) a=(char) ((int)(a)-num);	//Lletra minus sense problemes
-				
-		}
-		return a;
-	}
+	
 	
 	/**
 	 * Metode que tractara les dades amb el metode triat
@@ -124,78 +78,51 @@ public class Aplicacio {
 	 * @param cuaClau cua que conte la clau
 	 * @param signe indica si s'ha de sumar(xifrar) o restar(desxifrar)
 	 */
-	public static void tractarDades(String nomFitxer, TADDades<Integer> cuaClau, char signe) {
+	public static void cargarDades(String nomFitxer, TADLlistaGenerica<Alumne> llistaAlumne, TADLlistaGenerica<Assignatura> llistaAssignatura) {
 		
 		try {
 			//Variables
-			BufferedReader f=new BufferedReader(new FileReader(nomFitxer+".txt"));
-			String frase, nomGuardar;
+			BufferedReader f=new BufferedReader(new FileReader(nomFitxer+".csv"));
+			String frase, nomAssig, nomAlum, codiAlum;
 			Character a;
-			Integer num;
-				//Xifrar
-			if (signe=='+') nomGuardar=(nomFitxer+"_vX.txt");
-			//Desxifrar
-			else nomGuardar=(nomFitxer+"_vD.txt");
-			BufferedWriter g=new BufferedWriter(new FileWriter(nomGuardar));
+			Integer num, credits, curs, quad, codiAss;
 			
 			frase=f.readLine();
 			while(frase!=null){ 
-				for(int i=0;i<frase.length();i++){
-					a=frase.charAt(i);
-					if(Character.isLetter(a)){
-						try{
-							num=cuaClau.desencuar();
-							a = tractarLletra(a.charValue(), num.intValue(), signe);
-							g.write(String.valueOf(a));
-							cuaClau.encuar(num);
-						} catch(CuaBuida|CuaPlena e){
-							System.out.println("Aquesta circunstancia no deuria de passar mai.");
-						}
-					}
-					else g.write(String.valueOf(a));
-				}
-			frase = f.readLine();
-			if(frase!=null) g.newLine();
-		}
-			g.close();
+				StringTokenizer st = new StringTokenizer(frase, ";");
+				
+					codiAss=Integer.parseInt(st.nextToken());
+					nomAssig=st.nextToken();
+					credits=Integer.parseInt(st.nextToken());
+					curs=Integer.parseInt(st.nextToken());
+					quad=Integer.parseInt(st.nextToken());
+					Assignatura auxass= new Assignatura(codiAss, nomAssig, credits, curs, quad);
+					//afegirAssignatura(auxass);
+					codiAlum=st.nextToken();
+					nomAlum=st.nextToken();
+					Alumne auxal=new Alumne (codiAlum, nomAlum);
+					//afegirAlumne(auxal);
+				
+					frase = f.readLine();
+			}
+			
 			f.close();
-		}catch (IOException e) {
-			System.err.println("Error de tipus IOException.");
-		}
-	}
-	
-	/**
-	 * Metode que pregunta si es vol xifrar(+) o desxifrar(-) i guarda el signe dependent de l'opcio triada
-	 * @param teclat variable de tipus Scanner
-	 * @return retorna el signe depenent de l'opcio triada
-	 */
-	public static char xifrarDesxifrar(Scanner teclat) {
-		boolean opcioOk=false;
-		int opcio=0;
-		char signe='0';
-		String op;
-		
-		System.out.println("Indica si vols xifrar o desxifrar:\n\t1. Xifrar\n\t2. Desxifrar");
-		op=teclat.nextLine();
-		if(Character.isDigit(op.charAt(0))) opcio=Integer.parseInt(op);
-		
-		while(!opcioOk){
-			switch(opcio){
-				//Xifrar
-				case 1: signe='+'; opcioOk=true; break;
-				//Desxifrar
-				case 2: signe='-'; opcioOk=true; break;
-			default:
-					System.out.println("Valor incorrecte. Indica si vols xifrar o desxifrar:\n\t1. Xifrar\n\t2. Desxifrar");
-					op=teclat.nextLine();
-					if(Character.isDigit(op.charAt(0))) opcio=Integer.parseInt(op); break;
+			}catch (IOException e) {
+				System.err.println("Error de tipus IOException.");
 			}
 	}
-		return signe;
+	
+	public void afegirAssignatura(Assignatura assig){
+		
 	}
 	
+	public void afegirAlumne(Alumne alum){
+		
+	}
+	
+	
 	/**
-		 * Metode que comprova que el nom del fitxer sigui correcte
+	 * Metode que comprova que el nom del fitxer sigui correcte
 	 * @param teclat variable de tipus Scanner
 	 * @return nomFitxer retorna el nom del teclat
 	 */
@@ -205,57 +132,53 @@ public class Aplicacio {
 		
 		System.out.println("Indica el nom del fitxer. Si no has creat cap, el nom que has de ficar és 'text'.");
 		nomFitxer=teclat.nextLine();
-		File nameFile = new File(nomFitxer+".txt");
+		File nameFile = new File(nomFitxer+".csv");
 		while(isOk){
 			if(nameFile.isFile()) isOk=false;
 			else {
 				System.out.println("El fitxer amb el nom "+nomFitxer+" NO existeix. Indica un altre nom: ");
 				nomFitxer=teclat.nextLine();
-				nameFile = new File(nomFitxer+".txt");
+				nameFile = new File(nomFitxer+".csv");
 			}
 		}
 		return nomFitxer;
 	}
 	
-	/**
-	 * Metode que comprova que la clau sigui correcta
-	 * @param teclat variable de tipus Scanner
-	 * @return clau retorna la clau
-	 */
-	public static String clauCorrecta(Scanner teclat) {
-		int i=0;
-		String clau;
-		boolean isOk=true, nonum=true;
+	
+	public static void consultaperCodiAl(){
 		
-		System.out.println("Indica la clau:");
-		clau=teclat.nextLine();
-		while(isOk){
-			while((nonum) && (i<clau.length())){
-				if(Character.isDigit(clau.charAt(i))) i++;
-				else nonum=false;				
-			}
-			if((nonum==false) && (i>0)){
-				System.out.println("La clau que has introduit te algun caràcter incorrecte. Indica la clau:");
-				clau=teclat.nextLine();
-				isOk=true;
-			}
-			else isOk=false;
-		}
-		return clau;
+		
 	}
+	
+	public static void consultaperAss(){
+		
+		
+	}
+	
+	public static void alumcredits(){
+		
+		
+	}
+	
+	public static void assigalums(){
+		
+		
+	}
+	
+	
 	/**
 	 * 	/-Main-/
 	 * @param args args
 	 */
 	public static void main(String[] args) {
-		Assignatura[] assiglist= new Assignatura [200];
-		Alumne[] alumlist=new Alumne [200];
+		//Assignatura[] assiglist= new Assignatura [1000];
+		//Alumne[] alumlist=new Alumne [1000];
 		Scanner teclat=new Scanner(System.in);
 		TADLlistaGenerica<Alumne> llistaAlumne=null;
 		TADLlistaGenerica<Assignatura> llistaAssignatura=null;
 		String nomFitxer;
-		int opcio;
-		long tempsi, tempsf;
+		int opcio, dim=1000;
+		long tempsi=0, tempsf=0;
 		
 		//Tipus de implementació
 		opcio=tipusImplementacio(teclat);
@@ -264,10 +187,47 @@ public class Aplicacio {
 		nomFitxer=nomCorrecte(teclat);
 		
 		//Operacions
-		tempsi=System.nanoTime();
-		cuaClau=implementacio(opcio, clau.length(), cuaClau, clau);
-		tractarDades(nomFitxer, cuaClau, signe);
-		tempsf=System.nanoTime();
+		
+		implementacio(opcio, dim, llistaAlumne, llistaAssignatura);
+		cargarDades(nomFitxer, llistaAlumne, llistaAssignatura);
+		
+		
+		
+		//Menu
+		int opcioM=0;
+		
+		String op;
+		System.out.println("Menu de consultes:\n\t1. Consulta per Codi del Alumne\n\t2. Consulta per Codi Assignatura\n\t3. Alumnes amb x credits o menys\n4. Assignatures amb x alumnes o menys");
+		op=teclat.nextLine();
+		if(Character.isDigit(op.charAt(0))) opcioM=Integer.parseInt(op);
+		
+			switch(opcioM){
+				case 1: 
+					tempsi=System.nanoTime();
+					consultaperCodiAl();
+					tempsf=System.nanoTime();
+					break;
+				case 2: 
+					tempsi=System.nanoTime();
+					consultaperAss();
+					tempsf=System.nanoTime();
+					break;
+				case 3: 
+					tempsi=System.nanoTime();
+					alumcredits();
+					tempsf=System.nanoTime();
+					break;
+				case 4:
+					tempsi=System.nanoTime();
+					assigalums();
+					tempsf=System.nanoTime();
+					break;
+				default:
+					System.out.println("Valor incorrecte.\tMenu de consultes:\n\t1. Consulta per Codi del Alumne\n\t2. Consulta per Codi Assignatura\n\t3. Alumnes amb x credits o menys\n4. Assignatures amb x alumnes o menys");
+					op=teclat.nextLine();
+					if(Character.isDigit(op.charAt(0))) opcioM=Integer.parseInt(op); break;
+			}
+		
 		
 		System.out.println("Les Dades s'han tractat correctament.\n");
 		System.out.println("El programa ha tardat: "+(tempsf-tempsi)+"ns.");

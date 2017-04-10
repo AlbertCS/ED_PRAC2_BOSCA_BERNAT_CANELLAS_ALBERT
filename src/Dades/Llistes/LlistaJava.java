@@ -14,32 +14,37 @@ import Exceptions.LlistaPlena;
  */
 public class LlistaJava<T extends Comparable<T>> implements Iterable<T>, TADLlistaGenerica<T>{
 
-	private static int  numElem=0;
-	LinkedList<T> list=new LinkedList<T>();
+	private static int  numElems=0;
+	LinkedList<T> llista=new LinkedList<T>();
 		
 	@Override
 	public void afegirElement(T elem) throws LlistaPlena {
-		list.add(elem);
-		numElem++;
+		int pos=numElems-1;
+		while ((pos>=0) && (elem.compareTo(llista.get(pos))<0)) {
+			llista.add(pos+1, llista.get(pos));
+			pos--;
+		}
+		llista.add(pos+1, elem);
+		numElems++;
 	}
 
 	@Override
 	public T consultarPosicio(int i) throws LlistaBuida {
-		return list.get(i);
+		return llista.get(i);
 	}
 
 	@Override
 	public int numElems() {
-		return list.size();
+		return numElems;
 	}
 
 	@Override
 	public Iterator<T> iterator() {
-		return list.iterator();
+		return llista.iterator();
 	}
 
 	@Override
 	public String toString() {
-		return "LlistaJava [list=" + list + "]";
+		return "LlistaJava [llista=" + llista + "]";
 	}
 }
