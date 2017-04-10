@@ -97,16 +97,15 @@ public class Multillista<E extends Comparable<E>,T extends Comparable<T>> {
 		return llistaAlumAux;
 	}
 	
-	public void afegirMatricula (Integer assig, String alum) {
+	public void afegirMatricula (Matricula newMat) {
 		int i=0;
-		Matricula newMat=new Matricula(assig, alum);
 		Assignatura assigAux=null;
 		Alumne aluAux=null;
 		Matricula matAux=null;
 		try {
 			//Busquem la assignatura a la llista
 			assigAux=(Assignatura) llistaAssig.consultarPosicio(i);
-			while(assig!=assigAux.getCodiAssig()) {
+			while(newMat.getCodiAssig()!=assigAux.getCodiAssig()) {
 				i++;
 				assigAux=(Assignatura) llistaAssig.consultarPosicio(i);
 			}
@@ -120,9 +119,9 @@ public class Multillista<E extends Comparable<E>,T extends Comparable<T>> {
 			//Si ja tenim la primera relació
 			else {
 				//Busquem que no existisca previament una relacio amb aquesta asignatura i el mateix alumne
-				while((matAux.getSeguentAssig()!=null)&&(matAux.getCodiAlum()!=alum)) matAux=matAux.getSeguentAssig();
+				while((matAux.getSeguentAssig()!=null)&&(matAux.getCodiAlum()!=newMat.getCodiAlum())) matAux=matAux.getSeguentAssig();
 				//Sino existeix cap relacio amb aquesta asignatura i aquest alumne
-				if((matAux.getSeguentAssig()==null)&&(matAux.getCodiAlum()!=alum)) {
+				if((matAux.getSeguentAssig()==null)&&(matAux.getCodiAlum()!=newMat.getCodiAlum())) {
 					matAux.setSeguentAssig(newMat);
 					newMat.setAnteriorAssig(matAux);
 					newMat.setAssignatura(assigAux);
@@ -131,7 +130,7 @@ public class Multillista<E extends Comparable<E>,T extends Comparable<T>> {
 			i=0;
 			aluAux=(Alumne) llistaAssig.consultarPosicio(i);
 			//Busquem el alumne a la llista
-			while(alum!=aluAux.getCodiAlum()) {
+			while(newMat.getCodiAlum()!=aluAux.getCodiAlum()) {
 				i++;
 				aluAux=(Alumne) llistaAssig.consultarPosicio(i);
 			}
@@ -144,9 +143,9 @@ public class Multillista<E extends Comparable<E>,T extends Comparable<T>> {
 			}
 			else {
 				//Busquem que no existisca previament una relacio amb aquesta asignatura i el mateix alumne
-				while((matAux.getSeguentAlumne()!=null)&&(matAux.getCodiAssig()!=assig)) matAux=matAux.getSeguentAlumne();
+				while((matAux.getSeguentAlumne()!=null)&&(matAux.getCodiAssig()!=newMat.getCodiAssig())) matAux=matAux.getSeguentAlumne();
 				//Sino existeix cap relacio amb aquesta asignatura i aquest alumne
-				if((matAux.getSeguentAlumne()==null)&&(matAux.getCodiAssig()!=assig)) {
+				if((matAux.getSeguentAlumne()==null)&&(matAux.getCodiAssig()!=newMat.getCodiAssig())) {
 					matAux.setSeguentAlumne(newMat);
 					newMat.setAnteriorAlumne(matAux);
 					newMat.setAlumne(aluAux);

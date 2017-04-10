@@ -18,6 +18,7 @@ public class LlistaDinamica<T extends Comparable<T>> implements Iterable<T>, TAD
 		Node<T> nou=new Node<T>(p, null, null);
 		if(numElems==0) {
 			elem=nou;
+			numElems++;
 		}
 		else {
 			Node<T> elemAux=elem;
@@ -25,24 +26,26 @@ public class LlistaDinamica<T extends Comparable<T>> implements Iterable<T>, TAD
 			while ((elemAux.getAnterior()!=null) && (p.compareTo((T) elemAux)<0)) {
 				elemAux.getAnterior();
 			}
-			if(elemAux!=elem) {
-				anterior=elemAux.getAnterior();
-				if(anterior!=null) {
-					nou.setAnterior(anterior);
-					anterior.setSeguent(nou);
+			if(!p.equals(elemAux.getX())) {
+				if(elemAux!=elem) {
+					anterior=elemAux.getAnterior();
+					if(anterior!=null) {
+						nou.setAnterior(anterior);
+						anterior.setSeguent(nou);
+					}
+					nou.setSeguent(elemAux);
+					elemAux.setAnterior(nou);
 				}
-				nou.setSeguent(elemAux);
-				elemAux.setAnterior(nou);
-			}
-			else {
-				nou.setAnterior(elemAux);
-				elemAux.setSeguent(nou);
-			}
-			while (elem.getSeguent()!=null) {
-				elem.getSeguent();
+				else {
+					nou.setAnterior(elemAux);
+					elemAux.setSeguent(nou);
+				}
+				while (elem.getSeguent()!=null) {
+					elem.getSeguent();
+				}
+				numElems++;
 			}
 		}
-		numElems++;
 	}
 
 	/**

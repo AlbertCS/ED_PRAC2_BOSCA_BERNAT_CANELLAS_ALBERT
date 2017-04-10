@@ -87,36 +87,67 @@ public class Aplicacio {
 	 * @param cuaClau cua que conte la clau
 	 * @param signe indica si s'ha de sumar(xifrar) o restar(desxifrar)
 	 */
-	public static void cargarDades(String nomFitxer, TADLlistaGenerica<Alumne> llistaAlumne, TADLlistaGenerica<Assignatura> llistaAssignatura) {
+	public static void cargarLlistes(String nomFitxer, TADLlistaGenerica<Alumne> llistaAlumne, TADLlistaGenerica<Assignatura> llistaAssignatura) {
 		
 		try {
 			//Variables
-			BufferedReader f=new BufferedReader(new FileReader(nomFitxer+".csv"));
-			String frase, nomAssig, nomAlum, codiAlum;
-			Character a;
-			Integer num, credits, curs, quad, codiAssig;
+			BufferedReader f=new BufferedReader(new FileReader(nomFitxer));
+			String frase, nomAssig, quad, nomAlum, codiAlum;
+			Integer credits, curs, quadri,codiAssig;
 			
 			frase=f.readLine();
 			while(frase!=null){ 
 				StringTokenizer st = new StringTokenizer(frase, ";");
 				
-					codiAssig=Integer.parseInt(st.nextToken());
-					nomAssig=st.nextToken();
-					credits=Integer.parseInt(st.nextToken());
-					curs=Integer.parseInt(st.nextToken());
-					quad=Integer.parseInt(st.nextToken());
-					Assignatura auxAssig= new Assignatura(codiAssig, nomAssig, credits, curs, quad);
-					llistaAssignatura.afegirElement(auxAssig);
-					codiAlum=st.nextToken();
-					nomAlum=st.nextToken();
-					Alumne auxAlum=new Alumne (codiAlum, nomAlum);
-					llistaAlumne.afegirElement(auxAlum);
+				codiAssig=Integer.parseInt(st.nextToken());
+				nomAssig=st.nextToken();
+				credits=Integer.parseInt(st.nextToken());
+				curs=Integer.parseInt(st.nextToken());
+				quad=st.nextToken();
+				quadri=(int) (quad.charAt(0))-48;
+				Assignatura auxAssig= new Assignatura(codiAssig, nomAssig, credits, curs, quadri);
+				llistaAssignatura.afegirElement(auxAssig);
+				codiAlum=st.nextToken();
+				nomAlum=st.nextToken();
+				Alumne auxAlum=new Alumne (codiAlum, nomAlum);
+				llistaAlumne.afegirElement(auxAlum);
 				
-					frase = f.readLine();
+				frase = f.readLine();
 			}
 			
 			f.close();
 			}catch (IOException | LlistaPlena e) {
+				System.err.println("Error de tipus IOException.");
+			}
+	}
+	
+public static void cargarMultilist(String nomFitxer, Multillista<Assignatura, Alumne> multilist) {
+		
+		try {
+			//Variables
+			BufferedReader f=new BufferedReader(new FileReader(nomFitxer));
+			String frase, codiAlum;
+			Integer codiAssig;
+			
+			frase=f.readLine();
+			while(frase!=null){ 
+				StringTokenizer st = new StringTokenizer(frase, ";");
+				
+				codiAssig=Integer.parseInt(st.nextToken());
+				st.nextToken();
+				st.nextToken();
+				st.nextToken();
+				st.nextToken();
+				codiAlum=st.nextToken();
+				st.nextToken();
+				
+				multilist.afegirMatricula(new Matricula(codiAssig, codiAlum));
+				
+				frase = f.readLine();
+			}
+			
+			f.close();
+			}catch (IOException e) {
 				System.err.println("Error de tipus IOException.");
 			}
 	}
@@ -139,15 +170,15 @@ public class Aplicacio {
 		String nomFitxer;
 		boolean isOk=true;
 		
-		System.out.println("Indica el nom del fitxer. Si no has creat cap, el nom que has de ficar és 'DadesMatricula'.");
+		System.out.println("Indica el nom del fitxer. Si no has creat cap, el nom que has de ficar és 'DadesMatricula.csv' o 'text.txt'.");
 		nomFitxer=teclat.nextLine();
-		File nameFile = new File(nomFitxer+".csv");
+		File nameFile = new File(nomFitxer);
 		while(isOk){
 			if(nameFile.isFile()) isOk=false;
 			else {
 				System.out.println("El fitxer amb el nom "+nomFitxer+" NO existeix. Indica un altre nom: ");
 				nomFitxer=teclat.nextLine();
-				nameFile = new File(nomFitxer+".csv");
+				nameFile = new File(nomFitxer);
 			}
 		}
 		return nomFitxer;
@@ -185,21 +216,23 @@ public class Aplicacio {
 		Scanner teclat=new Scanner(System.in);
 		TADLlistaGenerica<Alumne> llistaAlumne=null;
 		TADLlistaGenerica<Assignatura> llistaAssignatura=null;
+		Multillista<Assignatura, Alumne> multilist=null;
 		String nomFitxer;
 		int opcio;
 		long tempsi=0, tempsf=0;
 		
 		//Tipus de implementació
-		opcio=tipusImplementacio(teclat);
+		opcio=1;//tipusImplementacio(teclat);
 		
 		//Nom fitxer
-		nomFitxer=nomCorrecte(teclat);
+		nomFitxer="DadesMatricula.csv";//nomCorrecte(teclat);
 		
 		//Operacions
 		llistaAlumne=implementacioLlistaAlum(opcio, 1000, llistaAlumne);
 		llistaAssignatura=implementacioLlistaAssig(opcio, 50, llistaAssignatura);
-		cargarDades(nomFitxer, llistaAlumne, llistaAssignatura);
-		
+		cargarLlistes(nomFitxer, llistaAlumne, llistaAssignatura);
+		multilist=new Multillista<Assignatura, Alumne>(llistaAssignatura, llistaAlumne, opcio);
+		cargarMultilist(nomFitxer, multilist);
 		
 		/*
 		//Menu
