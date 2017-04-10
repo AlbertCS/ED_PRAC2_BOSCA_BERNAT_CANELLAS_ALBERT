@@ -2,19 +2,21 @@ package Dades.Llistes;
 import Exceptions.*;
 import Dades.Base.*;
 
-public class Multillista<T extends Comparable<T>> {
-	private TADLlistaGenerica<T> llistaAssig;
+public class Multillista<E extends Comparable<E>,T extends Comparable<T>> {
+	private TADLlistaGenerica<E> llistaAssig;
 	private TADLlistaGenerica<T> llistaAlum;
 	
-	public Multillista(TADLlistaGenerica<T> llistaAssig, TADLlistaGenerica<T> llistaAlum, int tipus) {
+	public Multillista(TADLlistaGenerica<E> llistaAssig, TADLlistaGenerica<T> llistaAlum, int tipus) {
 		switch(tipus){
 			case 1:
-				this.llistaAssig=new LlistaEstatica<T>(llistaAssig.numElems());
+				this.llistaAssig=new LlistaEstatica<E>(llistaAssig.numElems());
 				this.llistaAlum=new LlistaEstatica<T>(llistaAlum.numElems()); break;
 			case 2:
-				this.llistaAssig=new LlistaDinamica<T>();
+				this.llistaAssig=new LlistaDinamica<E>();
 				this.llistaAlum=new LlistaDinamica<T>(); break;
-			case 3: break;
+			case 3: 
+				this.llistaAssig=new LlistaJava<E>();
+				this.llistaAlum=new LlistaJava<T>(); break;
 			default: break;
 		}
 		try{
@@ -27,10 +29,54 @@ public class Multillista<T extends Comparable<T>> {
 		}
 	}
 	
-	public Matricula consultarMatricula (Integer assig, String alum) {
+	public TADLlistaGenerica<Assignatura> consultarMatriculaAlum (String alum, int tipus) {
+		int i=0;
+		Alumne alumAux=null;
+		Matricula matAux=null;
+		TADLlistaGenerica<Assignatura> llistaAssigAux=null;
+		switch(tipus){
+			case 1:
+				llistaAssigAux=new LlistaEstatica<Assignatura>(llistaAssig.numElems()); break;
+			case 2:
+				llistaAssigAux=new LlistaDinamica<Assignatura>(); break;
+			case 3: 
+				llistaAssigAux=new LlistaJava<Assignatura>(); break;
+			default: break;
+		}
+		try {
+			//Busquem el laumne a la llista
+			alumAux=(Alumne) llistaAlum.consultarPosicio(i);
+			while(alum!=alumAux.getCodiAlum()) {
+				i++;
+				alumAux=(Alumne) llistaAlum.consultarPosicio(i);
+			}
+			//Una vegada ja l'hem trobat
+			matAux=alumAux.getMatric();
+			while(matAux!=null) {
+				llistaAssigAux.afegirElement(matAux.getAssignatura());
+				matAux=matAux.getSeguentAssig();
+			}
+		} catch (LlistaPlena|LlistaBuida e) {
+			e.printStackTrace();
+		}
+		//Ojo que si no existeix la relació entre assignatura i alumne retornara null
+		return llistaAssigAux;
+	}
+	
+	public TADLlistaGenerica<Alumne> consultarMatriculaAssig (Integer assig, int tipus) {
 		int i=0;
 		Assignatura assigAux=null;
 		Matricula matAux=null;
+		TADLlistaGenerica<Alumne> llistaAlumAux=null;
+		switch(tipus){
+			case 1:
+				llistaAlumAux=new LlistaEstatica<Alumne>(llistaAlum.numElems()); break;
+			case 2:
+				llistaAlumAux=new LlistaDinamica<Alumne>(); break;
+			case 3: 
+				llistaAlumAux=new LlistaJava<Alumne>(); break;
+			default: break;
+		}
 		try {
 			//Busquem la assignatura a la llista
 			assigAux=(Assignatura) llistaAssig.consultarPosicio(i);
@@ -40,13 +86,15 @@ public class Multillista<T extends Comparable<T>> {
 			}
 			//Una vegada ja l'hem trobat
 			matAux=assigAux.getMatric();
-			//Busquem la relacio entre aquesta asignatura i el alumne
-			while((matAux.getSeguentAssig()!=null)&&(matAux.getAlum()!=alum)) matAux=matAux.getSeguentAssig();
-		} catch (LlistaBuida e) {
+			while(matAux!=null) {
+				llistaAlumAux.afegirElement(matAux.getAlumne());
+				matAux=matAux.getSeguentAssig();
+			}
+		} catch (LlistaPlena|LlistaBuida e) {
 			e.printStackTrace();
 		}
 		//Ojo que si no existeix la relació entre assignatura i alumne retornara null
-		return matAux;
+		return llistaAlumAux;
 	}
 	
 	public void afegirMatricula (Integer assig, String alum) {
@@ -65,30 +113,43 @@ public class Multillista<T extends Comparable<T>> {
 			//Una vegada ja l'hem trobat
 			matAux=assigAux.getMatric();
 			//Mirem si es la primera relació que hauria de fer o deuria ser referenciada
-			if(matAux==null) assigAux.setMatric(newMat);
+			if(matAux==null) {
+				assigAux.setMatric(newMat);
+				newMat.setAssignatura(assigAux);
+			}
 			//Si ja tenim la primera relació
 			else {
 				//Busquem que no existisca previament una relacio amb aquesta asignatura i el mateix alumne
-				while((matAux.getSeguentAssig()!=null)&&(matAux.getAlum()!=alum)) matAux=matAux.getSeguentAssig();
+				while((matAux.getSeguentAssig()!=null)&&(matAux.getCodiAlum()!=alum)) matAux=matAux.getSeguentAssig();
 				//Sino existeix cap relacio amb aquesta asignatura i aquest alumne
-				if((matAux.getSeguentAssig()==null)&&(matAux.getAlum()!=alum)) {
+				if((matAux.getSeguentAssig()==null)&&(matAux.getCodiAlum()!=alum)) {
 					matAux.setSeguentAssig(newMat);
 					newMat.setAnteriorAssig(matAux);
+					newMat.setAssignatura(assigAux);
 				}
 			}
 			i=0;
 			aluAux=(Alumne) llistaAssig.consultarPosicio(i);
+			//Busquem el alumne a la llista
 			while(alum!=aluAux.getCodiAlum()) {
 				i++;
 				aluAux=(Alumne) llistaAssig.consultarPosicio(i);
 			}
+			//Una vegada ja l'hem trobat
 			matAux=aluAux.getMatric();
-			if(matAux==null) aluAux.setMatric(newMat);
+			//Mirem si es la primera relació que hauria de fer o deuria ser referenciada
+			if(matAux==null) {
+				aluAux.setMatric(newMat);
+				newMat.setAlumne(aluAux);
+			}
 			else {
-				while((matAux.getSeguentAlumne()!=null)&&(matAux.getAssig()!=assig)) matAux=matAux.getSeguentAlumne();
-				if((matAux.getSeguentAlumne()==null)&&(matAux.getAssig()!=assig)) {
+				//Busquem que no existisca previament una relacio amb aquesta asignatura i el mateix alumne
+				while((matAux.getSeguentAlumne()!=null)&&(matAux.getCodiAssig()!=assig)) matAux=matAux.getSeguentAlumne();
+				//Sino existeix cap relacio amb aquesta asignatura i aquest alumne
+				if((matAux.getSeguentAlumne()==null)&&(matAux.getCodiAssig()!=assig)) {
 					matAux.setSeguentAlumne(newMat);
 					newMat.setAnteriorAlumne(matAux);
+					newMat.setAlumne(aluAux);
 				}
 			}
 		} catch (LlistaBuida e) {

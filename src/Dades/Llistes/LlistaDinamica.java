@@ -13,15 +13,34 @@ public class LlistaDinamica<T extends Comparable<T>> implements Iterable<T>, TAD
 		elem=null;
 	}
 
+	@SuppressWarnings("unchecked")
 	public void afegirElement(T p) throws LlistaPlena {
 		Node<T> nou=new Node<T>(p, null, null);
 		if(numElems==0) {
 			elem=nou;
 		}
 		else {
-			nou.setAnterior(elem);
-			elem.setSeguent(nou);
-			elem=nou;
+			Node<T> elemAux=elem;
+			Node<T> anterior=elem;
+			while ((elemAux.getAnterior()!=null) && (p.compareTo((T) elemAux)<0)) {
+				elemAux.getAnterior();
+			}
+			if(elemAux!=elem) {
+				anterior=elemAux.getAnterior();
+				if(anterior!=null) {
+					nou.setAnterior(anterior);
+					anterior.setSeguent(nou);
+				}
+				nou.setSeguent(elemAux);
+				elemAux.setAnterior(nou);
+			}
+			else {
+				nou.setAnterior(elemAux);
+				elemAux.setSeguent(nou);
+			}
+			while (elem.getSeguent()!=null) {
+				elem.getSeguent();
+			}
 		}
 		numElems++;
 	}
