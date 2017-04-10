@@ -41,7 +41,7 @@ public class Aplicacio {
 				case 3: 
 					opcioOk=false; break;
 				default:
-					System.out.println("Valor incorrecte. Indica tipus de cua a utilitzar:\n\t1. Estàtica\n\t2. Dinàmica\n\t3. JavaCollection");
+					System.out.println("Valor incorrecte. Indica tipus de llista a utilitzar:\n\t1. Estàtica\n\t2. Dinàmica\n\t3. JavaCollection");
 					op=teclat.nextLine();
 					if(Character.isDigit(op.charAt(0))) opcio=Integer.parseInt(op); break;
 			}
@@ -55,22 +55,31 @@ public class Aplicacio {
 	 * @param mida dimensio de la llista
 	 * @param cua	la llista implementada
 	 */
-	public static void implementacio(int opcio, int mida, TADLlistaGenerica<Alumne> llistaAlumne, TADLlistaGenerica<Assignatura> llistaAssignatura) {
+	public static TADLlistaGenerica<Alumne> implementacioLlistaAlum(int opcio, int mida, TADLlistaGenerica<Alumne> llista) {
 		switch(opcio){
 			case 1:
-				llistaAlumne=new LlistaEstatica<Alumne>(mida); 
-				llistaAssignatura=new LlistaEstatica<Assignatura>(mida); break;
+				llista=new LlistaEstatica<Alumne>(mida); break;
 			case 2:
-				llistaAlumne=new LlistaDinamica<Alumne>(); 
-				llistaAssignatura=new LlistaDinamica<Assignatura>(); break;
-			case 3:
-				llistaAlumne=new LlistaJava<Alumne>(); 
-				llistaAssignatura=new LlistaJava<Assignatura>(); break;
+				llista=new LlistaDinamica<Alumne>(); break;
+			case 3: 
+				llista=new LlistaJava<Alumne>(); break;
 			default: break;
 		}
+		return llista;
 	}
 	
-	
+	public static TADLlistaGenerica<Assignatura> implementacioLlistaAssig(int opcio, int mida, TADLlistaGenerica<Assignatura> llista) {
+		switch(opcio){
+			case 1:
+				llista=new LlistaEstatica<Assignatura>(mida); break;
+			case 2:
+				llista=new LlistaDinamica<Assignatura>(); break;
+			case 3: 
+				llista=new LlistaJava<Assignatura>(); break;
+			default: break;
+		}
+		return llista;
+	}
 	
 	/**
 	 * Metode que tractara les dades amb el metode triat
@@ -85,29 +94,29 @@ public class Aplicacio {
 			BufferedReader f=new BufferedReader(new FileReader(nomFitxer+".csv"));
 			String frase, nomAssig, nomAlum, codiAlum;
 			Character a;
-			Integer num, credits, curs, quad, codiAss;
+			Integer num, credits, curs, quad, codiAssig;
 			
 			frase=f.readLine();
 			while(frase!=null){ 
 				StringTokenizer st = new StringTokenizer(frase, ";");
 				
-					codiAss=Integer.parseInt(st.nextToken());
+					codiAssig=Integer.parseInt(st.nextToken());
 					nomAssig=st.nextToken();
 					credits=Integer.parseInt(st.nextToken());
 					curs=Integer.parseInt(st.nextToken());
 					quad=Integer.parseInt(st.nextToken());
-					Assignatura auxass= new Assignatura(codiAss, nomAssig, credits, curs, quad);
-					//afegirAssignatura(auxass);
+					Assignatura auxAssig= new Assignatura(codiAssig, nomAssig, credits, curs, quad);
+					llistaAssignatura.afegirElement(auxAssig);
 					codiAlum=st.nextToken();
 					nomAlum=st.nextToken();
-					Alumne auxal=new Alumne (codiAlum, nomAlum);
-					//afegirAlumne(auxal);
+					Alumne auxAlum=new Alumne (codiAlum, nomAlum);
+					llistaAlumne.afegirElement(auxAlum);
 				
 					frase = f.readLine();
 			}
 			
 			f.close();
-			}catch (IOException e) {
+			}catch (IOException | LlistaPlena e) {
 				System.err.println("Error de tipus IOException.");
 			}
 	}
@@ -130,7 +139,7 @@ public class Aplicacio {
 		String nomFitxer;
 		boolean isOk=true;
 		
-		System.out.println("Indica el nom del fitxer. Si no has creat cap, el nom que has de ficar és 'text'.");
+		System.out.println("Indica el nom del fitxer. Si no has creat cap, el nom que has de ficar és 'DadesMatricula'.");
 		nomFitxer=teclat.nextLine();
 		File nameFile = new File(nomFitxer+".csv");
 		while(isOk){
@@ -177,7 +186,7 @@ public class Aplicacio {
 		TADLlistaGenerica<Alumne> llistaAlumne=null;
 		TADLlistaGenerica<Assignatura> llistaAssignatura=null;
 		String nomFitxer;
-		int opcio, dim=1000;
+		int opcio;
 		long tempsi=0, tempsf=0;
 		
 		//Tipus de implementació
@@ -187,12 +196,12 @@ public class Aplicacio {
 		nomFitxer=nomCorrecte(teclat);
 		
 		//Operacions
-		
-		implementacio(opcio, dim, llistaAlumne, llistaAssignatura);
+		llistaAlumne=implementacioLlistaAlum(opcio, 1000, llistaAlumne);
+		llistaAssignatura=implementacioLlistaAssig(opcio, 50, llistaAssignatura);
 		cargarDades(nomFitxer, llistaAlumne, llistaAssignatura);
 		
 		
-		
+		/*
 		//Menu
 		int opcioM=0;
 		
@@ -227,7 +236,7 @@ public class Aplicacio {
 					op=teclat.nextLine();
 					if(Character.isDigit(op.charAt(0))) opcioM=Integer.parseInt(op); break;
 			}
-		
+			*/
 		
 		System.out.println("Les Dades s'han tractat correctament.\n");
 		System.out.println("El programa ha tardat: "+(tempsf-tempsi)+"ns.");
