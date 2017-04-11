@@ -14,15 +14,7 @@ import Exceptions.LlistaPlena;
  */
 public class LlistaJava<T extends Comparable<T>> implements Iterable<T>, TADLlistaGenerica<T>{
 
-<<<<<<< HEAD
-	private static int  numElem=0;
-	LinkedList<T> list= new LinkedList<T>();
-		
-	@Override
-	public void afegirElement(T elem) throws LlistaPlena {
-		list.add(elem);
-		numElem++;
-=======
+
 	private static int  numElems=0;
 	LinkedList<T> llista=new LinkedList<T>();
 		
@@ -42,38 +34,21 @@ public class LlistaJava<T extends Comparable<T>> implements Iterable<T>, TADLlis
 			numElems++;
 		}
 		
->>>>>>> refs/remotes/origin/master
+
 	}
 
 	@Override
 	public T consultarPosicio(int i) throws LlistaBuida {
-<<<<<<< HEAD
-		return list.get(i);
-=======
 		return llista.get(i);
->>>>>>> refs/remotes/origin/master
 	}
 
 	@Override
 	public int numElems() {
-<<<<<<< HEAD
-		return list.size();
-=======
 		return numElems;
->>>>>>> refs/remotes/origin/master
 	}
 
 	@Override
 	public Iterator<T> iterator() {
-<<<<<<< HEAD
-		return list.iterator();
-	}
-
-	
-	
-	
-	
-=======
 		return llista.iterator();
 	}
 
@@ -81,5 +56,4 @@ public class LlistaJava<T extends Comparable<T>> implements Iterable<T>, TADLlis
 	public String toString() {
 		return "LlistaJava [llista=" + llista + "]";
 	}
->>>>>>> refs/remotes/origin/master
 }

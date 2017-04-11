@@ -41,11 +41,7 @@ public class Aplicacio {
 				case 3: 
 					opcioOk=false; break;
 				default:
-<<<<<<< HEAD
-					System.out.println("Valor incorrecte. Indica tipus de cua a utilitzar:\n\t1. Estàtica\n\t2. Dinàmica\n\t3. JavaCollection");
-=======
 					System.out.println("Valor incorrecte. Indica tipus de llista a utilitzar:\n\t1. Estàtica\n\t2. Dinàmica\n\t3. JavaCollection");
->>>>>>> refs/remotes/origin/master
 					op=teclat.nextLine();
 					if(Character.isDigit(op.charAt(0))) opcio=Integer.parseInt(op); break;
 			}
@@ -59,24 +55,7 @@ public class Aplicacio {
 	 * @param mida dimensio de la llista
 	 * @param cua	la llista implementada
 	 */
-<<<<<<< HEAD
-	public static void implementacio(int opcio, int mida, TADLlistaGenerica<Alumne> llistaAlumne, TADLlistaGenerica<Assignatura> llistaAssignatura) {
-		switch(opcio){
-			case 1:
-				llistaAlumne=new LlistaEstatica<Alumne>(mida); 
-				llistaAssignatura=new LlistaEstatica<Assignatura>(mida); break;
-			case 2:
-				llistaAlumne=new LlistaDinamica<Alumne>(); 
-				llistaAssignatura=new LlistaDinamica<Assignatura>(); break;
-			case 3:
-				llistaAlumne=new LlistaJava<Alumne>(); 
-				llistaAssignatura=new LlistaJava<Assignatura>(); break;
-			default: break;
-		}
-	}
-	
-	
-=======
+
 	public static TADLlistaGenerica<Alumne> implementacioLlistaAlum(int opcio, int mida, TADLlistaGenerica<Alumne> llista) {
 		switch(opcio){
 			case 1:
@@ -102,7 +81,7 @@ public class Aplicacio {
 		}
 		return llista;
 	}
->>>>>>> refs/remotes/origin/master
+
 	
 	/**
 	 * Metode que tractara les dades amb el metode triat
@@ -110,48 +89,17 @@ public class Aplicacio {
 	 * @param cuaClau cua que conte la clau
 	 * @param signe indica si s'ha de sumar(xifrar) o restar(desxifrar)
 	 */
-<<<<<<< HEAD
-	public static void cargarDades(String nomFitxer, TADLlistaGenerica<Alumne> llistaAlumne, TADLlistaGenerica<Assignatura> llistaAssignatura) {
-		
-		try {
-			//Variables
-			BufferedReader f=new BufferedReader(new FileReader(nomFitxer+".csv"));
-			String frase, nomAssig, nomAlum, codiAlum;
-			Character a;
-			Integer num, credits, curs, quad, codiAss;
-=======
+
 	public static void cargarLlistes(String nomFitxer, TADLlistaGenerica<Alumne> llistaAlumne, TADLlistaGenerica<Assignatura> llistaAssignatura) {
 		
 		try {
 			//Variables
 			BufferedReader f=new BufferedReader(new FileReader(nomFitxer));
 			String frase, nomAssig, quad, nomAlum, codiAlum;
-			Integer credits, curs, quadri,codiAssig;
->>>>>>> refs/remotes/origin/master
-			
+			Integer credits, curs, quadri,codiAssig;			
 			frase=f.readLine();
 			while(frase!=null){ 
 				StringTokenizer st = new StringTokenizer(frase, ";");
-				
-<<<<<<< HEAD
-					codiAss=Integer.parseInt(st.nextToken());
-					nomAssig=st.nextToken();
-					credits=Integer.parseInt(st.nextToken());
-					curs=Integer.parseInt(st.nextToken());
-					quad=Integer.parseInt(st.nextToken());
-					Assignatura auxass= new Assignatura(codiAss, nomAssig, credits, curs, quad);
-					afegirAssignatura(auxass);
-					codiAlum=st.nextToken();
-					nomAlum=st.nextToken();
-					Alumne auxal=new Alumne (codiAlum, nomAlum);
-					afegirAlumne(auxal);
-				
-					frase = f.readLine();
-			}
-			
-			f.close();
-			}catch (IOException e) {
-=======
 				codiAssig=Integer.parseInt(st.nextToken());
 				nomAssig=st.nextToken();
 				credits=Integer.parseInt(st.nextToken());
@@ -167,24 +115,12 @@ public class Aplicacio {
 				
 				frase = f.readLine();
 			}
-			
 			f.close();
 			}catch (IOException | LlistaPlena e) {
->>>>>>> refs/remotes/origin/master
 				System.err.println("Error de tipus IOException.");
 			}
 	}
 	
-<<<<<<< HEAD
-	public void afegirAssignatura(Assignatura assig){
-		
-	}
-	
-	public void afegirAlumne(Alumne alum){
-		
-	}
-	
-=======
 public static void cargarMultilist(String nomFitxer, Multillista<Assignatura, Alumne> multilist) {
 		
 		try {
@@ -224,7 +160,7 @@ public static void cargarMultilist(String nomFitxer, Multillista<Assignatura, Al
 		
 	}
 	
->>>>>>> refs/remotes/origin/master
+
 	
 	/**
 	 * Metode que comprova que el nom del fitxer sigui correcte
@@ -237,21 +173,13 @@ public static void cargarMultilist(String nomFitxer, Multillista<Assignatura, Al
 		
 		System.out.println("Indica el nom del fitxer. Si no has creat cap, el nom que has de ficar és 'DadesMatricula.csv' o 'text.txt'.");
 		nomFitxer=teclat.nextLine();
-<<<<<<< HEAD
-		File nameFile = new File(nomFitxer+".csv");
-=======
 		File nameFile = new File(nomFitxer);
->>>>>>> refs/remotes/origin/master
 		while(isOk){
 			if(nameFile.isFile()) isOk=false;
 			else {
 				System.out.println("El fitxer amb el nom "+nomFitxer+" NO existeix. Indica un altre nom: ");
 				nomFitxer=teclat.nextLine();
-<<<<<<< HEAD
-				nameFile = new File(nomFitxer+".csv");
-=======
 				nameFile = new File(nomFitxer);
->>>>>>> refs/remotes/origin/master
 			}
 		}
 		return nomFitxer;
@@ -265,7 +193,6 @@ public static void cargarMultilist(String nomFitxer, Multillista<Assignatura, Al
 	
 	public static void consultaperAss(){
 		
-<<<<<<< HEAD
 		
 	}
 	
@@ -278,23 +205,7 @@ public static void cargarMultilist(String nomFitxer, Multillista<Assignatura, Al
 		
 		
 	}
-	
-=======
-		
-	}
-	
-	public static void alumcredits(){
-		
-		
-	}
-	
-	public static void assigalums(){
-		
-		
-	}
-	
->>>>>>> refs/remotes/origin/master
-	
+
 	/**
 	 * 	/-Main-/
 	 * @param args args
@@ -307,11 +218,7 @@ public static void cargarMultilist(String nomFitxer, Multillista<Assignatura, Al
 		TADLlistaGenerica<Assignatura> llistaAssignatura=null;
 		Multillista<Assignatura, Alumne> multilist=null;
 		String nomFitxer;
-<<<<<<< HEAD
-		int opcio, dim=1000;
-=======
 		int opcio;
->>>>>>> refs/remotes/origin/master
 		long tempsi=0, tempsf=0;
 		
 		//Tipus de implementació
@@ -321,14 +228,7 @@ public static void cargarMultilist(String nomFitxer, Multillista<Assignatura, Al
 		nomFitxer="DadesMatricula.csv";//nomCorrecte(teclat);
 		
 		//Operacions
-<<<<<<< HEAD
-		
-		implementacio(opcio, dim, llistaAlumne, llistaAssignatura);
-		cargarDades(nomFitxer, llistaAlumne, llistaAssignatura);
-		
-		
-		
-=======
+
 		llistaAlumne=implementacioLlistaAlum(opcio, 1000, llistaAlumne);
 		llistaAssignatura=implementacioLlistaAssig(opcio, 50, llistaAssignatura);
 		cargarLlistes(nomFitxer, llistaAlumne, llistaAssignatura);
@@ -336,7 +236,6 @@ public static void cargarMultilist(String nomFitxer, Multillista<Assignatura, Al
 		cargarMultilist(nomFitxer, multilist);
 		
 		/*
->>>>>>> refs/remotes/origin/master
 		//Menu
 		int opcioM=0;
 		
@@ -371,12 +270,7 @@ public static void cargarMultilist(String nomFitxer, Multillista<Assignatura, Al
 					op=teclat.nextLine();
 					if(Character.isDigit(op.charAt(0))) opcioM=Integer.parseInt(op); break;
 			}
-<<<<<<< HEAD
-		
-=======
-			*/
->>>>>>> refs/remotes/origin/master
-		
+			*/		
 		System.out.println("Les Dades s'han tractat correctament.\n");
 		System.out.println("El programa ha tardat: "+(tempsf-tempsi)+"ns.");
 		
