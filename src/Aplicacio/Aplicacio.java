@@ -222,7 +222,7 @@ public static void cargarMultilist(String nomFitxer, Multillista<Assignatura, Al
 		long tempsi=0, tempsf=0;
 		
 		//Tipus de implementació
-		opcio=1;//tipusImplementacio(teclat);
+		opcio=2;//tipusImplementacio(teclat);
 		
 		//Nom fitxer
 		nomFitxer="DadesMatricula.csv";//nomCorrecte(teclat);

@@ -97,12 +97,15 @@ public class Assignatura implements Comparable<Assignatura>{
 		
 	}
 	
-	public void clone(Assignatura assig) {
-		this.codiAssig=assig.getCodiAssig();
-		this.nomAssig=assig.getNomAssig();
-		this.credits=assig.getCredits();
-		this.curs=assig.getCurs();
-		this.quad=assig.getQuad();
-		this.matric=assig.getMatric();
+	@Override
+	public Object clone() {
+		Assignatura aux;
+		try {
+			aux = (Assignatura) super.clone();
+			return aux;
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

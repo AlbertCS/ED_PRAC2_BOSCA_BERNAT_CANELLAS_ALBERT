@@ -60,9 +60,15 @@ public class Alumne implements Comparable<Alumne>{
 		
 	}
 	
-	public void clone(Alumne alum) {
-		this.codiAlum=alum.getCodiAlum();
-		this.nomAlum=alum.getNomAlum();
-		this.matric=alum.getMatric();
+	@Override
+	public Object clone() {
+		Alumne aux;
+		try {
+			aux = (Alumne) super.clone();
+			return aux;
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

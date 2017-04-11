@@ -20,7 +20,7 @@ public class LlistaJava<T extends Comparable<T>> implements Iterable<T>, TADLlis
 	@Override
 	public void afegirElement(T elem) throws LlistaPlena {
 		int pos=0;
-		while (!elem.equals(llista.get(pos))&& (pos!=numElems)){
+		while (!elem.equals(llista.get(pos))&& (pos<numElems)){
 			pos++;
 		}
 		if(pos==numElems) {

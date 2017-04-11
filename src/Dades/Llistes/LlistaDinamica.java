@@ -6,14 +6,13 @@ import Exceptions.*;
 public class LlistaDinamica<T extends Comparable<T>> implements Iterable<T>, TADLlistaGenerica<T> {
 	
 	private Node<T> elem;
-	private static int numElems=0;
+	private int numElems=0;
 	
 	
 	public LlistaDinamica() {
 		elem=null;
 	}
 
-	@SuppressWarnings("unchecked")
 	public void afegirElement(T p) throws LlistaPlena {
 		Node<T> nou=new Node<T>(p, null, null);
 		if(numElems==0) {
@@ -22,26 +21,25 @@ public class LlistaDinamica<T extends Comparable<T>> implements Iterable<T>, TAD
 		}
 		else {
 			Node<T> elemAux=elem;
-			Node<T> anterior=elem;
-			while ((elemAux.getAnterior()!=null) && (p.compareTo((T) elemAux)<0)) {
-				elemAux.getAnterior();
-			}
-			if(!p.equals(elemAux.getX())) {
-				if(elemAux!=elem) {
-					anterior=elemAux.getAnterior();
-					if(anterior!=null) {
-						nou.setAnterior(anterior);
-						anterior.setSeguent(nou);
-					}
-					nou.setSeguent(elemAux);
-					elemAux.setAnterior(nou);
+			Node<T> dretaElement=elem;
+			int pos=0;
+			while(!p.equals(elemAux.getX()) && (elemAux.getAnterior()!=null)){
+				if((p.compareTo(dretaElement.getX())==1) && (dretaElement.getAnterior()!=null)) {
+					dretaElement=dretaElement.getAnterior();
 				}
-				else {
-					nou.setAnterior(elemAux);
-					elemAux.setSeguent(nou);
+				elemAux=elemAux.getAnterior();
+				pos++;
+			}
+			if(pos==numElems) {
+				Node<T> seguent=dretaElement.getSeguent();
+				dretaElement.setSeguent(nou);
+				nou.setAnterior(dretaElement);
+				if(seguent!=null){
+					seguent.setAnterior(nou);
+					nou.setSeguent(seguent);
 				}
 				while (elem.getSeguent()!=null) {
-					elem.getSeguent();
+					elem=elem.getSeguent();
 				}
 				numElems++;
 			}
