@@ -22,7 +22,7 @@ public class Multillista<E extends Comparable<E>,T extends Comparable<T>> {
 		try{
 			for (int i=0; i<llistaAssig.numElems(); i++) 
 				this.llistaAssig.afegirElement(llistaAssig.consultarPosicio(i));
-			for (int i=0; i<llistaAssig.numElems(); i++) 
+			for (int i=0; i<llistaAlum.numElems(); i++) 
 				this.llistaAlum.afegirElement(llistaAlum.consultarPosicio(i));
 		} catch (LlistaPlena|LlistaBuida e){
 			System.out.println("Aquesta circunstancia no deuria de passar mai.");
@@ -105,7 +105,7 @@ public class Multillista<E extends Comparable<E>,T extends Comparable<T>> {
 		try {
 			//Busquem la assignatura a la llista
 			assigAux=(Assignatura) llistaAssig.consultarPosicio(i);
-			while(newMat.getCodiAssig()!=assigAux.getCodiAssig()) {
+			while(!newMat.getCodiAssig().equals(assigAux.getCodiAssig())) {
 				i++;
 				assigAux=(Assignatura) llistaAssig.consultarPosicio(i);
 			}
@@ -119,20 +119,20 @@ public class Multillista<E extends Comparable<E>,T extends Comparable<T>> {
 			//Si ja tenim la primera relació
 			else {
 				//Busquem que no existisca previament una relacio amb aquesta asignatura i el mateix alumne
-				while((matAux.getSeguentAssig()!=null)&&(matAux.getCodiAlum()!=newMat.getCodiAlum())) matAux=matAux.getSeguentAssig();
+				while((matAux.getSeguentAssig()!=null)&&(!matAux.getCodiAlum().equals(newMat.getCodiAlum()))) matAux=matAux.getSeguentAssig();
 				//Sino existeix cap relacio amb aquesta asignatura i aquest alumne
-				if((matAux.getSeguentAssig()==null)&&(matAux.getCodiAlum()!=newMat.getCodiAlum())) {
+				if((matAux.getSeguentAssig()==null)&&(!matAux.getCodiAlum().equals(newMat.getCodiAlum()))) {
 					matAux.setSeguentAssig(newMat);
 					newMat.setAnteriorAssig(matAux);
 					newMat.setAssignatura(assigAux);
 				}
 			}
 			i=0;
-			aluAux=(Alumne) llistaAssig.consultarPosicio(i);
+			aluAux=(Alumne) llistaAlum.consultarPosicio(i);
 			//Busquem el alumne a la llista
-			while(newMat.getCodiAlum()!=aluAux.getCodiAlum()) {
+			while(!newMat.getCodiAlum().equals(aluAux.getCodiAlum())) {
 				i++;
-				aluAux=(Alumne) llistaAssig.consultarPosicio(i);
+				aluAux=(Alumne) llistaAlum.consultarPosicio(i);
 			}
 			//Una vegada ja l'hem trobat
 			matAux=aluAux.getMatric();
@@ -143,9 +143,9 @@ public class Multillista<E extends Comparable<E>,T extends Comparable<T>> {
 			}
 			else {
 				//Busquem que no existisca previament una relacio amb aquesta asignatura i el mateix alumne
-				while((matAux.getSeguentAlumne()!=null)&&(matAux.getCodiAssig()!=newMat.getCodiAssig())) matAux=matAux.getSeguentAlumne();
+				while((matAux.getSeguentAlumne()!=null)&&(!matAux.getCodiAssig().equals(newMat.getCodiAssig()))) matAux=matAux.getSeguentAlumne();
 				//Sino existeix cap relacio amb aquesta asignatura i aquest alumne
-				if((matAux.getSeguentAlumne()==null)&&(matAux.getCodiAssig()!=newMat.getCodiAssig())) {
+				if((matAux.getSeguentAlumne()==null)&&(!matAux.getCodiAssig().equals(newMat.getCodiAssig()))) {
 					matAux.setSeguentAlumne(newMat);
 					newMat.setAnteriorAlumne(matAux);
 					newMat.setAlumne(aluAux);
