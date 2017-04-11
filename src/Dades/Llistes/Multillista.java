@@ -44,9 +44,9 @@ public class Multillista<E extends Comparable<E>,T extends Comparable<T>> {
 			default: break;
 		}
 		try {
-			//Busquem el laumne a la llista
+			//Busquem el alumne a la llista
 			alumAux=(Alumne) llistaAlum.consultarPosicio(i);
-			while(alum!=alumAux.getCodiAlum()) {
+			while(alum.equals(alumAux.getCodiAlum())) {
 				i++;
 				alumAux=(Alumne) llistaAlum.consultarPosicio(i);
 			}
@@ -80,7 +80,7 @@ public class Multillista<E extends Comparable<E>,T extends Comparable<T>> {
 		try {
 			//Busquem la assignatura a la llista
 			assigAux=(Assignatura) llistaAssig.consultarPosicio(i);
-			while(assig!=assigAux.getCodiAssig()) {
+			while(assig.equals(assigAux.getCodiAssig())) {
 				i++;
 				assigAux=(Assignatura) llistaAssig.consultarPosicio(i);
 			}
@@ -88,7 +88,7 @@ public class Multillista<E extends Comparable<E>,T extends Comparable<T>> {
 			matAux=assigAux.getMatric();
 			while(matAux!=null) {
 				llistaAlumAux.afegirElement(matAux.getAlumne());
-				matAux=matAux.getSeguentAssig();
+				matAux=matAux.getSeguentAlumne();
 			}
 		} catch (LlistaPlena|LlistaBuida e) {
 			e.printStackTrace();
