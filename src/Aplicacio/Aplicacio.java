@@ -186,24 +186,140 @@ public static void cargarMultilist(String nomFitxer, Multillista<Assignatura, Al
 	}
 	
 	
-	public static void consultaperCodiAl(){
+	public static void consultaperCodiAl(int tipus,  Multillista<Assignatura, Alumne> multilist) throws LlistaBuida{
+		TADLlistaGenerica<Assignatura> llistaAss;
+		Scanner teclat=new Scanner(System.in);
+		int totalCredits=0;
+		String codeAlum;
+		System.out.println("Escriu el codi del alumne a consultar: ");
+		codeAlum=teclat.nextLine();
 		
-		
+		llistaAss=multilist.consultarMatriculaAlum(codeAlum, tipus);
+		if(llistaAss==null) System.out.println("El alumne no es troba matriculat");
+		else{
+			for(int i=0; i<llistaAss.numElems(); i++){
+				System.out.println("\n\t"+i+". "+llistaAss.consultarPosicio(i).toString());
+				totalCredits=+llistaAss.consultarPosicio(i).getCredits();
+			}
+			System.out.println("\tNumero de credits totals: "+totalCredits);
+		}
+		teclat.close();
 	}
 	
-	public static void consultaperAss(){
+	public static void consultaperAss(int tipus, Multillista<Assignatura, Alumne> multilist) throws LlistaBuida{
+		TADLlistaGenerica<Alumne> llistaAlu;
+		Scanner teclat=new Scanner(System.in);
+		int i, codeAss;
+		System.out.println("Escriu el codi de la assignatura a consultar: ");
+		codeAss=Integer.parseInt(teclat.nextLine());
 		
-		
+		llistaAlu=multilist.consultarMatriculaAssig(codeAss, tipus);
+		if(llistaAlu==null) System.out.println("No hi ha cap alumne matriculat en aquesta assignatura");
+		else{
+			for(i=0; i<llistaAlu.numElems(); i++){
+				System.out.println(i+". "+llistaAlu.consultarPosicio(i).getNomAlum());
+			}
+			System.out.println("Total d'alumnes: "+i);
+		}
+		teclat.close();
 	}
 	
-	public static void alumcredits(){
+	public static void alumcredits(int tipus, TADLlistaGenerica<Alumne> llistaAlumne, Multillista<Assignatura, Alumne> multilist) throws LlistaBuida{
+		TADLlistaGenerica<Assignatura> llistaAss;
+		int totalCredits=0, creditsmin;
+		Scanner teclat=new Scanner(System.in);
+		System.out.println("Escriu el numero de credits minims: ");
+		creditsmin=Integer.parseInt(teclat.nextLine());
 		
-		
+		for(int i=0; i<llistaAlumne.numElems(); i++){
+			llistaAss=multilist.consultarMatriculaAlum(llistaAlumne.consultarPosicio(i).getCodiAlum(), tipus);
+			if(llistaAss!=null){
+				for(int y=0; y<llistaAss.numElems(); y++){
+					totalCredits=+llistaAss.consultarPosicio(y).getCredits();
+				}
+				if(totalCredits<=creditsmin){
+					System.out.println(i+". "+llistaAlumne.consultarPosicio(i).toString());
+				}
+			}	
+		}
+		teclat.close();
 	}
 	
-	public static void assigalums(){
+	public static void assigalums(int tipus, TADLlistaGenerica<Assignatura> llistaAssignatura, Multillista<Assignatura, Alumne> multilist) throws LlistaBuida{
+		TADLlistaGenerica<Alumne> llistaAlu;
+		Scanner teclat=new Scanner(System.in);
+		int estudiantsmin;
+		System.out.println("Escriu el numero minim d'alumnes: ");
+		estudiantsmin=Integer.parseInt(teclat.nextLine());
 		
+		for(int i=0; i<llistaAssignatura.numElems(); i++){
+			llistaAlu=multilist.consultarMatriculaAssig(llistaAssignatura.consultarPosicio(i).getCodiAssig(), tipus);
+			if(llistaAlu!=null){
+				if(llistaAlu.numElems()<=estudiantsmin){
+					System.out.println(i+". "+llistaAssignatura.consultarPosicio(i).toString());
+				}
+			}	
+		}
+		teclat.close();
+	}
+	
+	public static void menu(int opcio, TADLlistaGenerica<Alumne> llistaAlumne, TADLlistaGenerica<Assignatura> llistaAssignatura, Multillista<Assignatura, Alumne> multilist){
+		Scanner teclat=new Scanner(System.in);
+		int opcioM=0;
+		long tempsi=0, tempsf=0;
+		String op;
 		
+		System.out.println("Menu de consultes:\n\t1. Consulta per Codi del Alumne\n\t2. Consulta per Codi Assignatura\n\t3. Alumnes amb x credits o menys\n4. Assignatures amb x alumnes o menys");
+		op=teclat.nextLine();
+		if(Character.isDigit(op.charAt(0))) opcioM=Integer.parseInt(op);
+		
+			switch(opcioM){
+				case 1: 
+					try {
+						tempsi=System.nanoTime();
+						consultaperCodiAl(opcio, multilist);
+						tempsf=System.nanoTime();
+						System.out.println("El programa ha tardat: "+(tempsf-tempsi)+"ns.");
+					} catch (LlistaBuida e) {
+						e.printStackTrace();
+					}
+					break;
+				case 2: 
+					try {
+						tempsi=System.nanoTime();
+						consultaperAss(opcio, multilist);
+						tempsf=System.nanoTime();
+						System.out.println("El programa ha tardat: "+(tempsf-tempsi)+"ns.");
+					} catch (LlistaBuida e) {
+						e.printStackTrace();
+					}
+					break;
+				case 3: 
+					try {
+						tempsi=System.nanoTime();
+						alumcredits(opcio, llistaAlumne, multilist);
+						tempsf=System.nanoTime();
+						System.out.println("El programa ha tardat: "+(tempsf-tempsi)+"ns.");
+					} catch (LlistaBuida e) {
+						e.printStackTrace();
+					}
+					break;
+				case 4:
+					try {
+						tempsi=System.nanoTime();
+						assigalums(opcio, llistaAssignatura, multilist);
+						tempsf=System.nanoTime();
+						System.out.println("El programa ha tardat: "+(tempsf-tempsi)+"ns.");
+					} catch (LlistaBuida e) {
+						e.printStackTrace();
+					}
+					break;
+				default:
+					System.out.println("Valor incorrecte.\tMenu de consultes:\n\t1. Consulta per Codi del Alumne\n\t2. Consulta per Codi Assignatura\n\t3. Alumnes amb x credits o menys\n4. Assignatures amb x alumnes o menys");
+					op=teclat.nextLine();
+					if(Character.isDigit(op.charAt(0))) opcioM=Integer.parseInt(op); break;
+			}
+			teclat.close();
 	}
 
 	/**
@@ -213,13 +329,12 @@ public static void cargarMultilist(String nomFitxer, Multillista<Assignatura, Al
 	public static void main(String[] args) {
 		//Assignatura[] assiglist= new Assignatura [1000];
 		//Alumne[] alumlist=new Alumne [1000];
-		Scanner teclat=new Scanner(System.in);
 		TADLlistaGenerica<Alumne> llistaAlumne=null;
 		TADLlistaGenerica<Assignatura> llistaAssignatura=null;
 		Multillista<Assignatura, Alumne> multilist=null;
 		String nomFitxer;
 		int opcio;
-		long tempsi=0, tempsf=0;
+		
 		
 		//Tipus de implementació
 		opcio=1;//tipusImplementacio(teclat);
@@ -234,46 +349,8 @@ public static void cargarMultilist(String nomFitxer, Multillista<Assignatura, Al
 		cargarLlistes(nomFitxer, llistaAlumne, llistaAssignatura);
 		multilist=new Multillista<Assignatura, Alumne>(llistaAssignatura, llistaAlumne, opcio);
 		cargarMultilist(nomFitxer, multilist);
-		
-		/*
-		//Menu
-		int opcioM=0;
-		
-		String op;
-		System.out.println("Menu de consultes:\n\t1. Consulta per Codi del Alumne\n\t2. Consulta per Codi Assignatura\n\t3. Alumnes amb x credits o menys\n4. Assignatures amb x alumnes o menys");
-		op=teclat.nextLine();
-		if(Character.isDigit(op.charAt(0))) opcioM=Integer.parseInt(op);
-		
-			switch(opcioM){
-				case 1: 
-					tempsi=System.nanoTime();
-					consultaperCodiAl();
-					tempsf=System.nanoTime();
-					break;
-				case 2: 
-					tempsi=System.nanoTime();
-					consultaperAss();
-					tempsf=System.nanoTime();
-					break;
-				case 3: 
-					tempsi=System.nanoTime();
-					alumcredits();
-					tempsf=System.nanoTime();
-					break;
-				case 4:
-					tempsi=System.nanoTime();
-					assigalums();
-					tempsf=System.nanoTime();
-					break;
-				default:
-					System.out.println("Valor incorrecte.\tMenu de consultes:\n\t1. Consulta per Codi del Alumne\n\t2. Consulta per Codi Assignatura\n\t3. Alumnes amb x credits o menys\n4. Assignatures amb x alumnes o menys");
-					op=teclat.nextLine();
-					if(Character.isDigit(op.charAt(0))) opcioM=Integer.parseInt(op); break;
-			}
-			*/		
-		System.out.println("Les Dades s'han tractat correctament.\n");
-		System.out.println("El programa ha tardat: "+(tempsf-tempsi)+"ns.");
-		
-		teclat.close();
+		menu(opcio, llistaAlumne, llistaAssignatura, multilist);
+					
+		System.out.println("Les Dades s'han tractat correctament.\n");		
 	}
 }

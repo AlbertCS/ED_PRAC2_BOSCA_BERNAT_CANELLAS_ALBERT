@@ -14,7 +14,8 @@ public class MeuIterator<T extends Comparable<T>> implements Iterator<T> {
 				llista=new LlistaEstatica<T>(ll.numElems()); break;
 			case 2:
 				llista=new LlistaDinamica<T>(); break;
-			case 3: break;
+			case 3: 
+				llista=new LListaJava<T>(); break;
 			default: break;
 		}
 		try{
