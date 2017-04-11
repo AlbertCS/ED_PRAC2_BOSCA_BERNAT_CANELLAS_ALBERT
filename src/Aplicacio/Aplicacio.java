@@ -340,7 +340,7 @@ public static void cargarMultilist(String nomFitxer, Multillista<Assignatura, Al
 		opcio=2;//tipusImplementacio(teclat);
 		
 		//Nom fitxer
-		nomFitxer="text.txt";//nomCorrecte(teclat);
+		nomFitxer="DadesMatricula.csv";//nomCorrecte(teclat);
 		
 		//Operacions
 

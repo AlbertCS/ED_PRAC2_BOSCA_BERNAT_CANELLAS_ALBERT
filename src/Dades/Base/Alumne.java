@@ -43,9 +43,7 @@ public class Alumne implements Comparable<Alumne>{
 	
 	@Override
 	public int compareTo(Alumne alum) { 
-		if (this.nomAlum.compareTo(alum.nomAlum)==0) {
-			return (this.codiAlum.compareTo(alum.codiAlum));
-		}
+		if (this.nomAlum.compareTo(alum.nomAlum)==0) return (this.codiAlum.compareTo(alum.codiAlum));
 		else return (this.nomAlum.compareTo(alum.nomAlum));
 	}
 

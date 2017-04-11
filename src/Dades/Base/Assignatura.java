@@ -82,7 +82,8 @@ public class Assignatura implements Comparable<Assignatura>{
 		else if (this.curs>assig.curs) return 1;
 		else if (this.quad<assig.quad) return -1;
 		else if (this.quad>assig.quad) return 1;
-		else return (this.nomAssig.compareTo(assig.nomAssig)); 
+		else if (this.nomAssig.compareTo(assig.nomAssig)==0) return (this.codiAssig.compareTo(assig.codiAssig));
+		else return (this.nomAssig.compareTo(assig.nomAssig));
 	}
 	
 	@Override
