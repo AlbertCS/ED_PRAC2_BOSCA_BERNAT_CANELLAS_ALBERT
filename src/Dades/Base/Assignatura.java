@@ -82,21 +82,31 @@ public class Assignatura implements Comparable<Assignatura>{
 		else if (this.curs>assig.curs) return 1;
 		else if (this.quad<assig.quad) return -1;
 		else if (this.quad>assig.quad) return 1;
-		else return (this.nomAssig.compareTo(assig.nomAssig)); 
+		else if (this.nomAssig.compareTo(assig.nomAssig)==0) return (this.codiAssig.compareTo(assig.codiAssig));
+		else return (this.nomAssig.compareTo(assig.nomAssig));
 	}
 	
-	public boolean equals(Assignatura assig) {
-		if((this.codiAssig==assig.getCodiAssig())&&(this.nomAssig==assig.getNomAssig())&&(this.credits==assig.getCredits())&&(this.quad==assig.getQuad())&&(this.matric==assig.getMatric())) 
-			return true;
+	@Override
+	public boolean equals(Object assig) {
+		if(assig!=null){
+			Assignatura aux=(Assignatura) assig;
+			if((codiAssig.equals(aux.getCodiAssig()))&&(nomAssig.equals(aux.getNomAssig()))&&(credits.equals(aux.getCredits()))&&(quad.equals(aux.getQuad()))) 
+				return true;
+			else return false;
+		}
 		else return false;
+		
 	}
 	
-	public void clone(Assignatura assig) {
-		this.codiAssig=assig.getCodiAssig();
-		this.nomAssig=assig.getNomAssig();
-		this.credits=assig.getCredits();
-		this.curs=assig.getCurs();
-		this.quad=assig.getQuad();
-		this.matric=assig.getMatric();
+	@Override
+	public Object clone() {
+		Assignatura aux;
+		try {
+			aux = (Assignatura) super.clone();
+			return aux;
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

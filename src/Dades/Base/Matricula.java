@@ -120,14 +120,15 @@ public class Matricula {
 		else return false;
 	}
 	
-	public void clone(Matricula mat) {
-		this.codiAssig=mat.getCodiAssig();
-		this.codiAlum=mat.getCodiAlum();
-		this.seguentAssig=mat.getSeguentAssig();
-		this.seguentAlumne=mat.getSeguentAlumne();
-		this.anteriorAssig=mat.getAnteriorAssig();
-		this.anteriorAlumne=mat.getAnteriorAlumne();
-		this.alumne=mat.getAlumne();
-		this.assignatura=mat.getAssignatura();
+	@Override
+	public Object clone() {
+		Matricula aux;
+		try {
+			aux = (Matricula) super.clone();
+			return aux;
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }
