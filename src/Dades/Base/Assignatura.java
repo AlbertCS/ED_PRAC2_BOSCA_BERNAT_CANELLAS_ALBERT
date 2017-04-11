@@ -85,8 +85,10 @@ public class Assignatura implements Comparable<Assignatura>{
 		else return (this.nomAssig.compareTo(assig.nomAssig)); 
 	}
 	
-	public boolean equals(Assignatura assig) {
-		if((this.codiAssig==assig.getCodiAssig())&&(this.nomAssig==assig.getNomAssig())&&(this.credits==assig.getCredits())&&(this.quad==assig.getQuad())&&(this.matric==assig.getMatric())) 
+	@Override
+	public boolean equals(Object assig) {
+		Assignatura aux=(Assignatura) assig;
+		if((codiAssig==aux.getCodiAssig())&&(nomAssig==aux.getNomAssig())&&(credits==aux.getCredits())&&(quad==aux.getQuad())) 
 			return true;
 		else return false;
 	}

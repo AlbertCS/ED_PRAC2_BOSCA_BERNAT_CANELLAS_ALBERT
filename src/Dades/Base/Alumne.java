@@ -46,8 +46,10 @@ public class Alumne implements Comparable<Alumne>{
 		return (this.nomAlum.compareTo(alum.nomAlum));
 	}
 
-	public boolean equals(Alumne alum) {
-		if((this.codiAlum==alum.getCodiAlum())&&(this.nomAlum==alum.getNomAlum())&&(this.matric==alum.getMatric())) return true;
+	@Override
+	public boolean equals(Object alum) {
+		Alumne aux=(Alumne) alum;
+		if((codiAlum==aux.getCodiAlum())&&(nomAlum==aux.getNomAlum())) return true;
 		else return false;
 	}
 	
