@@ -6,7 +6,6 @@ import java.io.*;
 import java.util.*;
 
 import Exceptions.*;
-import Dades.*;
 import Dades.Llistes.*;
 /**
  * Class per testejar el programa
@@ -337,7 +336,7 @@ public static void cargarMultilist(String nomFitxer, Multillista<Assignatura, Al
 		
 		
 		//Tipus de implementació
-		opcio=2;//tipusImplementacio(teclat);
+		opcio=3;//tipusImplementacio(teclat);
 		
 		//Nom fitxer
 		nomFitxer="DadesMatricula.csv";//nomCorrecte(teclat);
