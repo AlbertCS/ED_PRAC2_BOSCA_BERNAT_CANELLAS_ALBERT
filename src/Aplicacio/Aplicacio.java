@@ -6,7 +6,6 @@ import java.io.*;
 import java.util.*;
 
 import Exceptions.*;
-import Dades.*;
 import Dades.Llistes.*;
 /**
  * Class per testejar el programa
@@ -186,7 +185,11 @@ public static void cargarMultilist(String nomFitxer, Multillista<Assignatura, Al
 	}
 	
 	
+<<<<<<< HEAD
 	public static void consultaperCodiAl(int tipus,  Multillista<Assignatura, Alumne> multilist) throws LlistaBuida{
+=======
+	public static void consultaPerCodiAl(int tipus,  Multillista<Assignatura, Alumne> multilist) throws LlistaBuida{
+>>>>>>> refs/remotes/origin/master
 		TADLlistaGenerica<Assignatura> llistaAss;
 		Scanner teclat=new Scanner(System.in);
 		int totalCredits=0;
@@ -198,15 +201,24 @@ public static void cargarMultilist(String nomFitxer, Multillista<Assignatura, Al
 		if(llistaAss==null) System.out.println("El alumne no es troba matriculat");
 		else{
 			for(int i=0; i<llistaAss.numElems(); i++){
+<<<<<<< HEAD
 				System.out.println("\n\t"+i+". "+llistaAss.consultarPosicio(i).toString());
 				totalCredits=+llistaAss.consultarPosicio(i).getCredits();
+=======
+				System.out.println("\n\t"+(i+1)+". "+llistaAss.consultarPosicio(i).toString());
+				totalCredits+=llistaAss.consultarPosicio(i).getCredits();
+>>>>>>> refs/remotes/origin/master
 			}
 			System.out.println("\tNumero de credits totals: "+totalCredits);
 		}
 		teclat.close();
 	}
 	
+<<<<<<< HEAD
 	public static void consultaperAss(int tipus, Multillista<Assignatura, Alumne> multilist) throws LlistaBuida{
+=======
+	public static void consultaPerAss(int tipus, Multillista<Assignatura, Alumne> multilist) throws LlistaBuida{
+>>>>>>> refs/remotes/origin/master
 		TADLlistaGenerica<Alumne> llistaAlu;
 		Scanner teclat=new Scanner(System.in);
 		int i, codeAss;
@@ -217,14 +229,22 @@ public static void cargarMultilist(String nomFitxer, Multillista<Assignatura, Al
 		if(llistaAlu==null) System.out.println("No hi ha cap alumne matriculat en aquesta assignatura");
 		else{
 			for(i=0; i<llistaAlu.numElems(); i++){
+<<<<<<< HEAD
 				System.out.println(i+". "+llistaAlu.consultarPosicio(i).getNomAlum());
+=======
+				System.out.println((i+1)+". "+llistaAlu.consultarPosicio(i).getNomAlum());
+>>>>>>> refs/remotes/origin/master
 			}
 			System.out.println("Total d'alumnes: "+i);
 		}
 		teclat.close();
 	}
 	
+<<<<<<< HEAD
 	public static void alumcredits(int tipus, TADLlistaGenerica<Alumne> llistaAlumne, Multillista<Assignatura, Alumne> multilist) throws LlistaBuida{
+=======
+	public static void alumCredits(int tipus, TADLlistaGenerica<Alumne> llistaAlumne, Multillista<Assignatura, Alumne> multilist) throws LlistaBuida{
+>>>>>>> refs/remotes/origin/master
 		TADLlistaGenerica<Assignatura> llistaAss;
 		int totalCredits=0, creditsmin;
 		Scanner teclat=new Scanner(System.in);
@@ -238,14 +258,22 @@ public static void cargarMultilist(String nomFitxer, Multillista<Assignatura, Al
 					totalCredits=+llistaAss.consultarPosicio(y).getCredits();
 				}
 				if(totalCredits<=creditsmin){
+<<<<<<< HEAD
 					System.out.println(i+". "+llistaAlumne.consultarPosicio(i).toString());
+=======
+					System.out.println((i+1)+". "+llistaAlumne.consultarPosicio(i).toString());
+>>>>>>> refs/remotes/origin/master
 				}
 			}	
 		}
 		teclat.close();
 	}
 	
+<<<<<<< HEAD
 	public static void assigalums(int tipus, TADLlistaGenerica<Assignatura> llistaAssignatura, Multillista<Assignatura, Alumne> multilist) throws LlistaBuida{
+=======
+	public static void assigAlums(int tipus, TADLlistaGenerica<Assignatura> llistaAssignatura, Multillista<Assignatura, Alumne> multilist) throws LlistaBuida{
+>>>>>>> refs/remotes/origin/master
 		TADLlistaGenerica<Alumne> llistaAlu;
 		Scanner teclat=new Scanner(System.in);
 		int estudiantsmin;
@@ -256,7 +284,11 @@ public static void cargarMultilist(String nomFitxer, Multillista<Assignatura, Al
 			llistaAlu=multilist.consultarMatriculaAssig(llistaAssignatura.consultarPosicio(i).getCodiAssig(), tipus);
 			if(llistaAlu!=null){
 				if(llistaAlu.numElems()<=estudiantsmin){
+<<<<<<< HEAD
 					System.out.println(i+". "+llistaAssignatura.consultarPosicio(i).toString());
+=======
+					System.out.println((i+1)+". "+llistaAssignatura.consultarPosicio(i).toString());
+>>>>>>> refs/remotes/origin/master
 				}
 			}	
 		}
@@ -277,7 +309,11 @@ public static void cargarMultilist(String nomFitxer, Multillista<Assignatura, Al
 				case 1: 
 					try {
 						tempsi=System.nanoTime();
+<<<<<<< HEAD
 						consultaperCodiAl(opcio, multilist);
+=======
+						consultaPerCodiAl(opcio, multilist);
+>>>>>>> refs/remotes/origin/master
 						tempsf=System.nanoTime();
 						System.out.println("El programa ha tardat: "+(tempsf-tempsi)+"ns.");
 					} catch (LlistaBuida e) {
@@ -287,7 +323,11 @@ public static void cargarMultilist(String nomFitxer, Multillista<Assignatura, Al
 				case 2: 
 					try {
 						tempsi=System.nanoTime();
+<<<<<<< HEAD
 						consultaperAss(opcio, multilist);
+=======
+						consultaPerAss(opcio, multilist);
+>>>>>>> refs/remotes/origin/master
 						tempsf=System.nanoTime();
 						System.out.println("El programa ha tardat: "+(tempsf-tempsi)+"ns.");
 					} catch (LlistaBuida e) {
@@ -297,7 +337,11 @@ public static void cargarMultilist(String nomFitxer, Multillista<Assignatura, Al
 				case 3: 
 					try {
 						tempsi=System.nanoTime();
+<<<<<<< HEAD
 						alumcredits(opcio, llistaAlumne, multilist);
+=======
+						alumCredits(opcio, llistaAlumne, multilist);
+>>>>>>> refs/remotes/origin/master
 						tempsf=System.nanoTime();
 						System.out.println("El programa ha tardat: "+(tempsf-tempsi)+"ns.");
 					} catch (LlistaBuida e) {
@@ -307,7 +351,11 @@ public static void cargarMultilist(String nomFitxer, Multillista<Assignatura, Al
 				case 4:
 					try {
 						tempsi=System.nanoTime();
+<<<<<<< HEAD
 						assigalums(opcio, llistaAssignatura, multilist);
+=======
+						assigAlums(opcio, llistaAssignatura, multilist);
+>>>>>>> refs/remotes/origin/master
 						tempsf=System.nanoTime();
 						System.out.println("El programa ha tardat: "+(tempsf-tempsi)+"ns.");
 					} catch (LlistaBuida e) {
@@ -340,7 +388,7 @@ public static void cargarMultilist(String nomFitxer, Multillista<Assignatura, Al
 		opcio=1;//tipusImplementacio(teclat);
 		
 		//Nom fitxer
-		nomFitxer="DadesMatricula.csv";//nomCorrecte(teclat);
+		nomFitxer="text.txt";//nomCorrecte(teclat);
 		
 		//Operacions
 
@@ -349,7 +397,18 @@ public static void cargarMultilist(String nomFitxer, Multillista<Assignatura, Al
 		cargarLlistes(nomFitxer, llistaAlumne, llistaAssignatura);
 		multilist=new Multillista<Assignatura, Alumne>(llistaAssignatura, llistaAlumne, opcio);
 		cargarMultilist(nomFitxer, multilist);
+<<<<<<< HEAD
 		menu(opcio, llistaAlumne, llistaAssignatura, multilist);
+=======
+		
+		try {
+			consultaPerAss(opcio, multilist);
+		} catch (LlistaBuida e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//menu(opcio, llistaAlumne, llistaAssignatura, multilist);
+>>>>>>> refs/remotes/origin/master
 					
 		System.out.println("Les Dades s'han tractat correctament.\n");		
 	}

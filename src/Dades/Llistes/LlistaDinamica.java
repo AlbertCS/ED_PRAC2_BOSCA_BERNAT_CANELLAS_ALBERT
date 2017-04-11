@@ -6,14 +6,13 @@ import Exceptions.*;
 public class LlistaDinamica<T extends Comparable<T>> implements Iterable<T>, TADLlistaGenerica<T> {
 	
 	private Node<T> elem;
-	private static int numElems=0;
+	private int numElems=0;
 	
 	
 	public LlistaDinamica() {
 		elem=null;
 	}
 
-	@SuppressWarnings("unchecked")
 	public void afegirElement(T p) throws LlistaPlena {
 		Node<T> nou=new Node<T>(p, null, null);
 		if(numElems==0) {
@@ -22,26 +21,36 @@ public class LlistaDinamica<T extends Comparable<T>> implements Iterable<T>, TAD
 		}
 		else {
 			Node<T> elemAux=elem;
-			Node<T> anterior=elem;
-			while ((elemAux.getAnterior()!=null) && (p.compareTo((T) elemAux)<0)) {
-				elemAux.getAnterior();
+			Node<T> dretaElement=elem;
+			int pos=0;
+			while((elemAux!=null) && (!p.equals(elemAux.getX()))){
+				if((p.compareTo(dretaElement.getX())<0) && (dretaElement.getAnterior()!=null)) {
+					dretaElement=dretaElement.getAnterior();
+				}
+				elemAux=elemAux.getAnterior();
+				pos++;
 			}
-			if(!p.equals(elemAux.getX())) {
-				if(elemAux!=elem) {
-					anterior=elemAux.getAnterior();
-					if(anterior!=null) {
-						nou.setAnterior(anterior);
+			if(pos==numElems) {
+				if(p.compareTo(dretaElement.getX())<0){
+					Node<T> anterior=dretaElement.getAnterior();
+					dretaElement.setAnterior(nou);
+					nou.setSeguent(dretaElement);
+					if(anterior!=null){
 						anterior.setSeguent(nou);
+						nou.setAnterior(anterior);
 					}
-					nou.setSeguent(elemAux);
-					elemAux.setAnterior(nou);
 				}
 				else {
-					nou.setAnterior(elemAux);
-					elemAux.setSeguent(nou);
+					Node<T> seguent=dretaElement.getSeguent();
+					dretaElement.setSeguent(nou);
+					nou.setAnterior(dretaElement);
+					if(seguent!=null){
+						seguent.setAnterior(nou);
+						nou.setSeguent(seguent);
+					}
 				}
 				while (elem.getSeguent()!=null) {
-					elem.getSeguent();
+					elem=elem.getSeguent();
 				}
 				numElems++;
 			}
@@ -86,7 +95,7 @@ public class LlistaDinamica<T extends Comparable<T>> implements Iterable<T>, TAD
 			for(int i=numElems-1; i>num; i--){
 			aux=aux.getAnterior();
 			}
-		return aux.getX();	
+			return aux.getX();	
 		}
 	}
 

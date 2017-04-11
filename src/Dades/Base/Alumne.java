@@ -43,17 +43,30 @@ public class Alumne implements Comparable<Alumne>{
 	
 	@Override
 	public int compareTo(Alumne alum) { 
-		return (this.nomAlum.compareTo(alum.nomAlum));
+		if (this.nomAlum.compareTo(alum.nomAlum)==0) return (this.codiAlum.compareTo(alum.codiAlum));
+		else return (this.nomAlum.compareTo(alum.nomAlum));
 	}
 
-	public boolean equals(Alumne alum) {
-		if((this.codiAlum==alum.getCodiAlum())&&(this.nomAlum==alum.getNomAlum())&&(this.matric==alum.getMatric())) return true;
+	@Override
+	public boolean equals(Object alum) {
+		if(alum!=null){
+			Alumne aux=(Alumne) alum;
+			if((codiAlum.equals(aux.getCodiAlum()))&&(nomAlum.equals(aux.getNomAlum()))) return true;
+			else return false;
+		}
 		else return false;
+		
 	}
 	
-	public void clone(Alumne alum) {
-		this.codiAlum=alum.getCodiAlum();
-		this.nomAlum=alum.getNomAlum();
-		this.matric=alum.getMatric();
+	@Override
+	public Object clone() {
+		Alumne aux;
+		try {
+			aux = (Alumne) super.clone();
+			return aux;
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

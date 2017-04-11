@@ -25,7 +25,7 @@ public class LlistaEstatica<T extends Comparable<T>> implements Iterable<T>, TAD
 		}
 		// segur que tinc espai
 		int pos=0;
-		while ((!p.equals(llista[pos])) && (pos!=numElems)){
+		while ((!p.equals(llista[pos])) && (pos<numElems)){
 			pos++;
 		}
 		if(pos==numElems) {
