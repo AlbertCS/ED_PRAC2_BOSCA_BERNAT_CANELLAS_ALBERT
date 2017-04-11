@@ -87,10 +87,14 @@ public class Assignatura implements Comparable<Assignatura>{
 	
 	@Override
 	public boolean equals(Object assig) {
-		Assignatura aux=(Assignatura) assig;
-		if((codiAssig==aux.getCodiAssig())&&(nomAssig==aux.getNomAssig())&&(credits==aux.getCredits())&&(quad==aux.getQuad())) 
-			return true;
+		if(assig!=null){
+			Assignatura aux=(Assignatura) assig;
+			if((codiAssig.equals(aux.getCodiAssig()))&&(nomAssig.equals(aux.getNomAssig()))&&(credits.equals(aux.getCredits()))&&(quad.equals(aux.getQuad()))) 
+				return true;
+			else return false;
+		}
 		else return false;
+		
 	}
 	
 	public void clone(Assignatura assig) {
