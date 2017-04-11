@@ -3,17 +3,21 @@ package Dades.Base;
 //Class Node
 public class Matricula {
 
-	private Integer assig;
-	private String alum;
-	Matricula seguentAssig, seguentAlumne, anteriorAssig, anteriorAlumne;
+	private Integer codiAssig;
+	private String codiAlum;
+	private Matricula seguentAssig, seguentAlumne, anteriorAssig, anteriorAlumne;
+	private Alumne alumne;
+	private Assignatura assignatura;
 	
 	public Matricula(Integer assig, String alum) {
-		this.assig=assig;
-		this.alum=alum;
+		this.codiAssig=assig;
+		this.codiAlum=alum;
 		seguentAssig=null;
 		seguentAlumne=null;
 		anteriorAssig=null;
 		anteriorAlumne=null;
+		alumne=null;
+		assignatura=null;
 	}
 
 	public Matricula getAnteriorAssig() {
@@ -28,6 +32,22 @@ public class Matricula {
 		return anteriorAlumne;
 	}
 
+	public Alumne getAlumne() {
+		return alumne;
+	}
+
+	public void setAlumne(Alumne alumne) {
+		this.alumne = alumne;
+	}
+
+	public Assignatura getAssignatura() {
+		return assignatura;
+	}
+
+	public void setAssignatura(Assignatura assignatura) {
+		this.assignatura = assignatura;
+	}
+
 	public void setAnteriorAlumne(Matricula anteriorAlumne) {
 		this.anteriorAlumne = anteriorAlumne;
 	}
@@ -35,29 +55,29 @@ public class Matricula {
 	/**
 	 * @return the assig
 	 */
-	public Integer getAssig() {
-		return assig;
+	public Integer getCodiAssig() {
+		return codiAssig;
 	}
 
 	/**
 	 * @param assig the assig to set
 	 */
-	public void setAssig(Integer assig) {
-		this.assig = assig;
+	public void setCodiAssig(Integer assig) {
+		this.codiAssig = assig;
 	}
 
 	/**
 	 * @return the alum
 	 */
-	public String getAlum() {
-		return alum;
+	public String getCodiAlum() {
+		return codiAlum;
 	}
 
 	/**
 	 * @param alum the alum to set
 	 */
-	public void setAlum(String alum) {
-		this.alum = alum;
+	public void setCodiAlum(String alum) {
+		this.codiAlum = alum;
 	}
 
 	public Matricula getSeguentAssig() {
@@ -78,15 +98,15 @@ public class Matricula {
 
 	@Override
 	public String toString() {
-		return "Matricula [assig=" + assig + ", alum=" + alum + "]";
+		return "Matricula [assig=" + codiAssig + ", alum=" + codiAlum + "]";
 	}
 	
 	public int compareTo(Assignatura assig) {
-		return (this.assig.compareTo(assig.getCodiAssig()));
+		return (this.codiAssig.compareTo(assig.getCodiAssig()));
 	}
 	
 	public int compareTo(Alumne alum) { 
-		return (this.alum.compareTo(alum.getCodiAlum()));
+		return (this.codiAlum.compareTo(alum.getCodiAlum()));
 	}
 	
 	public boolean equals(Assignatura assig) {
@@ -95,15 +115,19 @@ public class Matricula {
 	}
 	
 	public boolean equals(Matricula mat) {
-		if((this.assig==mat.getAssig())&&(this.alum==mat.getAlum())&&(this.seguentAssig==mat.getSeguentAssig())&&(this.seguentAlumne==mat.getSeguentAlumne())) 
+		if((this.codiAssig==mat.getCodiAssig())&&(this.codiAlum==mat.getCodiAlum())&&(this.seguentAssig==mat.getSeguentAssig())&&(this.seguentAlumne==mat.getSeguentAlumne())) 
 			return true;
 		else return false;
 	}
 	
 	public void clone(Matricula mat) {
-		this.assig=mat.getAssig();
-		this.alum=mat.getAlum();
+		this.codiAssig=mat.getCodiAssig();
+		this.codiAlum=mat.getCodiAlum();
 		this.seguentAssig=mat.getSeguentAssig();
 		this.seguentAlumne=mat.getSeguentAlumne();
+		this.anteriorAssig=mat.getAnteriorAssig();
+		this.anteriorAlumne=mat.getAnteriorAlumne();
+		this.alumne=mat.getAlumne();
+		this.assignatura=mat.getAssignatura();
 	}
 }
