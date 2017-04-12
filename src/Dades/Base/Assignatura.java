@@ -72,8 +72,7 @@ public class Assignatura implements Comparable<Assignatura>{
 
 	@Override
 	public String toString() {
-		return "Assignatura [codiAssig=" + codiAssig + ", nomAssig=" + nomAssig + ", credits=" + credits + ", curs="
-				+ curs + ", quad=" + quad + "]";
+		return "Assignatura: " + nomAssig + ". Amb codi: " + codiAssig + ", credits: " + credits + ", curs: " + curs + ", quadrimestres: " + quad;
 	}
 
 	@Override
