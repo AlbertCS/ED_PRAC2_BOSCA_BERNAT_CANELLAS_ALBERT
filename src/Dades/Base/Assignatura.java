@@ -24,7 +24,7 @@ public class Assignatura implements Comparable<Assignatura>{
 
 	/**
 	 * Setter de matricula
-	 * @param matric
+	 * @param matric a definir
 	 */
 	public void setMatric(Matricula matric) {
 		this.matric = matric;
@@ -40,7 +40,7 @@ public class Assignatura implements Comparable<Assignatura>{
 
 	/**
 	 * Setter de codiAssignatura
-	 * @param codiAssig
+	 * @param codiAssig a definir
 	 */
 	public void setCodiAssig(Integer codiAssig) {
 		this.codiAssig = codiAssig;
@@ -56,7 +56,7 @@ public class Assignatura implements Comparable<Assignatura>{
 
 	/**
 	 * Setter de nomAssignatura
-	 * @param nomAssig
+	 * @param nomAssig a definir
 	 */
 	public void setNomAssig(String nomAssig) {
 		this.nomAssig = nomAssig;
@@ -72,7 +72,7 @@ public class Assignatura implements Comparable<Assignatura>{
 
 	/**
 	 *  Setter de credits de l'assignatura
-	 * @param credits
+	 * @param credits a definir
 	 */
 	public void setCredits(Integer credits) {
 		this.credits = credits;
@@ -88,7 +88,7 @@ public class Assignatura implements Comparable<Assignatura>{
 
 	/**
 	 * Setter de nomAssignatura
-	 * @param nomAssig
+	 * @param nomAssig a definir
 	 */
 	public void setNom(String nomAssig) {
 		this.nomAssig = nomAssig;
@@ -104,7 +104,7 @@ public class Assignatura implements Comparable<Assignatura>{
 
 	/**
 	 * Setter de curs
-	 * @param curs
+	 * @param curs a definir
 	 */
 	public void setCurs(Integer curs) {
 		this.curs = curs;
@@ -120,7 +120,7 @@ public class Assignatura implements Comparable<Assignatura>{
 
 	/**
 	 * Setter de quadri
-	 * @param quad
+	 * @param quad a definir
 	 */
 	public void setQuad(Integer quad) {
 		this.quad = quad;

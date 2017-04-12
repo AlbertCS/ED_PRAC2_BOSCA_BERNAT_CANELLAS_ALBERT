@@ -3,7 +3,7 @@ package Dades.Llistes;
 /**
  * @author Bernat Bosca Candel
  * 		   Albert Cañellas Sole
- * @param <E> Tipus Element
+ * 
  *
  */
 public class Node<T extends Comparable<T>> {
@@ -65,7 +65,7 @@ public class Node<T extends Comparable<T>> {
 	
 	/**
 	 * Setter de la referencia del anterior element
-	 * @param seguent element anterior
+	 * @param anterior element anterior
 	 */
 	public void setAnterior(Node<T> anterior) {
 		this.anterior = anterior;

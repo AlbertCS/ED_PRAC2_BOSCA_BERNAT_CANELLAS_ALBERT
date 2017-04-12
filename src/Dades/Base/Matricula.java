@@ -30,7 +30,7 @@ public class Matricula {
 
 	/**
 	 * Setter anteriorAssignatura
-	 * @param anteriorAssig
+	 * @param anteriorAssig a definir
 	 */
 	public void setAnteriorAssig(Matricula anteriorAssig) {
 		this.anteriorAssig = anteriorAssig;
@@ -54,7 +54,7 @@ public class Matricula {
 
 	/**
 	 * Setter alumne
-	 * @param alumne
+	 * @param alumne a definir
 	 */
 	public void setAlumne(Alumne alumne) {
 		this.alumne = alumne;
@@ -62,7 +62,7 @@ public class Matricula {
 
 	/**
 	 * Getter assignatura
-	 * @return
+	 * @return assignatura a consultar
 	 */
 	public Assignatura getAssignatura() {
 		return assignatura;
@@ -70,7 +70,7 @@ public class Matricula {
 
 	/**
 	 * Setter assignatura
-	 * @param assignatura
+	 * @param assignatura a definir
 	 */
 	public void setAssignatura(Assignatura assignatura) {
 		this.assignatura = assignatura;
@@ -78,7 +78,7 @@ public class Matricula {
 
 	/**
 	 * Setter anteriorAlumne
-	 * @param anteriorAlumne
+	 * @param anteriorAlumne a definir
 	 */
 	public void setAnteriorAlumne(Matricula anteriorAlumne) {
 		this.anteriorAlumne = anteriorAlumne;
@@ -126,7 +126,7 @@ public class Matricula {
 
 	/**
 	 * Setter de seguentAssignatura
-	 * @param seguentAssig
+	 * @param seguentAssig a definir
 	 */
 	public void setSeguentAssig(Matricula seguentAssig) {
 		this.seguentAssig = seguentAssig;
@@ -134,7 +134,7 @@ public class Matricula {
 
 	/**
 	 * Getter de seguentAlumne
-	 * @return seguentAlumne
+	 * @return seguentAlumne a consultar
 	 */
 	public Matricula getSeguentAlumne() {
 		return seguentAlumne;
@@ -142,7 +142,7 @@ public class Matricula {
 
 	/**
 	 * Setter seguentAlumne
-	 * @param seguentAlumne
+	 * @param seguentAlumne a definir
 	 */
 	public void setSeguentAlumne(Matricula seguentAlumne) {
 		this.seguentAlumne = seguentAlumne;

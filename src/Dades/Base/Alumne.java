@@ -21,7 +21,7 @@ public class Alumne implements Comparable<Alumne>{
 
 	/**
 	 * Setter de matricula
-	 * @param matric 
+	 * @param matric a definir
 	 */
 	public void setMatric(Matricula matric) {
 		this.matric = matric;
@@ -37,7 +37,7 @@ public class Alumne implements Comparable<Alumne>{
 
 	/**
 	 * Setter de codiAlumne
-	 * @param codiAlum
+	 * @param codiAlum a definir
 	 */
 	public void setCodiAlum(String codiAlum) {
 		this.codiAlum = codiAlum;
@@ -53,7 +53,7 @@ public class Alumne implements Comparable<Alumne>{
 
 	/**
 	 * Setter de NomAlumne
-	 * @param nomAlum
+	 * @param nomAlum a definir
 	 */
 	public void setNomAlum(String nomAlum) {
 		this.nomAlum = nomAlum;

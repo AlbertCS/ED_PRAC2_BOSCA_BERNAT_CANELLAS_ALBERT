@@ -15,7 +15,7 @@ public class LlistaDinamica<T extends Comparable<T>> implements Iterable<T>, TAD
 
 	/**
 	 * Metode que afegeix un nou element a la llista
-	 * @param P element a afegir
+	 * @param p element a afegir
 	 */
 	public void afegirElement(T p) throws LlistaPlena {
 		Node<T> nou=new Node<T>(p, null, null);
@@ -71,7 +71,7 @@ public class LlistaDinamica<T extends Comparable<T>> implements Iterable<T>, TAD
 
 	/**
 	 * Setter de l'element
-	 * @param elem
+	 * @param elem a canviar
 	 */
 	public void setElem(Node<T> elem) {
 		this.elem = elem;

@@ -25,7 +25,7 @@ public class LlistaJava<T extends Comparable<T>> implements Iterable<T>, TADLlis
 	
 	/**
 	 * Metode que afegeix un element
-	 * @param p
+	 * @param p element a afegir
 	 */
 	@Override
 	public void afegirElement(T p) throws LlistaPlena {
