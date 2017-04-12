@@ -192,11 +192,12 @@ public class Aplicacio {
 		llistaAss=multilist.consultarMatriculaAlum(codeAlum, tipus);
 		if(llistaAss==null) System.out.println("El alumne no es troba matriculat");
 		else{
+			System.out.println("");			//Salt de linea
 			for(int i=0; i<llistaAss.numElems(); i++){
-				System.out.println("\n\t"+(i+1)+". "+llistaAss.consultarPosicio(i).toString());
+				System.out.println("\t"+(i+1)+". "+llistaAss.consultarPosicio(i).toString());
 				totalCredits+=llistaAss.consultarPosicio(i).getCredits();
 			}
-			System.out.println("\tNumero de credits totals: "+totalCredits);
+			System.out.println("\n\tNúmero de crèdits totals: "+totalCredits);
 		}
 	}
 	
@@ -214,10 +215,11 @@ public class Aplicacio {
 		llistaAlu=multilist.consultarMatriculaAssig(codeAss, tipus);
 		if(llistaAlu==null) System.out.println("No hi ha cap alumne matriculat en aquesta assignatura");
 		else{
+			System.out.println("");			//Salt de linea
 			for(i=0; i<llistaAlu.numElems(); i++){
-				System.out.println((i+1)+". "+llistaAlu.consultarPosicio(i).getNomAlum());
+				System.out.println("\t"+(i+1)+". "+llistaAlu.consultarPosicio(i).getNomAlum());
 			}
-			System.out.println("Total d'alumnes: "+i);
+			System.out.println("\n\tTotal d'alumnes: "+i);
 		}
 	}
 	
@@ -229,21 +231,25 @@ public class Aplicacio {
 	 * @param multilist la multillista on trobem les relacions
 	 * @throws LlistaBuida excepcio si la llista esta buida
 	 */
-	public static void alumCredits(int creditsmin,int tipus, TADLlistaGenerica<Alumne> llistaAlumne, Multillista<Assignatura, Alumne> multilist) throws LlistaBuida{
+	public static void alumCredits(int creditsMin, int tipus, TADLlistaGenerica<Alumne> llistaAlumne, Multillista<Assignatura, Alumne> multilist) throws LlistaBuida{
 		TADLlistaGenerica<Assignatura> llistaAss;
-		int totalCredits=0;		
+		int totalCredits=0, num=1;		
 		
+		System.out.println("");			//Salt de linea
 		for(int i=0; i<llistaAlumne.numElems(); i++){
 			llistaAss=multilist.consultarMatriculaAlum(llistaAlumne.consultarPosicio(i).getCodiAlum(), tipus);
 			if(llistaAss!=null){
+				totalCredits=0;
 				for(int y=0; y<llistaAss.numElems(); y++){
-					totalCredits=+llistaAss.consultarPosicio(y).getCredits();
+					totalCredits+=llistaAss.consultarPosicio(y).getCredits();
 				}
-				if(totalCredits<=creditsmin){
-					System.out.println((i+1)+". "+llistaAlumne.consultarPosicio(i).toString());
+				if(totalCredits<=creditsMin){
+					System.out.println("\t"+num+". "+llistaAlumne.consultarPosicio(i).toString()+" i crèdits totals: "+totalCredits);
+					num++;
 				}
 			}	
 		}
+		if(num==1) System.out.println("\tNo hi ha cap alumne amb "+creditsMin+ " o menys.");
 	}
 	
 	/**
@@ -254,17 +260,21 @@ public class Aplicacio {
 	 * @param multilist la multillista on trobem les relacions
 	 * @throws LlistaBuida excepcio si la llista esta buida
 	 */
-	public static void assigAlums(int estudiantsmin, int tipus, TADLlistaGenerica<Assignatura> llistaAssignatura, Multillista<Assignatura, Alumne> multilist) throws LlistaBuida{
+	public static void assigAlums(int estudiantsMin, int tipus, TADLlistaGenerica<Assignatura> llistaAssignatura, Multillista<Assignatura, Alumne> multilist) throws LlistaBuida{
 		TADLlistaGenerica<Alumne> llistaAlu;
-	
+		int num=1;
+		
+		System.out.println("");	
 		for(int i=0; i<llistaAssignatura.numElems(); i++){
 			llistaAlu=multilist.consultarMatriculaAssig(llistaAssignatura.consultarPosicio(i).getCodiAssig(), tipus);
 			if(llistaAlu!=null){
-				if(llistaAlu.numElems()<=estudiantsmin){
-					System.out.println((i+1)+". "+llistaAssignatura.consultarPosicio(i).toString());
+				if(llistaAlu.numElems()>=estudiantsMin){
+					System.out.println("\t"+num+". "+llistaAssignatura.consultarPosicio(i).toString()+" i estudiants totals: "+llistaAlu.numElems());
+					num++;
 				}
 			}	
 		}
+		if(num==1) System.out.println("\tNo hi ha cap assignatura que tingui un mínim de "+estudiantsMin+" estudiants.");
 	}
 	
 	/**
@@ -440,7 +450,7 @@ public class Aplicacio {
 		cargarMultilist(nomFitxer, multilist);
 		
 		try {
-			consultaPerAss(17234001 ,opcio, multilist);
+			assigAlums(7 , opcio, llistaAssignatura, multilist);
 		} catch (LlistaBuida e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

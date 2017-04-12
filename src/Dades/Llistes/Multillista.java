@@ -46,12 +46,10 @@ public class Multillista<E extends Comparable<E>,T extends Comparable<T>> {
 		try {
 			//Busquem el alumne a la llista
 			alumAux=(Alumne) llistaAlum.consultarPosicio(i);
-			while(alum.equals(alumAux.getCodiAlum())) {
+			while(!alum.equals(alumAux.getCodiAlum())) {
 				i++;
 				alumAux=(Alumne) llistaAlum.consultarPosicio(i);
 			}
-			//Correguim la posició que sha desplaçat una de més
-			alumAux=(Alumne) llistaAlum.consultarPosicio(i-1);
 			//Una vegada ja l'hem trobat
 			matAux=alumAux.getMatric();
 			while(matAux!=null) {
@@ -82,12 +80,10 @@ public class Multillista<E extends Comparable<E>,T extends Comparable<T>> {
 		try {
 			//Busquem la assignatura a la llista
 			assigAux=(Assignatura) llistaAssig.consultarPosicio(i);
-			while(assig.equals(assigAux.getCodiAssig())) {
+			while(!assig.equals(assigAux.getCodiAssig())) {
 				i++;
 				assigAux=(Assignatura) llistaAssig.consultarPosicio(i);
 			}
-			//Correguim la posició que sha desplaçat una de més
-			assigAux=(Assignatura) llistaAssig.consultarPosicio(i-1);
 			//Una vegada ja l'hem trobat
 			matAux=assigAux.getMatric();
 			while(matAux!=null) {
