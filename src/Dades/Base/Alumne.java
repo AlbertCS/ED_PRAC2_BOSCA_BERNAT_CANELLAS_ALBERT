@@ -62,7 +62,7 @@ public class Alumne implements Comparable<Alumne>{
 	
 	@Override
 	public String toString() {
-		return "Alumne [codiAlum=" + codiAlum + ", nomAlum=" + nomAlum + "]";
+		return "Alumne: "+ nomAlum + ". Amb codi: " + codiAlum;
 	}
 	
 	@Override

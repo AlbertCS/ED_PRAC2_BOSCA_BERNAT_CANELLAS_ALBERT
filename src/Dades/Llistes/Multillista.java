@@ -46,7 +46,7 @@ public class Multillista<E extends Comparable<E>,T extends Comparable<T>> {
 		try {
 			//Busquem el alumne a la llista
 			alumAux=(Alumne) llistaAlum.consultarPosicio(i);
-			while(alum.equals(alumAux.getCodiAlum())) {
+			while(!alum.equals(alumAux.getCodiAlum())) {
 				i++;
 				alumAux=(Alumne) llistaAlum.consultarPosicio(i);
 			}
@@ -80,7 +80,7 @@ public class Multillista<E extends Comparable<E>,T extends Comparable<T>> {
 		try {
 			//Busquem la assignatura a la llista
 			assigAux=(Assignatura) llistaAssig.consultarPosicio(i);
-			while(assig.equals(assigAux.getCodiAssig())) {
+			while(!assig.equals(assigAux.getCodiAssig())) {
 				i++;
 				assigAux=(Assignatura) llistaAssig.consultarPosicio(i);
 			}
@@ -101,7 +101,7 @@ public class Multillista<E extends Comparable<E>,T extends Comparable<T>> {
 		int i=0;
 		Assignatura assigAux=null;
 		Alumne aluAux=null;
-		Matricula matAux=null;
+		Matricula matAuxAssig=null, matAuxAlum=null;
 		try {
 			//Busquem la assignatura a la llista
 			assigAux=(Assignatura) llistaAssig.consultarPosicio(i);
@@ -110,23 +110,7 @@ public class Multillista<E extends Comparable<E>,T extends Comparable<T>> {
 				assigAux=(Assignatura) llistaAssig.consultarPosicio(i);
 			}
 			//Una vegada ja l'hem trobat
-			matAux=assigAux.getMatric();
-			//Mirem si es la primera relació que hauria de fer o deuria ser referenciada
-			if(matAux==null) {
-				assigAux.setMatric(newMat);
-				newMat.setAssignatura(assigAux);
-			}
-			//Si ja tenim la primera relació
-			else {
-				//Busquem que no existisca previament una relacio amb aquesta asignatura i el mateix alumne
-				while((matAux.getSeguentAssig()!=null)&&(!matAux.getCodiAlum().equals(newMat.getCodiAlum()))) matAux=matAux.getSeguentAssig();
-				//Sino existeix cap relacio amb aquesta asignatura i aquest alumne
-				if((matAux.getSeguentAssig()==null)&&(!matAux.getCodiAlum().equals(newMat.getCodiAlum()))) {
-					matAux.setSeguentAssig(newMat);
-					newMat.setAnteriorAssig(matAux);
-					newMat.setAssignatura(assigAux);
-				}
-			}
+			matAuxAssig=assigAux.getMatric();
 			i=0;
 			aluAux=(Alumne) llistaAlum.consultarPosicio(i);
 			//Busquem el alumne a la llista
@@ -135,21 +119,73 @@ public class Multillista<E extends Comparable<E>,T extends Comparable<T>> {
 				aluAux=(Alumne) llistaAlum.consultarPosicio(i);
 			}
 			//Una vegada ja l'hem trobat
-			matAux=aluAux.getMatric();
-			//Mirem si es la primera relació que hauria de fer o deuria ser referenciada
-			if(matAux==null) {
+			matAuxAlum=aluAux.getMatric();
+			//Mirem si es la primera relació que hauria de fer en la llista asignatures
+			if(matAuxAssig==null) {
+				assigAux.setMatric(newMat);
+				newMat.setAssignatura(assigAux);
+			}
+			//Si ja tenim la primera relació feta
+			else {
+				//Fiquem en la última posició de alumnes
+				while(matAuxAssig.getSeguentAlumne()!=null) matAuxAssig=matAuxAssig.getSeguentAlumne();
+				//Busquem el ordre de la relacio de la nova matricula amb les que ja hi han respecte als alumnes ja que la assignatura es la mateixa
+				while((matAuxAssig.getAnteriorAlumne()!=null) && (aluAux.compareTo(matAuxAssig.getAlumne())<0)) {
+					matAuxAssig=matAuxAssig.getAnteriorAlumne();
+				}
+				if(aluAux.compareTo(matAuxAssig.getAlumne())<0){
+					Matricula anterior=matAuxAssig.getAnteriorAlumne();
+					matAuxAssig.setAnteriorAlumne(newMat);
+					newMat.setSeguentAlumne(matAuxAssig);
+					if(anterior!=null){
+						anterior.setSeguentAlumne(newMat);
+						newMat.setAnteriorAlumne(anterior);
+					}
+					else assigAux.setMatric(newMat);
+				}
+				else {
+					Matricula seguent=matAuxAssig.getSeguentAlumne();
+					matAuxAssig.setSeguentAlumne(newMat);
+					newMat.setAnteriorAlumne(matAuxAssig);
+					if(seguent!=null){
+						seguent.setAnteriorAlumne(newMat);
+						newMat.setSeguentAlumne(seguent);
+					}
+				}
+				newMat.setAssignatura(assigAux);
+			}
+			//Mirem si es la primera relació que hauria de fer en la llista alumnes
+			if(matAuxAlum==null) {
 				aluAux.setMatric(newMat);
 				newMat.setAlumne(aluAux);
 			}
 			else {
-				//Busquem que no existisca previament una relacio amb aquesta asignatura i el mateix alumne
-				while((matAux.getSeguentAlumne()!=null)&&(!matAux.getCodiAssig().equals(newMat.getCodiAssig()))) matAux=matAux.getSeguentAlumne();
-				//Sino existeix cap relacio amb aquesta asignatura i aquest alumne
-				if((matAux.getSeguentAlumne()==null)&&(!matAux.getCodiAssig().equals(newMat.getCodiAssig()))) {
-					matAux.setSeguentAlumne(newMat);
-					newMat.setAnteriorAlumne(matAux);
-					newMat.setAlumne(aluAux);
+				//Fiquem en la última posició de assignatures
+				while(matAuxAlum.getSeguentAssig()!=null) matAuxAlum=matAuxAlum.getSeguentAssig();
+				//Busquem el ordre de la relacio de la nova matricula amb les que ja hi han respecte a les assignatures ja que el alumne el mateix
+				while((matAuxAlum.getAnteriorAssig()!=null) && (assigAux.compareTo(matAuxAlum.getAssignatura())<0)) {
+					matAuxAlum=matAuxAlum.getAnteriorAssig();
 				}
+				if(assigAux.compareTo(matAuxAlum.getAssignatura())<0){
+					Matricula anterior=matAuxAlum.getAnteriorAssig();
+					matAuxAlum.setAnteriorAssig(newMat);
+					newMat.setSeguentAssig(matAuxAlum);
+					if(anterior!=null){
+						anterior.setSeguentAssig(newMat);
+						newMat.setAnteriorAssig(anterior);
+					}
+					else aluAux.setMatric(newMat);
+				}
+				else {
+					Matricula seguent=matAuxAlum.getSeguentAssig();
+					matAuxAlum.setSeguentAssig(newMat);
+					newMat.setAnteriorAssig(matAuxAlum);
+					if(seguent!=null){
+						seguent.setAnteriorAssig(newMat);
+						newMat.setSeguentAssig(seguent);
+					}
+				}
+				newMat.setAlumne(aluAux);
 			}
 		} catch (LlistaBuida e) {
 			e.printStackTrace();
