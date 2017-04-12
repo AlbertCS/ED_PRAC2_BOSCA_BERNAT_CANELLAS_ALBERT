@@ -127,13 +127,12 @@ public class Multillista<E extends Comparable<E>,T extends Comparable<T>> {
 			}
 			//Si ja tenim la primera relació feta
 			else {
+				//Fiquem en la última posició de alumnes
+				while(matAuxAssig.getSeguentAlumne()!=null) matAuxAssig=matAuxAssig.getSeguentAlumne();
 				//Busquem el ordre de la relacio de la nova matricula amb les que ja hi han respecte als alumnes ja que la assignatura es la mateixa
-				i=0;
 				while((matAuxAssig.getAnteriorAlumne()!=null) && (aluAux.compareTo(matAuxAssig.getAlumne())<0)) {
-					i++;
 					matAuxAssig=matAuxAssig.getAnteriorAlumne();
 				}
-				if(i==0) assigAux.setMatric(newMat);
 				if(aluAux.compareTo(matAuxAssig.getAlumne())<0){
 					Matricula anterior=matAuxAssig.getAnteriorAlumne();
 					matAuxAssig.setAnteriorAlumne(newMat);
@@ -142,6 +141,7 @@ public class Multillista<E extends Comparable<E>,T extends Comparable<T>> {
 						anterior.setSeguentAlumne(newMat);
 						newMat.setAnteriorAlumne(anterior);
 					}
+					else assigAux.setMatric(newMat);
 				}
 				else {
 					Matricula seguent=matAuxAssig.getSeguentAlumne();
@@ -160,13 +160,12 @@ public class Multillista<E extends Comparable<E>,T extends Comparable<T>> {
 				newMat.setAlumne(aluAux);
 			}
 			else {
+				//Fiquem en la última posició de assignatures
+				while(matAuxAlum.getSeguentAssig()!=null) matAuxAlum=matAuxAlum.getSeguentAssig();
 				//Busquem el ordre de la relacio de la nova matricula amb les que ja hi han respecte a les assignatures ja que el alumne el mateix
-				i=0;
 				while((matAuxAlum.getAnteriorAssig()!=null) && (assigAux.compareTo(matAuxAlum.getAssignatura())<0)) {
-					i++;
 					matAuxAlum=matAuxAlum.getAnteriorAssig();
 				}
-				if(i==0) aluAux.setMatric(newMat);
 				if(assigAux.compareTo(matAuxAlum.getAssignatura())<0){
 					Matricula anterior=matAuxAlum.getAnteriorAssig();
 					matAuxAlum.setAnteriorAssig(newMat);
@@ -175,6 +174,7 @@ public class Multillista<E extends Comparable<E>,T extends Comparable<T>> {
 						anterior.setSeguentAssig(newMat);
 						newMat.setAnteriorAssig(anterior);
 					}
+					else aluAux.setMatric(newMat);
 				}
 				else {
 					Matricula seguent=matAuxAlum.getSeguentAssig();
