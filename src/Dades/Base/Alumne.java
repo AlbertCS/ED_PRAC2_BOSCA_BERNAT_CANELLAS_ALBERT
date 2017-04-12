@@ -11,31 +11,55 @@ public class Alumne implements Comparable<Alumne>{
 		matric=null;
 	}
 
+	/**
+	 * Getter de matricula
+	 * @return matric retorna la matricula
+	 */
 	public Matricula getMatric() {
 		return matric;
 	}
 
+	/**
+	 * Setter de matricula
+	 * @param matric 
+	 */
 	public void setMatric(Matricula matric) {
 		this.matric = matric;
 	}
 
+	/**
+	 * Getter de codiAlumne
+	 * @return codiAlum el codi de l'alumne
+	 */
 	public String getCodiAlum() {
 		return codiAlum;
 	}
 
+	/**
+	 * Setter de codiAlumne
+	 * @param codiAlum
+	 */
 	public void setCodiAlum(String codiAlum) {
 		this.codiAlum = codiAlum;
 	}
 
+	/**
+	 * Getter de NomAlumne
+	 * @return nomAlum nom de l'alumne
+	 */
 	public String getNomAlum() {
 		return nomAlum;
 	}
 
-
+	/**
+	 * Setter de NomAlumne
+	 * @param nomAlum
+	 */
 	public void setNomAlum(String nomAlum) {
 		this.nomAlum = nomAlum;
 	}
 
+	
 	@Override
 	public String toString() {
 		return "Alumne [codiAlum=" + codiAlum + ", nomAlum=" + nomAlum + "]";

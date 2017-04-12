@@ -5,14 +5,14 @@ import Exceptions.*;
 public interface TADLlistaGenerica<T extends Comparable<T>>{
 
 		/**
-		 * 
+		 * Metode que afegeix un element
 		 * @param elem
 		 * @throws LlistaPlena
 		 */
 		void afegirElement(T elem)  throws LlistaPlena;
 		
 		/**
-		 * 
+		 * Metode que consulta l'element de la posicio demanada
 		 * @return
 		 * @throws LlistaBuida
 		 */
@@ -24,8 +24,16 @@ public interface TADLlistaGenerica<T extends Comparable<T>>{
 		 */
 		int numElems();
 		
+		/**
+		 * Metode toString
+		 * @return el string 
+		 */
 		String toString();
 		
+		/**
+		 * Metode iterador
+		 * @return iterador
+		 */
 		Iterator<T> iterator();
 
 }

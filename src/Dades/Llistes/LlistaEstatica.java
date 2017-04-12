@@ -15,6 +15,10 @@ public class LlistaEstatica<T extends Comparable<T>> implements Iterable<T>, TAD
 		numElems=0;
 	}
 
+	/**
+	 * Metode que afegeix un element+
+	 * @param p element a afegir
+	 */
 	@SuppressWarnings("unchecked")
 	public void afegirElement(T p) throws LlistaPlena {
 		if (numElems>=llista.length) {
@@ -39,11 +43,16 @@ public class LlistaEstatica<T extends Comparable<T>> implements Iterable<T>, TAD
 		}
 	}
 	
+	/**
+	 * Getter de numElems
+	 * @return numElems
+	 */
 	@Override
 	public int numElems() {
 		return numElems;
 	}
 
+	
 	@Override
 	public String toString() {
 		return "LlistaPunts [llista=" + Arrays.toString(llista) + ", numElems=" + numElems + "]";

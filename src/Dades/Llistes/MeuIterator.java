@@ -14,8 +14,6 @@ public class MeuIterator<T extends Comparable<T>> implements Iterator<T> {
 				llista=new LlistaEstatica<T>(ll.numElems()); break;
 			case 2:
 				llista=new LlistaDinamica<T>(); break;
-			case 3: 
-				llista=new LListaJava<T>(); break;
 			default: break;
 		}
 		try{
@@ -26,11 +24,19 @@ public class MeuIterator<T extends Comparable<T>> implements Iterator<T> {
 		posicioIterator=0; 	// ens preparem per a retornar els elements a partir de la posicio 0
 	}
 	
+	/**
+	 * Metode que mira si hi han mes elements
+	 * @return si hi a mes elements
+	 */
 	@Override
 	public boolean hasNext() {
 		return ((posicioIterator<llista.numElems()));
 	}
 
+	/**
+	 * Metode que retorna el seguent element
+	 * @return aux seguent element
+	 */
 	@Override
 	public T next() {
 		try {

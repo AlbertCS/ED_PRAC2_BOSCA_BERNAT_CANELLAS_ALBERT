@@ -20,39 +20,72 @@ public class Matricula {
 		assignatura=null;
 	}
 
+	/**
+	 * Getter anteriorAssignatura
+	 * @return anteriorAssig
+	 */
 	public Matricula getAnteriorAssig() {
 		return anteriorAssig;
 	}
 
+	/**
+	 * Setter anteriorAssignatura
+	 * @param anteriorAssig
+	 */
 	public void setAnteriorAssig(Matricula anteriorAssig) {
 		this.anteriorAssig = anteriorAssig;
 	}
 
+	/**
+	 * Getter anteriorAlumne
+	 * @return anterior alumne
+	 */
 	public Matricula getAnteriorAlumne() {
 		return anteriorAlumne;
 	}
 
+	/**
+	 * Getter alumne
+	 * @return alumne
+	 */
 	public Alumne getAlumne() {
 		return alumne;
 	}
 
+	/**
+	 * Setter alumne
+	 * @param alumne
+	 */
 	public void setAlumne(Alumne alumne) {
 		this.alumne = alumne;
 	}
 
+	/**
+	 * Getter assignatura
+	 * @return
+	 */
 	public Assignatura getAssignatura() {
 		return assignatura;
 	}
 
+	/**
+	 * Setter assignatura
+	 * @param assignatura
+	 */
 	public void setAssignatura(Assignatura assignatura) {
 		this.assignatura = assignatura;
 	}
 
+	/**
+	 * Setter anteriorAlumne
+	 * @param anteriorAlumne
+	 */
 	public void setAnteriorAlumne(Matricula anteriorAlumne) {
 		this.anteriorAlumne = anteriorAlumne;
 	}
 
 	/**
+	 * Getter de codiAssignatura
 	 * @return the assig
 	 */
 	public Integer getCodiAssig() {
@@ -60,6 +93,7 @@ public class Matricula {
 	}
 
 	/**
+	 * Setter codiAssignatura
 	 * @param assig the assig to set
 	 */
 	public void setCodiAssig(Integer assig) {
@@ -67,6 +101,7 @@ public class Matricula {
 	}
 
 	/**
+	 * Getter de codiAlumne
 	 * @return the alum
 	 */
 	public String getCodiAlum() {
@@ -74,24 +109,41 @@ public class Matricula {
 	}
 
 	/**
+	 * Setter de codiAlumne
 	 * @param alum the alum to set
 	 */
 	public void setCodiAlum(String alum) {
 		this.codiAlum = alum;
 	}
 
+	/**
+	 * Getter de seguentAssignatura
+	 * @return seguentAssig
+	 */
 	public Matricula getSeguentAssig() {
 		return seguentAssig;
 	}
 
+	/**
+	 * Setter de seguentAssignatura
+	 * @param seguentAssig
+	 */
 	public void setSeguentAssig(Matricula seguentAssig) {
 		this.seguentAssig = seguentAssig;
 	}
 
+	/**
+	 * Getter de seguentAlumne
+	 * @return seguentAlumne
+	 */
 	public Matricula getSeguentAlumne() {
 		return seguentAlumne;
 	}
 
+	/**
+	 * Setter seguentAlumne
+	 * @param seguentAlumne
+	 */
 	public void setSeguentAlumne(Matricula seguentAlumne) {
 		this.seguentAlumne = seguentAlumne;
 	}
