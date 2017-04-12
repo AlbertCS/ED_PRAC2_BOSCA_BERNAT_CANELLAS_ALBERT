@@ -14,58 +14,114 @@ public class Assignatura implements Comparable<Assignatura>{
 		this.quad=quad;
 	}
 
+	/**
+	 * Getter de matricula
+	 * @return matric
+	 */
 	public Matricula getMatric() {
 		return matric;
 	}
 
+	/**
+	 * Setter de matricula
+	 * @param matric a definir
+	 */
 	public void setMatric(Matricula matric) {
 		this.matric = matric;
 	}
 	
+	/**
+	 * Getter de codiAssignatura
+	 * @return codiAssig
+	 */
 	public Integer getCodiAssig() {
 		return codiAssig;
 	}
 
+	/**
+	 * Setter de codiAssignatura
+	 * @param codiAssig a definir
+	 */
 	public void setCodiAssig(Integer codiAssig) {
 		this.codiAssig = codiAssig;
 	}
 
+	/**
+	 * Getter de nomAssignatura
+	 * @return nomAssig
+	 */
 	public String getNomAssig() {
 		return nomAssig;
 	}
 
+	/**
+	 * Setter de nomAssignatura
+	 * @param nomAssig a definir
+	 */
 	public void setNomAssig(String nomAssig) {
 		this.nomAssig = nomAssig;
 	}
 
+	/**
+	 * Getter de credits de l'assignatura
+	 * @return credits
+	 */
 	public Integer getCredits() {
 		return credits;
 	}
 
+	/**
+	 *  Setter de credits de l'assignatura
+	 * @param credits a definir
+	 */
 	public void setCredits(Integer credits) {
 		this.credits = credits;
 	}
 
+	/**
+	 * Getter de nomAssignatura
+	 * @return nomAssig
+	 */
 	public String getNom() {
 		return nomAssig;
 	}
 
+	/**
+	 * Setter de nomAssignatura
+	 * @param nomAssig a definir
+	 */
 	public void setNom(String nomAssig) {
 		this.nomAssig = nomAssig;
 	}
 
+	/**
+	 * Getter de curs
+	 * @return curs
+	 */
 	public Integer getCurs() {
 		return curs;
 	}
 
+	/**
+	 * Setter de curs
+	 * @param curs a definir
+	 */
 	public void setCurs(Integer curs) {
 		this.curs = curs;
 	}
 
+	/**
+	 * Get quadri
+	 * @return quad
+	 */
 	public Integer getQuad() {
 		return quad;
 	}
 
+	/**
+	 * Setter de quadri
+	 * @param quad a definir
+	 */
 	public void setQuad(Integer quad) {
 		this.quad = quad;
 	}
