@@ -506,8 +506,6 @@ public class Aplicacio {
 	 * @param args args
 	 */
 	public static void main(String[] args) {
-		//Assignatura[] assiglist= new Assignatura [1000];
-		//Alumne[] alumlist=new Alumne [1000];
 		Scanner teclat=new Scanner(System.in);
 		TADLlistaGenerica<Alumne> llistaAlumne=null;
 		TADLlistaGenerica<Assignatura> llistaAssignatura=null;
