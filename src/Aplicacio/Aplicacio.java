@@ -433,11 +433,7 @@ public class Aplicacio {
 				System.out.println("\n\nMenú de consultes:\n\t1. Consulta per Codi del Alumne.\n\t2. Consulta per Codi Assignatura.\n\t3. Alumnes amb X crèdits o menys.\n\t4. Assignatures amb Y alumnes com a mínim.\n\t5. Sortir del menú.");
 				op=teclat.nextLine();
 				if(Character.isDigit(op.charAt(0))) opcioM=Integer.parseInt(op);
-<<<<<<< HEAD
 				else opcioM=10;		//Valor incorrecte
-=======
-				else  opcioM=10; //valor incorrecte
->>>>>>> refs/remotes/origin/master
 			}
 		
 			switch(opcioM){
