@@ -279,6 +279,7 @@ public class Aplicacio {
 	/**
 	 * Metode auxiliar que serveix per preguntar els valors necesaris que te d'introduir l'usuari, i comprova que siguin correctes
 	 * @param opcioM numero de la consulta escollida
+	 * @param teclat variable de tipus scanner
 	 * @return valor introduit per l'alumne correctament
 	 */
 	public static int demanarUsuari(int opcioM, Scanner teclat) {
@@ -419,6 +420,7 @@ public class Aplicacio {
 	 * @param llistaAlumne la llista d'alumnes
 	 * @param llistaAssignatura la llista d'assignatures
 	 * @param multilist  la multillista on trobem les relacions
+	 * @param teclat variable de tipus scanner
 	 */
 	public static void menu(int opcio, TADLlistaGenerica<Alumne> llistaAlumne, TADLlistaGenerica<Assignatura> llistaAssignatura, Multillista<Assignatura, Alumne> multilist, Scanner teclat){
 		int opcioM=1, x;
