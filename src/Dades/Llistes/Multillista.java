@@ -50,9 +50,9 @@ public class Multillista<E extends Comparable<E>,T extends Comparable<T>> {
 			alumAux=(Alumne) llistaAlum.consultarPosicio(i);
 			while(!ok) {
 				i++;
-				alumAux=(Alumne) llistaAlum.consultarPosicio(i);
 				if(alumAux!=null)ok=alum.equals(alumAux.getCodiAlum());
 				else ok=true;
+				alumAux=(Alumne) llistaAlum.consultarPosicio(i);
 			}
 			if(alumAux!=null){
 				//Una vegada ja l'hem trobat
@@ -90,9 +90,9 @@ public class Multillista<E extends Comparable<E>,T extends Comparable<T>> {
 			assigAux=(Assignatura) llistaAssig.consultarPosicio(i);
 			while(!ok) {
 				i++;
-				assigAux=(Assignatura) llistaAssig.consultarPosicio(i);
 				if(assigAux!=null) ok=assig.equals(assigAux.getCodiAssig());
 				else ok=true;
+				assigAux=(Assignatura) llistaAssig.consultarPosicio(i);
 			}
 			if(assigAux!=null){
 				//Una vegada ja l'hem trobat
