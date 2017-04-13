@@ -17,8 +17,8 @@ public class MeuIterator<T extends Comparable<T>> implements Iterator<T> {
 	
 	/**
 	 * Constructor de la classe
-	 * @param ll
-	 * @param tipus
+	 * @param ll Llista que necessita el iterator
+	 * @param tipus tipus de implementació de la llista
 	 */
 	public MeuIterator(TADLlistaGenerica<T> ll, int tipus) {
 		switch(tipus){

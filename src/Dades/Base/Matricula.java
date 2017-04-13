@@ -18,8 +18,8 @@ public class Matricula {
 	/**
 	 * Classe constructora
 	 * 
-	 * @param assig
-	 * @param alum
+	 * @param assig Codi de l'Assignatura
+	 * @param alum Codi del Alumne
 	 */
 	public Matricula(Integer assig, String alum) {
 		this.codiAssig=assig;
