@@ -7,6 +7,7 @@ import java.util.*;
 
 import Exceptions.*;
 import Dades.Llistes.*;
+
 /**
  * Class per testejar el programa
  * 	 
@@ -55,7 +56,6 @@ public class Aplicacio {
 	 * @param llista la llista implementada
 	 * @return llista inicialitzada
 	 */
-
 	public static TADLlistaGenerica<Alumne> implementacioLlistaAlum(int opcio, int mida, TADLlistaGenerica<Alumne> llista) {
 		switch(opcio){
 			case 1:
@@ -89,7 +89,6 @@ public class Aplicacio {
 	 * @param llistaAlumne llista d'alumnes
 	 * @param llistaAssignatura llista d'assignatures
 	 */
-
 	public static void cargarLlistes(String nomFitxer, TADLlistaGenerica<Alumne> llistaAlumne, TADLlistaGenerica<Assignatura> llistaAssignatura) {
 		
 		try {
@@ -120,6 +119,7 @@ public class Aplicacio {
 				System.err.println("Error de tipus IOException.");
 			}
 	}
+	
 	/**
 	 * Metode per inicialitzar tots els nodes realcio de la multillista
 	 * @param nomFitxer nom del fitxer d'on es llegirant les dades
@@ -128,32 +128,32 @@ public class Aplicacio {
 	public static void cargarMultilist(String nomFitxer, Multillista<Assignatura, Alumne> multilist) {
 		
 		try {
-			//Variables
-			BufferedReader f=new BufferedReader(new FileReader(nomFitxer));
-			String frase, codiAlum;
-			Integer codiAssig;
+		//Variables
+		BufferedReader f=new BufferedReader(new FileReader(nomFitxer));
+		String frase, codiAlum;
+		Integer codiAssig;
 			
-			frase=f.readLine();
-			while(frase!=null){ 
-				StringTokenizer st = new StringTokenizer(frase, ";");
+		frase=f.readLine();
+		while(frase!=null){ 
+			StringTokenizer st = new StringTokenizer(frase, ";");
 				
-				codiAssig=Integer.parseInt(st.nextToken());
-				st.nextToken();
-				st.nextToken();
-				st.nextToken();
-				st.nextToken();
-				codiAlum=st.nextToken();
-				st.nextToken();
+			codiAssig=Integer.parseInt(st.nextToken());
+			st.nextToken();
+			st.nextToken();
+			st.nextToken();
+			st.nextToken();
+			codiAlum=st.nextToken();
+			st.nextToken();
 				
-				multilist.afegirMatricula(new Matricula(codiAssig, codiAlum));
-				
-				frase = f.readLine();
-			}
+			multilist.afegirMatricula(new Matricula(codiAssig, codiAlum));
 			
-			f.close();
-			}catch (IOException e) {
-				System.err.println("Error de tipus IOException.");
-			}
+			frase = f.readLine();
+		}
+		
+		f.close();
+		}catch (IOException e) {
+			System.err.println("Error de tipus IOException.");
+		}
 	}
 	
 	/**
@@ -191,7 +191,7 @@ public class Aplicacio {
 		int totalCredits=0;		
 		
 		llistaAss=multilist.consultarMatriculaAlum(codeAlum, tipus);
-		if(llistaAss==null) System.out.println("El alumne no es troba matriculat");
+		if(llistaAss==null) System.out.println("\nEl alumne no es troba matriculat en cap assignatura de la URV.");
 		else{
 			System.out.println("");			//Salt de linea
 			for(int i=0; i<llistaAss.numElems(); i++){
@@ -214,7 +214,7 @@ public class Aplicacio {
 		int i;
 		
 		llistaAlu=multilist.consultarMatriculaAssig(codeAss, tipus);
-		if(llistaAlu==null) System.out.println("No hi ha cap alumne matriculat en aquesta assignatura");
+		if(llistaAlu==null) System.out.println("\nNo existeix aquesta assignatura o no té cap alumne matriculat.");
 		else{
 			System.out.println("");			//Salt de linea
 			for(i=0; i<llistaAlu.numElems(); i++){
@@ -232,7 +232,6 @@ public class Aplicacio {
 	 * @param multilist la multillista on trobem les relacions
 	 * @throws LlistaBuida excepcio si la llista esta buida
 	 */
-
 	public static void alumCredits(int creditsMin, int tipus, TADLlistaGenerica<Alumne> llistaAlumne, Multillista<Assignatura, Alumne> multilist) throws LlistaBuida{
 		TADLlistaGenerica<Assignatura> llistaAss;
 		int totalCredits=0, num=1;		
@@ -262,7 +261,6 @@ public class Aplicacio {
 	 * @param multilist la multillista on trobem les relacions
 	 * @throws LlistaBuida excepcio si la llista esta buida
 	 */
-
 	public static void assigAlums(int estudiantsMin, int tipus, TADLlistaGenerica<Assignatura> llistaAssignatura, Multillista<Assignatura, Alumne> multilist) throws LlistaBuida{
 		TADLlistaGenerica<Alumne> llistaAlu;
 		int num=1;
@@ -271,7 +269,7 @@ public class Aplicacio {
 		for(int i=0; i<llistaAssignatura.numElems(); i++){
 			llistaAlu=multilist.consultarMatriculaAssig(llistaAssignatura.consultarPosicio(i).getCodiAssig(), tipus);
 			if(llistaAlu!=null){
-				if(llistaAlu.numElems()<=estudiantsMin){
+				if(llistaAlu.numElems()>=estudiantsMin){
 					System.out.println("\t"+num+". "+llistaAssignatura.consultarPosicio(i).toString()+" i estudiants totals: "+llistaAlu.numElems());
 					num++;
 				}
@@ -285,72 +283,136 @@ public class Aplicacio {
 	 * @param opcioM numero de la consulta escollida
 	 * @return valor introduit per l'alumne correctament
 	 */
-	public static int demanarUsuari(int opcioM) {
-		Scanner teclat=new Scanner(System.in);
+	public static int demanarUsuari(int opcioM, Scanner teclat) {
 		int x=0, i;
 		String y="";
 		boolean ok=true;
 		switch(opcioM){
-		case 2:
-			//consultar per ass
-			while(ok){
+			case 2:
+				//consultar per assignatura
+				boolean bien=false;
+				int contador=0;
+				Character a='a', b='b';
+				String codiCorrecte="17234";
+				
 				System.out.println("Escriu el codi de la assignatura a consultar: ");
 				y=teclat.nextLine();
 				i=0;
-				while((i<y.length())&&(ok)){
-					if(Character.isDigit(y.charAt(i))){
-						ok=true;
+				
+				while(ok){
+					//Comprovem que els 5 primers digits es correspongen amb 17234
+					while((!bien) && (i<5)) {
+						if(i<y.length()) a=y.charAt(i);
+						b=codiCorrecte.charAt(i);
+						if(a.equals(b)) contador++;
+						i++;
 					}
-					else ok=false;
-					i++;
-				}
-				if(i==y.length()) ok=false;
-				else{ok=true; System.out.println("Codi incorrecte.");}
-			}
-			x=Integer.parseInt(y);
-			break;
-		case 3: 
-			//alumnes amb min credits
-			while(ok){
-				System.out.println("Escriu el numero de credits minims: ");
-				y=teclat.nextLine();
-				i=0;
-				while((i<y.length())&&(ok)){
-					if(Character.isDigit(y.charAt(i))){
-						ok=true;
+					//Si es correcte bien=true;		
+					if(i==contador) bien=true;
+					else bien=false;
+					//Comprovem que la resta de caracters siguen digits
+					while((i<y.length())&&(ok)){
+						if(Character.isDigit(y.charAt(i)))	i++;
+						else ok=false;
 					}
-					else ok=false;
-					i++;
-				}
-				if(i==y.length()) ok=false;
-				else{ok=true; System.out.println("Numero incorrecte.");}
-			}
-			x=Integer.parseInt(y);
-			break;
-		case 4:
-			//assig per min alums
-			while(ok){
-				System.out.println("Escriu el numero minim d'alumnes: ");
-				y=teclat.nextLine();
-				i=0;
-				while((i<y.length())&&(ok)){
-					if(Character.isDigit(y.charAt(i))){
-						ok=true;
+					//Si es cumpleix que els 5 primers nombres son 17234 i a més té altres 3 dígits considerarem el codi correcte i surtira del while
+					if((i==8) && (bien)) ok=false;
+					else {
+						i=0; contador=0;
+						ok=true; bien=false;
+						System.out.println("\nCodi incorrecte. Escriu el codi de la assignatura a consultar: ");
+						y=teclat.nextLine();
 					}
-					else ok=false;
-					i++;
 				}
-				if(i==y.length()) ok=false;
-				else{ok=true; System.out.println("Numero incorrecte.");}
-			
 				x=Integer.parseInt(y);
-			}
-			break;
-		default:
-			break;
+				break;
+			case 3: 
+				//alumnes amb min credits
+				System.out.println("\nEscriu el número de credits màxims que pot tenir un alumne: ");
+				y=teclat.nextLine();
+				i=0;
+				
+				while(ok){
+					while((i<y.length())&&(ok)){
+						if(Character.isDigit(y.charAt(i))) i++;
+						else ok=false;
+					}
+					if(i==y.length()) ok=false;
+					else {
+						i=0;
+						ok=true;
+						System.out.println("Número incorrecte. Escriu el número de credits màxims que pot tenir un alumne: ");
+						y=teclat.nextLine();
+					}
+				}
+				x=Integer.parseInt(y);
+				break;
+			case 4:
+				//assig per min alums
+				System.out.println("Escriu el número mínim d'alumnes: ");
+				y=teclat.nextLine();
+				i=0;
+				
+				while(ok){
+					while((i<y.length())&&(ok)){
+						if(Character.isDigit(y.charAt(i))) i++;
+						else ok=false;
+					}
+					if(i==y.length()) ok=false;
+					else {
+						i=0;
+						ok=true;
+						System.out.println("Número incorrecte. Escriu el número mínim d'alumnes: ");
+						y=teclat.nextLine();
+					}
+				}
+				x=Integer.parseInt(y);
+				break;
+			default:
+				break;
 		}
-		teclat.close();
 		return x;
+	}
+	
+	/**
+	 * Metode que comprova que el codi del alumne sigui correcte
+	 * @param teclat variable de tipus Scanner
+	 * @return codi retorna el nom del alumne
+	 */
+	public static String codiAlumCorrecte(Scanner teclat) {
+		boolean opcioOk=true, bien=false, ok=true;
+		String codi, codiCorrecte="URV_0";
+		int i=0, contador=0;
+		Character a='a', b='b';
+			
+		System.out.println("\nEscriu el codi del alumne a consultar: ");
+		codi=teclat.nextLine();
+		
+		while(opcioOk) {
+			while((!bien) && (i<5)) {
+				if(i<codi.length()) a=codi.charAt(i);
+				b=codiCorrecte.charAt(i);
+				if(a.equals(b)) contador++;
+				i++;
+			}
+			
+			if(i==contador) bien=true;
+			else bien=false;
+			
+			while((i<codi.length())&&(ok)){
+				if(Character.isDigit(codi.charAt(i)))	i++;
+				else ok=false;
+			}
+			
+			if((i==8) && (bien)) opcioOk=false;
+			else {
+				i=0; contador=0;
+				ok=true; bien=false;
+				System.out.println("\nEl codi del alumne es incorrecte. Escriu el codi del alumne a consultar: ");
+				codi=teclat.nextLine();
+			}
+		}
+		return codi;
 	}
 	
 	/**
@@ -360,21 +422,23 @@ public class Aplicacio {
 	 * @param llistaAssignatura la llista d'assignatures
 	 * @param multilist  la multillista on trobem les relacions
 	 */
-	public static void menu(int opcio, TADLlistaGenerica<Alumne> llistaAlumne, TADLlistaGenerica<Assignatura> llistaAssignatura, Multillista<Assignatura, Alumne> multilist){
-		Scanner teclat=new Scanner(System.in);
-		int opcioM=0, x;
+	public static void menu(int opcio, TADLlistaGenerica<Alumne> llistaAlumne, TADLlistaGenerica<Assignatura> llistaAssignatura, Multillista<Assignatura, Alumne> multilist, Scanner teclat){
+		int opcioM=1, x;
 		long tempsi=0, tempsf=0;
 		String op, codeAlum;
+		boolean ok=true;
 		
-		System.out.println("\n\nMenu de consultes:\n\t1. Consulta per Codi del Alumne\n\t2. Consulta per Codi Assignatura\n\t3. Alumnes amb x credits o menys\n\t4. Assignatures amb x alumnes o menys");
-		op=teclat.nextLine();
-		if(Character.isDigit(op.charAt(0))) opcioM=Integer.parseInt(op);
+		while(ok) {
+			if((opcioM>0)&&(opcioM<5)) {
+				System.out.println("\n\nMenú de consultes:\n\t1. Consulta per Codi del Alumne.\n\t2. Consulta per Codi Assignatura.\n\t3. Alumnes amb X crèdits o menys.\n\t4. Assignatures amb Y alumnes com a mínim.\n\t5. Sortir del menú.");
+				op=teclat.nextLine();
+				if(Character.isDigit(op.charAt(0))) opcioM=Integer.parseInt(op);
+			}
 		
 			switch(opcioM){
 				case 1: 
 					try {
-						System.out.println("Escriu el codi del alumne a consultar: ");
-						codeAlum=teclat.nextLine();
+						codeAlum=codiAlumCorrecte(teclat);
 						tempsi=System.nanoTime();
 						consultaPerCodiAl(codeAlum, opcio, multilist);
 						tempsf=System.nanoTime();
@@ -385,7 +449,7 @@ public class Aplicacio {
 					break;
 				case 2: 
 					try {
-						x=demanarUsuari(opcioM);
+						x=demanarUsuari(opcioM, teclat);
 						tempsi=System.nanoTime();
 						consultaPerAss(x, opcio, multilist);
 						tempsf=System.nanoTime();
@@ -396,7 +460,7 @@ public class Aplicacio {
 					break;
 				case 3: 
 					try {
-						x=demanarUsuari(opcioM);
+						x=demanarUsuari(opcioM, teclat);
 						tempsi=System.nanoTime();
 						alumCredits(x, opcio, llistaAlumne, multilist);
 						tempsf=System.nanoTime();
@@ -407,7 +471,7 @@ public class Aplicacio {
 					break;
 				case 4:
 					try {
-						x=demanarUsuari(opcioM);
+						x=demanarUsuari(opcioM, teclat);
 						tempsi=System.nanoTime();
 						assigAlums(x, opcio, llistaAssignatura, multilist);
 						tempsf=System.nanoTime();
@@ -416,12 +480,17 @@ public class Aplicacio {
 						e.printStackTrace();
 					}
 					break;
+				case 5:
+					ok=false;
+					System.out.println("\nHeu sortit del menú.");
+					break;
 				default:
-					System.out.println("\nValor incorrecte.\n\tMenu de consultes:\n\t1. Consulta per Codi del Alumne\n\t2. Consulta per Codi Assignatura\n\t3. Alumnes amb x credits o menys\n\t4. Assignatures amb x alumnes o menys");
+					System.out.println("\nValor incorrecte.\n\tMenú de consultes:\n\t1. Consulta per Codi del Alumne.\n\t2. Consulta per Codi Assignatura.\n\t3. Alumnes amb X crèdits o menys.\n\t4. Assignatures amb Y alumnes com a mínim.\n\t5. Sortir del menú.");
 					op=teclat.nextLine();
-					opcioM=Integer.parseInt(op); break;
+					if(Character.isDigit(op.charAt(0))) opcioM=Integer.parseInt(op);
+					break;
 			}
-			teclat.close();
+		}
 	}
 
 	/**
@@ -440,10 +509,10 @@ public class Aplicacio {
 		long tempsi, tempsf;
 		
 		//Tipus de implementació
-		opcio=tipusImplementacio(teclat);
+		opcio=3;//=tipusImplementacio(teclat);
 		
 		//Nom fitxer
-		nomFitxer=nomCorrecte(teclat);
+		//nomFitxer=nomCorrecte(teclat);
 		
 		//Operacions
 		tempsi=System.nanoTime();
@@ -453,10 +522,12 @@ public class Aplicacio {
 		multilist=new Multillista<Assignatura, Alumne>(llistaAssignatura, llistaAlumne, opcio);
 		cargarMultilist(nomFitxer, multilist);
 		tempsf=System.nanoTime();
-		System.out.println("\tLa carrega de les dades ha tardat: "+(tempsf-tempsi)+"ns.");
+		System.out.println("\nLa carrega de les dades ha tardat: "+(tempsf-tempsi)+"ns.");
 		
-		menu(opcio, llistaAlumne, llistaAssignatura, multilist);
+		menu(opcio, llistaAlumne, llistaAssignatura, multilist, teclat);
 					
-		System.out.println("Les Dades s'han tractat correctament.\n");		
+		System.out.println("\nEl programa ha finalitzat.\n");
+		
+		teclat.close();
 	}
 }
