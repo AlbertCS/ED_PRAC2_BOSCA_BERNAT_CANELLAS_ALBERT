@@ -14,6 +14,7 @@ import Exceptions.LlistaPlena;
  */
 public class LlistaJava<T extends Comparable<T>> implements Iterable<T>, TADLlistaGenerica<T>{
 
+
 	private int  numElems;
 	ArrayList<T> llista;
 		
@@ -22,6 +23,10 @@ public class LlistaJava<T extends Comparable<T>> implements Iterable<T>, TADLlis
 		numElems=0;
 	}
 	
+	/**
+	 * Metode que afegeix un element
+	 * @param p element a afegir
+	 */
 	@Override
 	public void afegirElement(T p) throws LlistaPlena {
 		if(numElems==0){
@@ -54,13 +59,23 @@ public class LlistaJava<T extends Comparable<T>> implements Iterable<T>, TADLlis
 				numElems++;
 			}
 		}
+
 	}
 
+	/**
+	 * Metode per consultar la posicio
+	 * @param i posicio a consultar
+	 */
 	@Override
 	public T consultarPosicio(int i) throws LlistaBuida {
-		return llista.get(i);
+		if (i<numElems) return llista.get(i);
+		else return (null);
 	}
 
+	/**
+	 * Getter de numElems
+	 * @return numElems
+	 */
 	@Override
 	public int numElems() {
 		return numElems;

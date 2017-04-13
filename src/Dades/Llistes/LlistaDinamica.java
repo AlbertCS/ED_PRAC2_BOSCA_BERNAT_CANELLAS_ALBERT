@@ -13,6 +13,10 @@ public class LlistaDinamica<T extends Comparable<T>> implements Iterable<T>, TAD
 		elem=null;
 	}
 
+	/**
+	 * Metode que afegeix un nou element a la llista
+	 * @param p element a afegir
+	 */
 	public void afegirElement(T p) throws LlistaPlena {
 		Node<T> nou=new Node<T>(p, null, null);
 		if(numElems==0) {
@@ -58,29 +62,30 @@ public class LlistaDinamica<T extends Comparable<T>> implements Iterable<T>, TAD
 	}
 
 	/**
-	 * @return the primer
+	 * Getter de l'element
+	 * @return elem
 	 */
 	public Node<T> getElem() {
 		return elem;
 	}
 
 	/**
-	 * @param primer the primer to set
+	 * Setter de l'element
+	 * @param elem a canviar
 	 */
 	public void setElem(Node<T> elem) {
 		this.elem = elem;
 	}
 
 	/**
-	 * @return the numElem
+	 * Getter de numElems
+	 * @return numElems
 	 */
 	public int numElems() {
 		return numElems;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+	
 	@Override
 	public String toString() {
 		return "LlistaDinamica [elem=" + elem + "]";
@@ -90,12 +95,14 @@ public class LlistaDinamica<T extends Comparable<T>> implements Iterable<T>, TAD
 	public T consultarPosicio(int num) throws LlistaBuida {
 		Node<T> aux;
 		aux=elem;
+		int i;
 		if(num==numElems-1) return aux.getX();
 		else {
-			for(int i=numElems-1; i>num; i--){
-			aux=aux.getAnterior();
+			for(i=numElems-1; i>num; i--){
+				aux=aux.getAnterior();
 			}
-			return aux.getX();	
+			if(aux!=null) return aux.getX();
+			else return null;
 		}
 	}
 

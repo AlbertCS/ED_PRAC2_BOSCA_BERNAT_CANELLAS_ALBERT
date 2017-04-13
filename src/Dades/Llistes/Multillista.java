@@ -33,6 +33,7 @@ public class Multillista<E extends Comparable<E>,T extends Comparable<T>> {
 		int i=0;
 		Alumne alumAux=null;
 		Matricula matAux=null;
+		boolean ok=false; //boolea per controlar quan es null
 		TADLlistaGenerica<Assignatura> llistaAssigAux=null;
 		switch(tipus){
 			case 1:
@@ -43,23 +44,29 @@ public class Multillista<E extends Comparable<E>,T extends Comparable<T>> {
 				llistaAssigAux=new LlistaJava<Assignatura>(); break;
 			default: break;
 		}
+		
 		try {
 			//Busquem el alumne a la llista
 			alumAux=(Alumne) llistaAlum.consultarPosicio(i);
-			while(!alum.equals(alumAux.getCodiAlum())) {
+			while(!ok) {
 				i++;
 				alumAux=(Alumne) llistaAlum.consultarPosicio(i);
+				if(alumAux!=null)ok=alum.equals(alumAux.getCodiAlum());
+				else ok=true;
 			}
-			//Una vegada ja l'hem trobat
-			matAux=alumAux.getMatric();
-			while(matAux!=null) {
-				llistaAssigAux.afegirElement(matAux.getAssignatura());
-				matAux=matAux.getSeguentAssig();
-			}
+			if(alumAux!=null){
+				//Una vegada ja l'hem trobat
+				matAux=alumAux.getMatric();
+				while(matAux!=null) {
+					llistaAssigAux.afegirElement(matAux.getAssignatura());
+					matAux=matAux.getSeguentAssig();
+				}
+			}	
 		} catch (LlistaPlena|LlistaBuida e) {
 			e.printStackTrace();
 		}
 		//Ojo que si no existeix la relació entre assignatura i alumne retornara null
+		if(llistaAssigAux.numElems()==0) return null;
 		return llistaAssigAux;
 	}
 	
@@ -67,6 +74,7 @@ public class Multillista<E extends Comparable<E>,T extends Comparable<T>> {
 		int i=0;
 		Assignatura assigAux=null;
 		Matricula matAux=null;
+		boolean ok=false; //boolea per controlar quan es null
 		TADLlistaGenerica<Alumne> llistaAlumAux=null;
 		switch(tipus){
 			case 1:
@@ -80,20 +88,25 @@ public class Multillista<E extends Comparable<E>,T extends Comparable<T>> {
 		try {
 			//Busquem la assignatura a la llista
 			assigAux=(Assignatura) llistaAssig.consultarPosicio(i);
-			while(!assig.equals(assigAux.getCodiAssig())) {
+			while(!ok) {
 				i++;
 				assigAux=(Assignatura) llistaAssig.consultarPosicio(i);
+				if(assigAux!=null) ok=assig.equals(assigAux.getCodiAssig());
+				else ok=true;
 			}
-			//Una vegada ja l'hem trobat
-			matAux=assigAux.getMatric();
-			while(matAux!=null) {
-				llistaAlumAux.afegirElement(matAux.getAlumne());
-				matAux=matAux.getSeguentAlumne();
+			if(assigAux!=null){
+				//Una vegada ja l'hem trobat
+				matAux=assigAux.getMatric();
+				while(matAux!=null) {
+					llistaAlumAux.afegirElement(matAux.getAlumne());
+					matAux=matAux.getSeguentAlumne();
+				}
 			}
 		} catch (LlistaPlena|LlistaBuida e) {
 			e.printStackTrace();
 		}
 		//Ojo que si no existeix la relació entre assignatura i alumne retornara null
+		if(llistaAlumAux.numElems()==0) return null;
 		return llistaAlumAux;
 	}
 	
