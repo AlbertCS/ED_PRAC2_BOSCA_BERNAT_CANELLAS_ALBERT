@@ -18,6 +18,9 @@ public class LlistaJava<T extends Comparable<T>> implements Iterable<T>, TADLlis
 	private int  numElems;
 	ArrayList<T> llista;
 		
+	/**
+	 * Constructor de la classe
+	 */
 	public LlistaJava() {
 		llista=new ArrayList<T>();
 		numElems=0;

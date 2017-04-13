@@ -4,10 +4,22 @@ import java.util.Iterator;
 
 import Exceptions.*;
 
+/**
+ * @author Bernat Bosca Candel
+ * 		   Albert Cañellas Sole
+ * 
+ * @param <T> Tipus d'element
+ * 
+ */
 public class MeuIterator<T extends Comparable<T>> implements Iterator<T> {
 	private TADLlistaGenerica<T> llista;	//nou atribut que ens guardarà una copia de la llista actual de elements
 	private int posicioIterator;
 	
+	/**
+	 * Constructor de la classe
+	 * @param ll
+	 * @param tipus
+	 */
 	public MeuIterator(TADLlistaGenerica<T> ll, int tipus) {
 		switch(tipus){
 			case 1:

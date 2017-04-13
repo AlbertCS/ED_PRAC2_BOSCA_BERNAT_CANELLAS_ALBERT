@@ -5,10 +5,22 @@ import java.util.Iterator;
 
 import Exceptions.*;
 
+/**
+ * @author Bernat Bosca Candel
+ * 		   Albert Cañellas Sole
+ * 
+ * @param <T> Tipus d'element
+ * 
+ */
 public class LlistaEstatica<T extends Comparable<T>> implements Iterable<T>, TADLlistaGenerica<T> {
 	private T[] llista;
 	private int numElems;
 	
+	/**
+	 * Constructor de la classe
+	 *
+	 * @param dim dimenció inicial de la llista
+	 */
 	@SuppressWarnings("unchecked")
 	public LlistaEstatica(int dim) {
 		llista=(T[])new Comparable[dim];

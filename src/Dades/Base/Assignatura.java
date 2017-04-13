@@ -1,11 +1,25 @@
 package Dades.Base;
 
+/**
+ * @author Bernat Bosca Candel
+ * 		   Albert Cañellas Sole
+ * 
+ */
 public class Assignatura implements Comparable<Assignatura>{
 	private Integer codiAssig;
 	private String nomAssig;
 	private Integer credits, curs,  quad;
 	private Matricula matric;
 	
+	/**
+	 * Constructor de la classe
+	 * 
+	 * @param codiAssig Codi de la Assignatura
+	 * @param nomAssig Nom de la Assignatura
+	 * @param credits Credits
+	 * @param curs Curs
+	 * @param quad Quadrimestre
+	 */
 	public Assignatura(Integer codiAssig, String nomAssig, Integer credits, Integer curs, Integer quad){
 		this.codiAssig=codiAssig;
 		this.nomAssig=nomAssig;

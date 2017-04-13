@@ -67,6 +67,13 @@ public class Aplicacio {
 		return llista;
 	}
 	
+	/**
+	 * Metode que crea el tipus de llista corresponent
+	 * @param opcio implementacio escollida
+	 * @param mida dimensio de la llista
+	 * @param llista la llista implementada
+	 * @return llista inicialitzada
+	 */
 	public static TADLlistaGenerica<Assignatura> implementacioLlistaAssig(int opcio, int mida, TADLlistaGenerica<Assignatura> llista) {
 		switch(opcio){
 			case 1:
@@ -510,10 +517,10 @@ public class Aplicacio {
 		long tempsi, tempsf;
 		
 		//Tipus de implementació
-		opcio=3;//=tipusImplementacio(teclat);
+		opcio=tipusImplementacio(teclat);
 		
 		//Nom fitxer
-		//nomFitxer=nomCorrecte(teclat);
+		nomFitxer=nomCorrecte(teclat);
 		
 		//Operacions
 		tempsi=System.nanoTime();

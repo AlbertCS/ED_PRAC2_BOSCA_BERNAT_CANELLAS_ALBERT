@@ -1,10 +1,21 @@
 package Dades.Base;
 
+/**
+ * @author Bernat Bosca Candel
+ * 		   Albert Cañellas Sole
+ * 
+ */
 public class Alumne implements Comparable<Alumne>{
 	private String codiAlum;
 	private String nomAlum;
 	private Matricula matric;
 	
+	/**
+	 * Constructor de la classe
+	 * 
+	 * @param codiAlum Codi del Alumne
+	 * @param nomAlum Nom del Alumne
+	 */
 	public Alumne(String codiAlum, String nomAlum) {
 		this.codiAlum=codiAlum;
 		this.nomAlum=nomAlum;
