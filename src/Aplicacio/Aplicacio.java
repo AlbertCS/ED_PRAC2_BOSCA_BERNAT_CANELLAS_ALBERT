@@ -1,10 +1,8 @@
 package Aplicacio;
+
 import Dades.Base.*;
-
-
 import java.io.*;
 import java.util.*;
-
 import Exceptions.*;
 import Dades.Llistes.*;
 
@@ -281,6 +279,7 @@ public class Aplicacio {
 	/**
 	 * Metode auxiliar que serveix per preguntar els valors necesaris que te d'introduir l'usuari, i comprova que siguin correctes
 	 * @param opcioM numero de la consulta escollida
+	 * @param teclat variable de tipus scanner
 	 * @return valor introduit per l'alumne correctament
 	 */
 	public static int demanarUsuari(int opcioM, Scanner teclat) {
@@ -421,6 +420,7 @@ public class Aplicacio {
 	 * @param llistaAlumne la llista d'alumnes
 	 * @param llistaAssignatura la llista d'assignatures
 	 * @param multilist  la multillista on trobem les relacions
+	 * @param teclat variable de tipus scanner
 	 */
 	public static void menu(int opcio, TADLlistaGenerica<Alumne> llistaAlumne, TADLlistaGenerica<Assignatura> llistaAssignatura, Multillista<Assignatura, Alumne> multilist, Scanner teclat){
 		int opcioM=1, x;
@@ -433,7 +433,11 @@ public class Aplicacio {
 				System.out.println("\n\nMenú de consultes:\n\t1. Consulta per Codi del Alumne.\n\t2. Consulta per Codi Assignatura.\n\t3. Alumnes amb X crèdits o menys.\n\t4. Assignatures amb Y alumnes com a mínim.\n\t5. Sortir del menú.");
 				op=teclat.nextLine();
 				if(Character.isDigit(op.charAt(0))) opcioM=Integer.parseInt(op);
+<<<<<<< HEAD
 				else opcioM=10;		//Valor incorrecte
+=======
+				else  opcioM=10; //valor incorrecte
+>>>>>>> refs/remotes/origin/master
 			}
 		
 			switch(opcioM){
