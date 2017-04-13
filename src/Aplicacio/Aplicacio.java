@@ -1,10 +1,8 @@
 package Aplicacio;
+
 import Dades.Base.*;
-
-
 import java.io.*;
 import java.util.*;
-
 import Exceptions.*;
 import Dades.Llistes.*;
 /**
