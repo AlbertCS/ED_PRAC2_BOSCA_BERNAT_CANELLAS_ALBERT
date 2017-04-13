@@ -68,7 +68,8 @@ public class LlistaJava<T extends Comparable<T>> implements Iterable<T>, TADLlis
 	 */
 	@Override
 	public T consultarPosicio(int i) throws LlistaBuida {
-		return llista.get(i);
+		if (i<numElems) return llista.get(i);
+		else return (null);
 	}
 
 	/**

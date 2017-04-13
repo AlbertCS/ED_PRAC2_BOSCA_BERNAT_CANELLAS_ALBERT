@@ -95,12 +95,14 @@ public class LlistaDinamica<T extends Comparable<T>> implements Iterable<T>, TAD
 	public T consultarPosicio(int num) throws LlistaBuida {
 		Node<T> aux;
 		aux=elem;
+		int i;
 		if(num==numElems-1) return aux.getX();
 		else {
-			for(int i=numElems-1; i>num; i--){
-			aux=aux.getAnterior();
+			for(i=numElems-1; i>num; i--){
+				aux=aux.getAnterior();
 			}
-			return aux.getX();	
+			if(aux!=null) return aux.getX();
+			else return null;
 		}
 	}
 
