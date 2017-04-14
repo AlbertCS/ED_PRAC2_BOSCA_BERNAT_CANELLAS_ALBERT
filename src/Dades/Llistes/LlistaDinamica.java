@@ -3,12 +3,22 @@ package Dades.Llistes;
 import java.util.*;
 import Exceptions.*;
 
+/**
+ * @author Bernat Bosca Candel
+ * 		   Albert Cañellas Sole
+ * 
+ * @param <T> Tipus d'element
+ * 
+ */
 public class LlistaDinamica<T extends Comparable<T>> implements Iterable<T>, TADLlistaGenerica<T> {
 	
 	private Node<T> elem;
 	private int numElems=0;
 	
 	
+	/**
+	 * Constructor de la classe
+	 */
 	public LlistaDinamica() {
 		elem=null;
 	}

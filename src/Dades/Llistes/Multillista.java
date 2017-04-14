@@ -2,10 +2,27 @@ package Dades.Llistes;
 import Exceptions.*;
 import Dades.Base.*;
 
+/**
+ * E i T són per al cas de voler fer una multillista en un altre tipus de variables
+ * 
+ * @author Bernat Bosca Candel
+ * 		   Albert Cañellas Sole
+ * 
+ * @param <T> En aquest cas serà Assignatura
+ * @param <E> En aquest cas serà Alumne
+ * 
+ */
 public class Multillista<E extends Comparable<E>,T extends Comparable<T>> {
 	private TADLlistaGenerica<E> llistaAssig;
 	private TADLlistaGenerica<T> llistaAlum;
 	
+	/**
+	 * Constructor de la classe
+	 * 
+	 * @param llistaAssig Llista de Assignatures
+	 * @param llistaAlum Llista de Alumnes
+	 * @param tipus tipus de implementació de la llista
+	 */
 	public Multillista(TADLlistaGenerica<E> llistaAssig, TADLlistaGenerica<T> llistaAlum, int tipus) {
 		switch(tipus){
 			case 1:
@@ -29,6 +46,13 @@ public class Multillista<E extends Comparable<E>,T extends Comparable<T>> {
 		}
 	}
 	
+	/**
+	 * Aquest mètode crea i retorna una llista de assignatures que es corresponen que cursa l'alumne indicat amb el seu codi
+	 * 
+	 * @param alum Codi del Alumne
+	 * @param tipus tipus de implementació que ha de tenir la llista
+	 * @return retorna una llista de assignatures
+	 */
 	public TADLlistaGenerica<Assignatura> consultarMatriculaAlum (String alum, int tipus) {
 		int i=0;
 		Alumne alumAux=null;
@@ -47,12 +71,11 @@ public class Multillista<E extends Comparable<E>,T extends Comparable<T>> {
 		
 		try {
 			//Busquem el alumne a la llista
-			alumAux=(Alumne) llistaAlum.consultarPosicio(i);
 			while(!ok) {
-				i++;
+				alumAux=(Alumne) llistaAlum.consultarPosicio(i);
 				if(alumAux!=null)ok=alum.equals(alumAux.getCodiAlum());
 				else ok=true;
-				alumAux=(Alumne) llistaAlum.consultarPosicio(i);
+				i++;
 			}
 			if(alumAux!=null){
 				//Una vegada ja l'hem trobat
@@ -70,6 +93,13 @@ public class Multillista<E extends Comparable<E>,T extends Comparable<T>> {
 		return llistaAssigAux;
 	}
 	
+	/**
+	 * Aquest mètode crea i retorna una llista de alumnes que cursen la assignatura indica pel codi
+	 * 
+	 * @param assig Codi de la Assignatura
+	 * @param tipus tipus de implementació que ha de tenir la llista
+	 * @return retorna una llista de Alumnes
+	 */
 	public TADLlistaGenerica<Alumne> consultarMatriculaAssig (Integer assig, int tipus) {
 		int i=0;
 		Assignatura assigAux=null;
@@ -87,12 +117,11 @@ public class Multillista<E extends Comparable<E>,T extends Comparable<T>> {
 		}
 		try {
 			//Busquem la assignatura a la llista
-			assigAux=(Assignatura) llistaAssig.consultarPosicio(i);
 			while(!ok) {
-				i++;
+				assigAux=(Assignatura) llistaAssig.consultarPosicio(i);
 				if(assigAux!=null) ok=assig.equals(assigAux.getCodiAssig());
 				else ok=true;
-				assigAux=(Assignatura) llistaAssig.consultarPosicio(i);
+				i++;
 			}
 			if(assigAux!=null){
 				//Una vegada ja l'hem trobat
@@ -110,6 +139,11 @@ public class Multillista<E extends Comparable<E>,T extends Comparable<T>> {
 		return llistaAlumAux;
 	}
 	
+	/**
+	 * Aquest mètode crea les relacions de la multillista
+	 * 
+	 * @param newMat Matricula a afegir
+	 */
 	public void afegirMatricula (Matricula newMat) {
 		int i=0;
 		Assignatura assigAux=null;

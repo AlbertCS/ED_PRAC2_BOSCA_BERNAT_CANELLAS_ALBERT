@@ -1,11 +1,25 @@
 package Dades.Base;
 
+/**
+ * @author Bernat Bosca Candel
+ * 		   Albert Cañellas Sole
+ * 
+ */
 public class Assignatura implements Comparable<Assignatura>{
 	private Integer codiAssig;
 	private String nomAssig;
 	private Integer credits, curs,  quad;
 	private Matricula matric;
 	
+	/**
+	 * Constructor de la classe
+	 * 
+	 * @param codiAssig Codi de la Assignatura
+	 * @param nomAssig Nom de la Assignatura
+	 * @param credits Credits
+	 * @param curs Curs
+	 * @param quad Quadrimestre
+	 */
 	public Assignatura(Integer codiAssig, String nomAssig, Integer credits, Integer curs, Integer quad){
 		this.codiAssig=codiAssig;
 		this.nomAssig=nomAssig;
@@ -128,7 +142,13 @@ public class Assignatura implements Comparable<Assignatura>{
 
 	@Override
 	public String toString() {
-		return "Assignatura: " + nomAssig + ". Amb codi: " + codiAssig + ", credits: " + credits + ", curs: " + curs + ", quadrimestres: " + quad;
+		String aux;
+		if((nomAssig.length()<14) || (codiAssig.equals(17234007))) aux="Assignatura: " + nomAssig + ".\t\t\t\t\tAmb codi:  " + codiAssig + " , credits: " + credits + " , curs: " + curs + " , quadrimestres: " + quad;
+		else if(nomAssig.length()<22) aux="Assignatura: " + nomAssig + ".\t\t\t\tAmb codi:  " + codiAssig + " , credits: " + credits + " , curs: " + curs + " , quadrimestres: " + quad;
+		else if(nomAssig.length()<=29) aux="Assignatura: " + nomAssig + ".\t\t\tAmb codi:  " + codiAssig + " , credits: " + credits + " , curs: " + curs + " , quadrimestres: " + quad;
+		else if(nomAssig.length()<=35) aux="Assignatura: " + nomAssig + ".\t\tAmb codi:  " + codiAssig + " , credits: " + credits + " , curs: " + curs + " , quadrimestres: " + quad;
+		else aux="Assignatura: " + nomAssig + ".\tAmb codi:  " + codiAssig + " , credits: " + credits + " , curs: " + curs + " , quadrimestres: " + quad;
+		return aux;
 	}
 
 	@Override

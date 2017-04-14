@@ -2,6 +2,13 @@ package Dades.Llistes;
 import java.util.*;
 import Exceptions.*;
 
+/**
+ * @author Bernat Bosca Candel
+ * 		   Albert Cañellas Sole
+ * 
+ * @param <T> Tipus d'element
+ * 
+ */
 public interface TADLlistaGenerica<T extends Comparable<T>>{
 
 		/**
@@ -13,9 +20,9 @@ public interface TADLlistaGenerica<T extends Comparable<T>>{
 		
 		/**
 		 * Metode que consulta l'element de la posicio demanada
+		 * @param i Indica la posició que es vol consultar
 		 * @return retorna lelement
 		 * @throws LlistaBuida excepcio de llista buida
-		 * @param i index de poscio
 		 */
 		T consultarPosicio(int i) throws LlistaBuida;
 		
