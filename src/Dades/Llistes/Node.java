@@ -4,6 +4,7 @@ package Dades.Llistes;
  * @author Bernat Bosca Candel
  * 		   Albert Cañellas Sole
  * 
+ * @param <T> Tipus d'element
  *
  */
 public class Node<T extends Comparable<T>> {
@@ -16,6 +17,7 @@ public class Node<T extends Comparable<T>> {
 	 * Constructor de la class Node
 	 * @param element element guardat en el node actual 
 	 * @param seguent referencia al seguent element
+	 * @param anterior referencia al anterior element
 	 */
 	public Node(T element, Node<T> seguent, Node<T> anterior) {
 		x=element;

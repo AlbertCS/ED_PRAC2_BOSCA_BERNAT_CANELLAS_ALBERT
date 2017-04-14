@@ -28,7 +28,7 @@ public class Aplicacio {
 			
 		System.out.println("Indica tipus de llista a utilitzar:\n\t1. Estàtica\n\t2. Dinàmica\n\t3. JavaCollection");
 		op=teclat.nextLine();
-		if(Character.isDigit(op.charAt(0))) opcio=Integer.parseInt(op);
+		if(Character.isDigit(op.charAt(0)) && (op.length()==1)) opcio=Integer.parseInt(op);
 		
 		while(opcioOk){
 			switch(opcio){
@@ -41,7 +41,7 @@ public class Aplicacio {
 				default:
 					System.out.println("Valor incorrecte. Indica tipus de llista a utilitzar:\n\t1. Estàtica\n\t2. Dinàmica\n\t3. JavaCollection");
 					op=teclat.nextLine();
-					if(Character.isDigit(op.charAt(0))) opcio=Integer.parseInt(op); break;
+					if(Character.isDigit(op.charAt(0)) && (op.length()==1)) opcio=Integer.parseInt(op); break;
 			}
 		}
 		return opcio;
@@ -67,6 +67,13 @@ public class Aplicacio {
 		return llista;
 	}
 	
+	/**
+	 * Metode que crea el tipus de llista corresponent
+	 * @param opcio implementacio escollida
+	 * @param mida dimensio de la llista
+	 * @param llista la llista implementada
+	 * @return llista inicialitzada
+	 */
 	public static TADLlistaGenerica<Assignatura> implementacioLlistaAssig(int opcio, int mida, TADLlistaGenerica<Assignatura> llista) {
 		switch(opcio){
 			case 1:
@@ -216,7 +223,7 @@ public class Aplicacio {
 		else{
 			System.out.println("");			//Salt de linea
 			for(i=0; i<llistaAlu.numElems(); i++){
-				System.out.println("\t"+(i+1)+". "+llistaAlu.consultarPosicio(i).getNomAlum());
+				System.out.println("\t"+(i+1)+". "+llistaAlu.consultarPosicio(i).toString());
 			}
 			System.out.println("\n\tTotal d'alumnes: "+i);
 		}
@@ -432,8 +439,8 @@ public class Aplicacio {
 			if((opcioM>0)&&(opcioM<5)) {
 				System.out.println("\n\nMenú de consultes:\n\t1. Consulta per Codi del Alumne.\n\t2. Consulta per Codi Assignatura.\n\t3. Alumnes amb X crèdits o menys.\n\t4. Assignatures amb Y alumnes com a mínim.\n\t5. Sortir del menú.");
 				op=teclat.nextLine();
-				if(Character.isDigit(op.charAt(0))) opcioM=Integer.parseInt(op);
-				else  opcioM=10; //valor incorrecte
+				if((Character.isDigit(op.charAt(0))) && (op.length()==1)) opcioM=Integer.parseInt(op);
+				else opcioM=10;		//Valor incorrecte
 			}
 		
 			switch(opcioM){
@@ -488,7 +495,7 @@ public class Aplicacio {
 				default:
 					System.out.println("\nValor incorrecte.\n\tMenú de consultes:\n\t1. Consulta per Codi del Alumne.\n\t2. Consulta per Codi Assignatura.\n\t3. Alumnes amb X crèdits o menys.\n\t4. Assignatures amb Y alumnes com a mínim.\n\t5. Sortir del menú.");
 					op=teclat.nextLine();
-					if(Character.isDigit(op.charAt(0))) opcioM=Integer.parseInt(op);
+					if(Character.isDigit(op.charAt(0)) && (op.length()==1)) opcioM=Integer.parseInt(op);
 					break;
 			}
 		}
@@ -499,8 +506,6 @@ public class Aplicacio {
 	 * @param args args
 	 */
 	public static void main(String[] args) {
-		//Assignatura[] assiglist= new Assignatura [1000];
-		//Alumne[] alumlist=new Alumne [1000];
 		Scanner teclat=new Scanner(System.in);
 		TADLlistaGenerica<Alumne> llistaAlumne=null;
 		TADLlistaGenerica<Assignatura> llistaAssignatura=null;
@@ -510,21 +515,22 @@ public class Aplicacio {
 		long tempsi, tempsf;
 		
 		//Tipus de implementació
-		opcio=3;//=tipusImplementacio(teclat);
+		opcio=tipusImplementacio(teclat);
 		
 		//Nom fitxer
-		//nomFitxer=nomCorrecte(teclat);
+		nomFitxer=nomCorrecte(teclat);
 		
-		//Operacions
+		//Construir EDs
 		tempsi=System.nanoTime();
-		llistaAlumne=implementacioLlistaAlum(opcio, 1000, llistaAlumne);
-		llistaAssignatura=implementacioLlistaAssig(opcio, 50, llistaAssignatura);
+		llistaAlumne=implementacioLlistaAlum(opcio, 200, llistaAlumne);
+		llistaAssignatura=implementacioLlistaAssig(opcio, 60, llistaAssignatura);
 		cargarLlistes(nomFitxer, llistaAlumne, llistaAssignatura);
 		multilist=new Multillista<Assignatura, Alumne>(llistaAssignatura, llistaAlumne, opcio);
 		cargarMultilist(nomFitxer, multilist);
 		tempsf=System.nanoTime();
-		System.out.println("\nLa carrega de les dades ha tardat: "+(tempsf-tempsi)+"ns.");
+		System.out.println("\nLa construcció de l'estructura de dades ha tardat: "+(tempsf-tempsi)+"ns.");
 		
+		//Menu operacions
 		menu(opcio, llistaAlumne, llistaAssignatura, multilist, teclat);
 					
 		System.out.println("\nEl programa ha finalitzat.\n");

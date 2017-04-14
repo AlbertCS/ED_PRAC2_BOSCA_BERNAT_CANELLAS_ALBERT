@@ -1,10 +1,21 @@
 package Dades.Base;
 
+/**
+ * @author Bernat Bosca Candel
+ * 		   Albert Cañellas Sole
+ * 
+ */
 public class Alumne implements Comparable<Alumne>{
 	private String codiAlum;
 	private String nomAlum;
 	private Matricula matric;
 	
+	/**
+	 * Constructor de la classe
+	 * 
+	 * @param codiAlum Codi del Alumne
+	 * @param nomAlum Nom del Alumne
+	 */
 	public Alumne(String codiAlum, String nomAlum) {
 		this.codiAlum=codiAlum;
 		this.nomAlum=nomAlum;
@@ -62,7 +73,11 @@ public class Alumne implements Comparable<Alumne>{
 	
 	@Override
 	public String toString() {
-		return "Alumne: "+ nomAlum + ". Amb codi: " + codiAlum;
+		String aux;
+		if(nomAlum.length()<=6) aux="Alumne:\t"+ nomAlum + ".\t\t\tAmb codi:  " + codiAlum;
+		else if(nomAlum.length()<=15) aux="Alumne:\t"+ nomAlum + ".\t\tAmb codi:  " + codiAlum;
+		else aux="Alumne:\t"+ nomAlum + ".\tAmb codi:  " + codiAlum;
+		return aux;
 	}
 	
 	@Override

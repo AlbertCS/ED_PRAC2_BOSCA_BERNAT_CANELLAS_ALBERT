@@ -1,6 +1,12 @@
 package Dades.Base;
 
-//Class Node
+
+/**
+ * Classe que serveix de relació entre Assignatures i Alumnes
+ * 
+ * @author Bernat Bosca Candel
+ * 		   Albert Cañellas Sole
+ */
 public class Matricula {
 
 	private Integer codiAssig;
@@ -9,6 +15,12 @@ public class Matricula {
 	private Alumne alumne;
 	private Assignatura assignatura;
 	
+	/**
+	 * Classe constructora
+	 * 
+	 * @param assig Codi de l'Assignatura
+	 * @param alum Codi del Alumne
+	 */
 	public Matricula(Integer assig, String alum) {
 		this.codiAssig=assig;
 		this.codiAlum=alum;
@@ -153,19 +165,10 @@ public class Matricula {
 		return "Matricula [assig=" + codiAssig + ", alum=" + codiAlum + "]";
 	}
 	
-	public int compareTo(Assignatura assig) {
-		return (this.codiAssig.compareTo(assig.getCodiAssig()));
-	}
-	
-	public int compareTo(Alumne alum) { 
-		return (this.codiAlum.compareTo(alum.getCodiAlum()));
-	}
-	
-	public boolean equals(Assignatura assig) {
-		if(this.compareTo(assig)==0) return true;
-		else return false;
-	}
-	
+	/**
+	 * @param mat Matricula a comparar en this
+	 * @return cert si les dos Matricules són iguals i fals sino
+	 */
 	public boolean equals(Matricula mat) {
 		if((this.codiAssig==mat.getCodiAssig())&&(this.codiAlum==mat.getCodiAlum())&&(this.seguentAssig==mat.getSeguentAssig())&&(this.seguentAlumne==mat.getSeguentAlumne())) 
 			return true;
