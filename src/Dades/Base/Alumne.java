@@ -73,7 +73,11 @@ public class Alumne implements Comparable<Alumne>{
 	
 	@Override
 	public String toString() {
-		return "Alumne: "+ nomAlum + ". Amb codi: " + codiAlum;
+		String aux;
+		if(nomAlum.length()<=6) aux="Alumne:\t"+ nomAlum + ".\t\t\tAmb codi:  " + codiAlum;
+		else if(nomAlum.length()<=15) aux="Alumne:\t"+ nomAlum + ".\t\tAmb codi:  " + codiAlum;
+		else aux="Alumne:\t"+ nomAlum + ".\tAmb codi:  " + codiAlum;
+		return aux;
 	}
 	
 	@Override

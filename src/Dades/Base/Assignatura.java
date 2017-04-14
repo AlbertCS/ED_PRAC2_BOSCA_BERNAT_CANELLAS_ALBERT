@@ -142,7 +142,13 @@ public class Assignatura implements Comparable<Assignatura>{
 
 	@Override
 	public String toString() {
-		return "Assignatura: " + nomAssig + ". Amb codi: " + codiAssig + ", credits: " + credits + ", curs: " + curs + ", quadrimestres: " + quad;
+		String aux;
+		if((nomAssig.length()<14) || (codiAssig.equals(17234007))) aux="Assignatura: " + nomAssig + ".\t\t\t\t\tAmb codi:  " + codiAssig + " , credits: " + credits + " , curs: " + curs + " , quadrimestres: " + quad;
+		else if(nomAssig.length()<22) aux="Assignatura: " + nomAssig + ".\t\t\t\tAmb codi:  " + codiAssig + " , credits: " + credits + " , curs: " + curs + " , quadrimestres: " + quad;
+		else if(nomAssig.length()<=29) aux="Assignatura: " + nomAssig + ".\t\t\tAmb codi:  " + codiAssig + " , credits: " + credits + " , curs: " + curs + " , quadrimestres: " + quad;
+		else if(nomAssig.length()<=35) aux="Assignatura: " + nomAssig + ".\t\tAmb codi:  " + codiAssig + " , credits: " + credits + " , curs: " + curs + " , quadrimestres: " + quad;
+		else aux="Assignatura: " + nomAssig + ".\tAmb codi:  " + codiAssig + " , credits: " + credits + " , curs: " + curs + " , quadrimestres: " + quad;
+		return aux;
 	}
 
 	@Override
